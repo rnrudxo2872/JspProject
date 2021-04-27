@@ -12,12 +12,15 @@ import org.json.simple.parser.JSONParser;
 import com.key.ApiKey;
 
 public class Weather {
-    public static void main(String[] args) {
+	String curCondition;
+	String curPlace;
+	String curTemp;
+	
+    public WeatherData getWeather(String lat, String lon){
+    	WeatherData nowWeather = null;
         try{
         	
         	//서울시청의 위도와 경도
-            String lon = "126.977948";  //경도
-            String lat = "37.566386";   //위도
             
             ApiKey Apikey = new ApiKey();
             String APIKEY = Apikey.getOpenWeather();
@@ -51,21 +54,31 @@ public class Weather {
             System.out.println(jsonObj);
             
             //지역 출력
-            System.out.println("지역 : " + jsonObj.get("name"));
+            curPlace = (String)jsonObj.get("name");
+            System.out.println("지역 : " + curPlace);
 
             //날씨 출력
             JSONArray weatherArray = (JSONArray) jsonObj.get("weather");
             JSONObject obj = (JSONObject) weatherArray.get(0);
-            System.out.println("날씨 : "+obj.get("main"));
-
+            String condition = (String)obj.get("main");
+            System.out.println("날씨 : "+condition);
+            
             //온도 출력
             JSONObject mainArray = (JSONObject) jsonObj.get("main");
+            curTemp = (String)mainArray.get("temp");
             
-            System.out.println(mainArray.get("temp"));
-
+            System.out.println(curTemp);
+            
+            nowWeather = new WeatherData();
+            nowWeather.setPlace(curPlace);
+            nowWeather.setTemp(curTemp);
+            nowWeather.setWeatherCondition(curCondition);
+            
             bf.close();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
+        
+        return nowWeather;
     }
 }
