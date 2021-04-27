@@ -60,12 +60,12 @@ public class Weather {
             //날씨 출력
             JSONArray weatherArray = (JSONArray) jsonObj.get("weather");
             JSONObject obj = (JSONObject) weatherArray.get(0);
-            String condition = (String)obj.get("main");
-            System.out.println("날씨 : "+condition);
+            curCondition = (String)obj.get("main");
             
             //온도 출력
             JSONObject mainArray = (JSONObject) jsonObj.get("main");
-            curTemp = (String)mainArray.get("temp");
+            System.out.println(mainArray.get("temp"));
+            curTemp = String.valueOf(mainArray.get("temp"));
             
             System.out.println(curTemp);
             
@@ -73,6 +73,8 @@ public class Weather {
             nowWeather.setPlace(curPlace);
             nowWeather.setTemp(curTemp);
             nowWeather.setWeatherCondition(curCondition);
+            
+            System.out.println("날씨 구하기 완료!");
             
             bf.close();
         }catch(Exception e){

@@ -9,7 +9,7 @@
                 data:params,            //전송데이터
                 dataType:"xml", // 받을 때 데이터 타입
                 success:function(args){ // 이 xml 형태의 데이터를 args로 받음 (바깥으로부터 들어옴)
-                                                            // xml 형태니깐 parsing 작업을 해서 받아야함
+                	console.log(args);                              // xml 형태니깐 parsing 작업을 해서 받아야함
                     $(args).find("status").each(function(){    //status 해당 태그 검색. eaxh는 반복문
  
                         alert($(this).text()); // this의 text 형태로 출력해라 
