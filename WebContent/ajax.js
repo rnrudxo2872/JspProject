@@ -1,4 +1,4 @@
-    $(function(){
+    let init = () => {
 
             var params = "subject=" + $("#subject").val() + 
                 "&content=" + $("#content").val(); //쿼리임 데이터만 넘길 것!
@@ -44,7 +44,7 @@
                     //xml을 받을때는 e.responseXml
                 }
             });
-    });
+    }
  
     function showRequest(){ 
  
@@ -68,5 +68,6 @@
  
         // subject, content 둘 다 값이 넣어져 있으면
         return flag;
- 
     }
+    
+    init();
