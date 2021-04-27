@@ -9,6 +9,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.key.ApiKey;
+
 public class Weather {
     public static void main(String[] args) {
         try{
@@ -17,11 +19,17 @@ public class Weather {
             String lon = "126.977948";  //경도
             String lat = "37.566386";   //위도
             
+            ApiKey Apikey = new ApiKey();
+            String APIKEY = Apikey.getOpenWeather();
+            
             //OpenAPI call하는 URL
             String urlstr = "https://api.openweathermap.org/data/2.5/weather?"
                         + "lat="+lat+"&lon="+lon
-                        +"&lang=kr&appid=9ec4f040743c8a068d8372f0f8af47d2"
+                        +"&lang=kr&appid=" 
+                        + APIKEY
                         +"&units=metric";
+            
+            //url data 가져옴
             URL url = new URL(urlstr);
         
             BufferedReader bf;
@@ -50,10 +58,9 @@ public class Weather {
             JSONObject obj = (JSONObject) weatherArray.get(0);
             System.out.println("날씨 : "+obj.get("main"));
 
-            //온도 출력(절대온도라서 변환 필요)
+            //온도 출력
             JSONObject mainArray = (JSONObject) jsonObj.get("main");
-            //double ktemp = Double.parseDouble(mainArray.get("temp").toString());
-            //double temp = mainArray.get("temp");
+            
             System.out.println(mainArray.get("temp"));
 
             bf.close();
