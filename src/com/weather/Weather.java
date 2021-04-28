@@ -15,6 +15,8 @@ public class Weather {
 	String curCondition;
 	String curPlace;
 	String curTemp;
+	String conditionDescription; //구름조금;
+	String curIcon;
 	
     public WeatherData getWeather(String lat, String lon){
     	WeatherData nowWeather = null;
@@ -55,26 +57,31 @@ public class Weather {
             
             //지역 출력
             curPlace = (String)jsonObj.get("name");
-            System.out.println("지역 : " + curPlace);
 
             //날씨 출력
             JSONArray weatherArray = (JSONArray) jsonObj.get("weather");
             JSONObject obj = (JSONObject) weatherArray.get(0);
             curCondition = (String)obj.get("main");
             
+            //날씨 설명
+            conditionDescription = (String)obj.get("description");
+            
+            //날씨 아이콘
+            curIcon = (String)obj.get("icon");
+            
             //온도 출력
             JSONObject mainArray = (JSONObject) jsonObj.get("main");
-            System.out.println(mainArray.get("temp"));
             curTemp = String.valueOf(mainArray.get("temp"));
-            
-            System.out.println(curTemp);
             
             nowWeather = new WeatherData();
             nowWeather.setPlace(curPlace);
             nowWeather.setTemp(curTemp);
             nowWeather.setWeatherCondition(curCondition);
+            nowWeather.setDesc(conditionDescription);
+            nowWeather.setIcon(curIcon);
             
             System.out.println("날씨 구하기 완료!");
+            System.out.println(nowWeather);
             
             bf.close();
         }catch(Exception e){

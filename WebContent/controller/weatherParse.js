@@ -12,12 +12,16 @@
                 	let weatherList = [];
                 	//장소, 온도, 날씨
                 	$(args).find("status").each(function(){    //status 해당 태그 검색. eaxh는 반복문
-                    	
-                        alert($(this).text()); // this의 text 형태로 출력해라 
-                        //weatherList.push($(this).text());
+                        console.log($(this).text());
+                        weatherList.push($(this).text());
                     });
                 	
                 	console.log(weatherList);
+                	let iconURL = `http://openweathermap.org/img/wn/${weatherList[4]}.png`;
+                	$(".place").html(weatherList[0]);
+                	$(".temp").html(weatherList[1]);
+                	$(".weatherDesc").html(weatherList[3]);
+                	$(".Icon").html(`<img style="max-height: 30px; max-width: 30px;" src=${iconURL}></img>`);
                 },
  
                 error:function(e){
