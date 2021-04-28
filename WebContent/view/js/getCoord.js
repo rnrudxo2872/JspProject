@@ -5,6 +5,7 @@ let SuccessCatch = (curPosition) => {
     lat = curPosition.coords.latitude;
     long = curPosition.coords.longitude;
 	console.log(lat, long);
+	
 	init();
 }
 
