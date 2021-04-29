@@ -1,0 +1,8 @@
+.basicFrame {
+    display: grid;
+    grid-template-rows: 100px 1fr 120px;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+}

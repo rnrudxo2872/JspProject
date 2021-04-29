@@ -8,5 +8,5 @@
 	</div>
 	<span class="place"></span> <span class="temp"></span>
 </div>
-<script src="../js/getCoord.js"></script>
-<script src="../js/weatherParse.js"></script>
+<script src="js/getCoord.js"></script>
+<script src="js/weatherParse.js"></script>
