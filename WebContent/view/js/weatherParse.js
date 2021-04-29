@@ -20,10 +20,10 @@
                 	
                 	console.log(weatherList);
                 	let iconURL = `http://openweathermap.org/img/wn/${weatherList[4]}.png`;
-                	$(".place").html(`${weatherList[0]}, `);
+                	$(".place").html(`${weatherList[0]}`);
                 	$(".temp").html(`${weatherList[1]}도`);
                 	$(".weatherDesc").html(weatherList[3]);
-                	$(".Icon").html(`<img style="max-height: 30px; max-width: 30px;" src=${iconURL}></img>`);
+                	$(".Icon").html(`<img style="max-height: 20px; max-width: 20px;" src=${iconURL}></img>`);
                 },
  
                 error:function(e){
