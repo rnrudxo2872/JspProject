@@ -6,7 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%
+ApiKey Apikey = new ApiKey();
+String title ="OO할 때 먹을 것들!";
+
+String recFood = "파전";
+%>
+<title>FProject | <%=title %></title>
 <!--  
 <link rel="shortcut icon" type="image/x-icon" href="./images/logo.png"></link>
 -->
@@ -16,12 +22,6 @@
 
 </head>
 <body>
-<%
-ApiKey Apikey = new ApiKey();
-String title ="OO할 때 먹을 것들!";
-
-String recFood = "파전";
-%>
 <div class="basicFrame">
 <div class="header">
 <jsp:include page="partials/header.jsp" flush="true">
