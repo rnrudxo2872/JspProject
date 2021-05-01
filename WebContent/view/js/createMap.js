@@ -1,10 +1,17 @@
 let loadMap = () =>{
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-
+	
 	mapOption = {
 	    center: new kakao.maps.LatLng(lat, long), // 지도의 중심좌표
 	    level: 1 // 지도의 확대 레벨
-	};  
+	};	
+	let reloadButton = document.querySelector(".reload");
+	
+	//주소값
+	let nowAddr = "";
+	
+	//처음 갱신
+	let pur = true;
 	
 	//지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
@@ -21,18 +28,18 @@ let loadMap = () =>{
 	// 장소 검색 객체를 생성합니다
 	var ps = new kakao.maps.services.Places();  
 	
-
+	
 	
 	//검색 함수
-	function searchPlaces(keyStr) {
+	function searchPlaces() {
 
-	    if (!keyStr.replace(/^\s+|\s+$/g, '')) {
+	    if (!nowAddr.replace(/^\s+|\s+$/g, '')) {
 	        alert('키워드 검색이 안됩니다!');
 	        return false;
 	    }
 
 	    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	    ps.keywordSearch( keyStr, placesSearchCB); 
+	    ps.keywordSearch( nowAddr, placesSearchCB); 
 	}
 	
 	// 장소검색이 완료됐을 때 콜백함수
@@ -141,13 +148,13 @@ let loadMap = () =>{
 
 	//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
 	function displayCenterInfo(result, status) {
-		let nowAddr = "";
+		nowAddr = "";
 		
 	if (status === kakao.maps.services.Status.OK) {
 	    var infoDiv = document.getElementById('centerAddr');
 	    
 	    for(var i = 0; i < result.length; i++) {
-	        console.log(result[i]);
+	        //console.log(result[i]);
 	    	// 행정동의 region_type 값은 'H' 이므로
 	        if (result[i].region_type === 'H') {
 	            infoDiv.innerHTML = result[i].address_name;
@@ -171,9 +178,13 @@ searchPlaces();
 	//음식 검색어 추가
 	nowAddr += ` ${recFood}`;
 	console.log(nowAddr);
-		
-	//검색
-	searchPlaces(nowAddr);
+	
+	if(pur){		
+		//검색
+		searchPlaces();
+		reloadButton.addEventListener("click",searchPlaces)
+		pur = false;
+	}
 	
 	}
 	
@@ -197,7 +208,7 @@ searchPlaces();
 	      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
 	                '</div>';           
 	    
-	    aAdd.href = `https://map.kakao.com/link/to/${places.id}`;
+	    aAdd.href = `https://map.kakao.com/link/map/${places.id}`;
 	    aAdd.innerHTML = itemStr;
 	    el.appendChild(aAdd);
 	    el.className = 'item';

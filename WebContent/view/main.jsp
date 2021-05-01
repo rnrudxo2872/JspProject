@@ -30,19 +30,7 @@ String recFood = "파전";
 </div>
 
 <article>
-<div class="map_wrap">
-    <div id="map" style="width:1200px;height:400px;position:relative;overflow:hidden;"></div>
-
-    <div class="hAddr">
-        <span id="centerAddr"></span>
-        <button class="reload">여기서 다시 찾아볼까요?</button>
-    </div>
-    <div id="menu_wrap" class="bg_white">
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
-    
-</div>
+메인
 </article>
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>

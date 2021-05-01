@@ -7,10 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-ApiKey Apikey = new ApiKey();
-String title ="OO할 때 먹을 것들!";
-
-String recFood = "파전";
+String title ="공유 게시판";
 %>
 <title>FProject | <%=title %></title>
 <!--  
@@ -30,26 +27,12 @@ String recFood = "파전";
 </div>
 
 <article>
-<div class="map_wrap">
-    <div id="map" style="width:1200px;height:400px;position:relative;overflow:hidden;"></div>
-
-    <div class="hAddr">
-        <span id="centerAddr"></span>
-        <button class="reload">여기서 다시 찾아볼까요?</button>
-    </div>
-    <div id="menu_wrap" class="bg_white">
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div>
-    
-</div>
+공유게시판
 </article>
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=Apikey.getKakaoMap()%>&libraries=services"></script>
-<script type="text/javascript">let recFood = "<%=recFood%>";</script>
 <script src="js/createMap.js"></script>
 </body>
 </html>
