@@ -13,6 +13,7 @@ String name = (String)session.getAttribute("id");
 <div><a href="login.jsp">로그인</a></div>
 <%}else{%>
 <span><%=name %>님</span>
+<span><a href="../controller/logout.jsp">로그아웃</a></span>
 <%}%>
 </div>
 <%@include file="nav.jsp"%>

@@ -126,4 +126,38 @@ public class memberDAO {
 		return false;
 	}
 	//insertMember
+	
+	//loginFun
+	public int loginFun(memberBean mb){
+		
+		//아이디가 없을 시 - 0, 비밀번호가 틀렸을 시 - 1, 로그인 성공 시 - 2
+		int flag = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "select pw from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, mb.getId());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				
+				// 동일한 아이디가 존재함
+				flag = 1;
+				
+				String rsPW = rs.getString(1);
+				String curPW = mb.getPw();
+				
+				//아이디와 비밀번호가 같다면,
+				if(curPW.equals(rsPW)){
+					flag = 2;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	//loginFun
 }
