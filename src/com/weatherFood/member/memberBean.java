@@ -1,11 +1,27 @@
 package com.weatherFood.member;
 
+import java.sql.Timestamp;
+
 public class memberBean {
 	private int idx;
 	private String id;
 	private String pw;
+	private String name;
 	private String gender;
+	private Timestamp reg_date;
 	
+	public Timestamp getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Timestamp reg_date) {
+		this.reg_date = reg_date;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getIdx() {
 		return idx;
 	}
@@ -32,6 +48,7 @@ public class memberBean {
 	}
 	
 	public String toString() {
-		return "memberBean [idx=" + idx + ", id=" + id + ", pw=" + pw + ", gender=" + gender + "]";
+		return "memberBean [idx=" + idx + ", id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender
+				+ ", reg_date=" + reg_date + "]";
 	}
 }

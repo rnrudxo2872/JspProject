@@ -40,6 +40,17 @@
 	color: #d8bebe; 
 	text-shadow: 1px 1px 3px;
 }
+
+.form-container__email-container{
+	display:grid;
+	grid-template-columns: minmax(100px, 2fr) minmax(50px,1fr);
+    grid-column-gap: 10px;
+}
+
+.form-container__email-container input[type="button"]{
+	height: 35px;
+}
+
 input[type="radio"] {
     display:none;
 }

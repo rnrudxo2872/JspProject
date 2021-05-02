@@ -14,7 +14,6 @@
                 	let weatherList = [];
                 	//장소, 온도, 날씨
                 	$(args).find("status").each(function(){    //status 해당 태그 검색. eaxh는 반복문
-                        console.log($(this).text());
                         weatherList.push($(this).text());
                     });
                 	

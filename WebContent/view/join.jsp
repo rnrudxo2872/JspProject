@@ -1,3 +1,6 @@
+<%@page import="com.weatherFood.member.memberDAO"%>
+<%@page import="com.weatherFood.member.memberBean"%>
+<%@page import="java.sql.Timestamp"%>
 <%@page import="com.key.ApiKey"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -30,23 +33,28 @@ String title ="회원가입";
 
 <div class="form-container">
         <form action="../controller/joinPro.jsp" method="post" style="display:flex; flex-direction: column;">
+            <div class="form-container__email-container">
             <input type="email" placeholder="이메일을 입력해주세요!" name="id">
+            <input type="button" onclick="searchId()" value="중복체크">
+            <span class="idSearchInfo"></span>
+            </div>
+			
             <input type="password" placeholder="비밀번호를 입력해주세요!" name="pw">
             <input type="password" placeholder="비밀번호를 한번더 입력해주세요!" name="pw2">
             <input type="text" placeholder="이름을 입력해주세요!" name="name">
     <p>
-        <input type="radio" id="r1" name="gender" value="man">
-    <label for="r1"><span></span>남</label>
-    <input type="radio" id="r2" name="gender" value="wom">
-    <label for="r2"><span></span>여</label>
-
-            <input type="submit" value="회원가입">
+		    <input type="radio" id="r1" name="gender" value="man">
+		    <label for="r1"><span></span>남</label>
+		    <input type="radio" id="r2" name="gender" value="wom">
+		    <label for="r2"><span></span>여</label>
+			
+        	<input type="submit" value="회원가입">
         </form>
 </div>
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
-<script src="js/createMap.js"></script>
+<script src="js/searchId.js"></script>
 </body>
 </html>
