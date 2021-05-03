@@ -1,8 +1,11 @@
 package com.weatherFood.board;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,10 +13,12 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class boardDAO {
-	Connection conn = null;
-	ResultSet rs = null;
-	PreparedStatement pstmt = null;
+	private Connection conn = null;
+	private ResultSet rs = null;
+	private PreparedStatement pstmt = null;
+	private String sql = "";
 	
+	//getConnection
 	private Connection getConnection(){
 		try {
 			Context initCTX = new InitialContext();
@@ -29,4 +34,81 @@ public class boardDAO {
 		System.out.println("드라이버 연결!");
 		return conn;
 	}
+	//getConnection
+	
+	private void clearDB(){
+			try {
+				if(conn != null) conn.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	//getBoardCount
+	public int getBoardCount(){
+		int cnt = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "select count(*) from board";
+
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				cnt = rs.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		return cnt;
+	}
+	//getBoardCount
+	
+	
+	//getBoards
+	public ArrayList<boardBean> getBoards(int startRow, int pageSize){
+		ArrayList<boardBean> ret = null;
+		boardBean tmpBb = null;
+		
+		try {
+			conn = getConnection();
+			
+			sql = "select * from board "
+					+ "order by re_ref desc, re_seq asc "
+					+ "limit ?, ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow - 1);
+			pstmt.setInt(2, pageSize);
+			
+			rs = pstmt.executeQuery();
+			
+			ret = new ArrayList<boardBean>();
+			while(rs.next()){
+				tmpBb = new boardBean();
+				
+				tmpBb.setNum(rs.getInt(1));
+				tmpBb.setTitle(rs.getString(2));
+				tmpBb.setUser_name(rs.getString(3));
+				tmpBb.setContent(rs.getString(4));
+				tmpBb.setDate(rs.getDate(5));
+				tmpBb.setRe_ref(rs.getInt(6));
+				tmpBb.setRe_lev(rs.getInt(7));
+				tmpBb.setRe_seq(rs.getInt(8));
+			
+				ret.add(tmpBb);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			clearDB();
+		}
+		
+		return ret;
+	}
+	//getBoards
 }

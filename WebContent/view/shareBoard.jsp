@@ -1,3 +1,5 @@
+<%@page import="com.weatherFood.board.boardDAO"%>
+<%@page import="com.weatherFood.board.boardBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.key.ApiKey"%>
 <%@page import="java.net.URLEncoder"%>
@@ -19,7 +21,27 @@ String title ="공유 게시판";
 <link rel="stylesheet" href="style/map.css">
 <link rel="stylesheet" href="style/board.css">
 <%
-ArrayList<>
+//DB 글 개수
+boardDAO bdao = new boardDAO();
+int cnt = bdao.getBoardCount();
+
+//보여줄 게시판 개수
+int pageSize = 10;
+
+//현재페이지
+String pageNum = request.getParameter("pageNum");
+if(pageNum == null)
+	pageNum = "1";
+
+int currentPage = Integer.parseInt(pageNum);
+
+int startRow = (currentPage - 1) * pageSize + 1;
+int endRow = currentPage * pageSize;
+
+ArrayList<boardBean> bbs = new ArrayList<boardBean>();
+
+//목록 로딩
+bbs = bdao.getBoards(startRow, pageSize);
 %>
 </head>
 <body>
@@ -30,11 +52,37 @@ ArrayList<>
 </jsp:include>
 </div>
     <main class="board-container">
-        <div>
-            공유게시판
-        </div>
+        <table class="board-container-boardList">
+			<tr>
+	            <th>게시글 번호</th>
+	            <th>제목</th>
+	            <th>작성자</th>
+	            <th>작성 날짜</th>
+        	</tr>
+			<%
+			for(int i = 0; i < bbs.size(); i++){
+			boardBean curBoard = (boardBean)bbs.get(i);
+			%>
+			<tr>
+	            <th><%=curBoard.getNum() %></th>
+	            <th><%=curBoard.getTitle() %></th>
+	            <th><%=curBoard.getUser_name()%></th>
+	            <th><%=curBoard.getDate() %></th>
+        	</tr>
+			<%} %>       
+        </table>
         <footer class="board-container-footer">
             <div class="board-container-footer__pagelink">
+            <%
+            //게시글이 있다면
+            if(cnt != 0){
+            	//페이지 갯수
+            	int pageCount = cnt/pageSize + (cnt%pageSize == 0 ? 0 : 1);
+            	
+            	//한 페이지에서 보여줄 페이지 블럭 수
+            	int pageBlock = 5;
+            }
+            %>
                 <a href="page=1">1</a>
                 <a href="page=2">2</a>
             </div>
