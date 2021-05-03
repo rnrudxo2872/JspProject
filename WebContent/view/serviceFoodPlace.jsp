@@ -19,6 +19,7 @@ String recFood = "파전";
 <link rel="stylesheet" href="style/weather.css">
 <link rel="stylesheet" href="style/frame.css">
 <link rel="stylesheet" href="style/map.css">
+<link rel="stylesheet" href="style/footer.css">
 
 </head>
 <body>
@@ -45,7 +46,7 @@ String recFood = "파전";
 </div>
 </article>
 <div>
-<jsp:include page="partials/footer.jsp"></jsp:include>
+<%@include file="partials/footer.jsp"%>
 </div> 
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=Apikey.getKakaoMap()%>&libraries=services"></script>

@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<h1>하단</h1>
+<div class="footer-container">
+밑에 하단
+</div>

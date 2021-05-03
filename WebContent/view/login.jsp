@@ -14,11 +14,6 @@ String title ="회원가입";
 <!--  
 <link rel="shortcut icon" type="image/x-icon" href="./images/logo.png"></link>
 -->
-<link rel="stylesheet" href="style/weather.css">
-<link rel="stylesheet" href="style/frame.css">
-<link rel="stylesheet" href="style/map.css">
-<link rel="stylesheet" href="style/form.css">
-
 </head>
 <body>
 <div class="basicFrame">

@@ -2,6 +2,9 @@
     display: grid;
     grid-template-rows: 1fr 90px;
 }
+.board-container-boardList td{
+	text-align: center;
+}
 .board-container-footer {
     border-top: 2px solid gray;
 }
