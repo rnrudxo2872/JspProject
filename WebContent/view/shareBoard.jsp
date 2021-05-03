@@ -26,7 +26,11 @@ boardDAO bdao = new boardDAO();
 int cnt = bdao.getBoardCount();
 
 //보여줄 게시판 개수
-int pageSize = 10;
+int pageSize;
+if(request.getParameter("pageSize") == null)
+	pageSize = 5;
+else
+	pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
 //현재페이지
 String pageNum = request.getParameter("pageNum");
@@ -81,10 +85,37 @@ bbs = bdao.getBoards(startRow, pageSize);
             	
             	//한 페이지에서 보여줄 페이지 블럭 수
             	int pageBlock = 5;
+            	
+            	//한 블럭의 시작 페이지
+            	int startPage = ((currentPage - 1)/pageBlock) * pageBlock + 1;
+            	
+            	//블럭 끝 페이지
+            	int endPage = startPage + pageBlock - 1;
+            	
+            	if(endPage > pageCount){
+            		endPage = pageCount;
+            	}
+            	
+            	//이전
+            	if(startPage > pageBlock){
+					%>
+					<a href="shareBoard.jsp?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+					<%
+            	}
+            	
+            	for(int i = startPage; i<= endPage; i++){
+            		%>
+            		<a <%if(i == currentPage){%><%} else{%>href="shareBoard.jsp?pageNum=<%=i%>"<%}%>><%=i %></a>
+            		<%
+            	}
+            	
+            	if(endPage < pageCount){
+            		%>
+            		<a href="shareBoard.jsp?pageNum=<%=endPage + 1%>">다음</a>
+            		<%
+            	}
             }
-            %>
-                <a href="page=1">1</a>
-                <a href="page=2">2</a>
+			%>
             </div>
             <form class="board-container-footer__search" action="">
                 <input type="text" placeholder="여기" name="searching">
