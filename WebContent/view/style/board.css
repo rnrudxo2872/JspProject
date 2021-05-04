@@ -42,3 +42,12 @@
 .board-container-footer__insertBoard:active{
     background-color: rgb(71, 68, 68);
 }
+
+.curPageNum{
+	background-color: rgb(128, 184, 114) !important;
+	cursor: default;
+}
+.boardDetail table{
+	width: 100%;
+	height: 100%;
+}

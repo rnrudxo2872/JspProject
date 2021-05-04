@@ -111,4 +111,37 @@ public class boardDAO {
 		return ret;
 	}
 	//getBoards
+	
+	//getBoard
+	public boardBean getBoard(int num){
+		boardBean bb = null;
+		
+		try {
+			conn = getConnection();
+			sql = "select * from board where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				bb = new boardBean();
+				bb.setNum(rs.getInt(1));
+				bb.setTitle(rs.getString(2));
+				bb.setUser_name(rs.getString(3));
+				bb.setContent(rs.getString(4));
+				bb.setDate(rs.getDate(5));
+				bb.setRe_ref(rs.getInt(6));
+				bb.setRe_lev(rs.getInt(7));
+				bb.setRe_seq(rs.getInt(8));
+				bb.setFile(rs.getString(9));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		
+		return bb;
+	}
+	//getBoard
 }

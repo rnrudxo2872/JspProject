@@ -11,6 +11,7 @@ public class boardBean {
 	private int re_ref;
 	private int re_lev;
 	private int re_seq;
+	private String file;
 	
 	public int getNum() {
 		return num;
@@ -76,9 +77,18 @@ public class boardBean {
 		this.re_seq = re_seq;
 	}
 
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
 	public String toString() {
 		return "boardBean [num=" + num + ", title=" + title + ", user_name=" + user_name + ", content=" + content
-				+ ", date=" + date + ", re_ref=" + re_ref + ", re_lev=" + re_lev + ", re_seq=" + re_seq + "]";
+				+ ", date=" + date + ", re_ref=" + re_ref + ", re_lev=" + re_lev + ", re_seq=" + re_seq + ", file="
+				+ file + "]";
 	}
 	
 	

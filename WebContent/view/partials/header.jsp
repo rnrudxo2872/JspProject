@@ -5,7 +5,7 @@
 String title = request.getParameter("title");
 String name = (String)session.getAttribute("id");
 %>
-<%@include file="style.jsp" %>
+
 <a href="main.jsp"><img class="headerLogo" src="logos/weatherFood.png"></img></a>
 <div class="header-container">
 <div>

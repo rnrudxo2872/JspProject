@@ -43,6 +43,7 @@ ArrayList<boardBean> bbs = new ArrayList<boardBean>();
 //목록 로딩
 bbs = bdao.getBoards(startRow, pageSize);
 %>
+<%@include file="partials/style.jsp" %>
 </head>
 <body>
 
@@ -104,7 +105,7 @@ bbs = bdao.getBoards(startRow, pageSize);
             	
             	for(int i = startPage; i<= endPage; i++){
             		%>
-            		<a <%if(i == currentPage){%><%} else{%>href="shareBoard.jsp?pageNum=<%=i%>"<%}%>><%=i %></a>
+            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="shareBoard.jsp?pageNum=<%=i%>"<%}%>><%=i %></a>
             		<%
             	}
             	

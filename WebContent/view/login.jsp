@@ -11,9 +11,7 @@ ApiKey Apikey = new ApiKey();
 String title ="로그인";
 %>
 <title>FProject | <%=title %></title>
-<!--  
-<link rel="shortcut icon" type="image/x-icon" href="./images/logo.png"></link>
--->
+<%@include file="partials/style.jsp" %>
 </head>
 <body>
 <div class="basicFrame">
