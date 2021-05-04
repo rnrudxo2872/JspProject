@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 ApiKey Apikey = new ApiKey();
-String title ="회원가입";
+String title ="로그인";
 %>
 <title>FProject | <%=title %></title>
 <!--  
@@ -37,6 +37,5 @@ String title ="회원가입";
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
-<script src="js/createMap.js"></script>
 </body>
 </html>
