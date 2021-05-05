@@ -1,0 +1,13 @@
+.boardDetail table{
+	width: 100%;
+	height: 100%;
+}
+.boardDetail tr td,.boardDetail tr th{
+	border-bottom: 3px solid black;
+}
+#table_writer{
+	border-right:3px solid black;	
+}
+#table_title{
+	font-size:21px;
+}

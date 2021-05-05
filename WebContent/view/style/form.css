@@ -34,6 +34,9 @@
   .form-container form input:not(:last-child) {
     margin-bottom: 20px; 
     }
+   .form-container form input:first-child {
+    margin-bottom: 0; 
+    }
 .form-container form input[type="submit"] {
 	background-color: #7C7CC4;
 	font-weight: 800;
@@ -43,7 +46,7 @@
 
 .form-container__email-container{
 	display:grid;
-	grid-template-columns: minmax(100px, 2fr) minmax(50px,1fr);
+	grid-template-rows: minmax(20px, 1fr) minmax(20px,1fr);
     grid-column-gap: 10px;
 }
 

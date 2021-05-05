@@ -53,7 +53,7 @@ bbs = bdao.getBoards(startRow, pageSize);
 <jsp:param value='<%=URLEncoder.encode(title, "UTF-8") %>' name="title"/>
 </jsp:include>
 </div>
-
+<div>
     <main class="board-container">
         <table class="board-container-boardList">
         
@@ -117,13 +117,16 @@ bbs = bdao.getBoards(startRow, pageSize);
             }
 			%>
             </div>
+        </div>
+    </main>
+
             <form class="board-container-footer__search" action="">
                 <input type="text" placeholder="여기" name="searching">
                 <input type="submit" value="검색">
             </form>
-            	<a class="board-container-footer__insertBoard" href="insertBoard">글쓰기</a>
-        </div>
-    </main>
+           	<%if(session.getAttribute("id") != null) {%>
+           	<a class="board-container-footer__insertBoard" href="insertBoard.jsp">글쓰기</a>
+           	<%} %>
     <div>
 	<span>게시판 출력개수</span>
 	<select class="pageBlockSelector">
@@ -133,6 +136,7 @@ bbs = bdao.getBoards(startRow, pageSize);
 	    <option value="20">20개</option>
 	</select>
 	</div>
+    </div>
 <div>
 <%@include file="partials/footer.jsp" %>
 </div> 

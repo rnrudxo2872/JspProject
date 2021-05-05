@@ -29,7 +29,7 @@ try{
 }catch(Exception e){
 	%>
 	<script>
-	alert("에러");
+	alert("없는 게시물입니다!");
 	location.href = "shareBoard.jsp";
 	</script>
 	<%
@@ -48,18 +48,19 @@ try{
 </div>
 <main class="boardDetail">
     <table>
-        <tr>
-            <th colspan="2"><%=bb.getTitle()%></th>
+        <tr id="table_title">
+        	<td style="font-weight:900; width:100px;">제목 :</td>
+            <th><%=bb.getTitle()%></th>
         </tr>
         <tr>
-            <th><%=bb.getUser_name()%></th>
-            <td><%=bb.getDate()%></td>
+            <th id="table_writer"><%=bb.getUser_name()%></th>
+            <td id="table_date"><%=bb.getDate()%></td>
         </tr>
         <tr>
-            <td colspan="2"><%=bb.getFile()%></td>
+            <td id="table_file" colspan="2">첨부파일 : <%=bb.getFile()%></td>
         </tr>
         <tr>
-            <td colspan="2"><%=bb.getContent()%></td>
+            <td id="table_content" colspan="2"><%=bb.getContent()%></td>
         </tr>
     </table>
 </main>

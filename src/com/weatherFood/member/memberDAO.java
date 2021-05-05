@@ -89,6 +89,16 @@ public class memberDAO {
 		try {
 			conn = getConnection();
 			
+			//중복여부
+			sql = "select pw from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mb.getId());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				return false;
+			
 			//idx 조회
 			sql = "select max(idx) from member";
 			pstmt =conn.prepareStatement(sql);
@@ -116,7 +126,7 @@ public class memberDAO {
 			
 			return true;
 		}catch(MySQLIntegrityConstraintViolationException e){
-			System.out.println("id 중복 에러!");
+			System.out.println("중복 에러!");
 			return false;
 		}catch (SQLException e) {
 			e.printStackTrace();

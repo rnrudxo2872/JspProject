@@ -33,9 +33,9 @@ if(joinSuc){
 }else{%>
 	<script>
 	alert("이미 사용중인 아이디가 있습니다! 중복 체크해주세요!");
+	history.back();
 	</script>
 <%
-response.sendRedirect("../view/login.jsp");
 }
 }%>
 </body>
