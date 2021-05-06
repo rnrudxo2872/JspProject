@@ -1,20 +1,30 @@
 const pageBlockSelect = document.querySelector(".pageBlockSelector");
 const curBoard = document.querySelector(".board-container");
 
-let changeCountBoard = () => {
-	console.log(pageBlockSelect.value);
-	let changePageSize = pageBlockSelect.value;
-	fetch(`shareBoard.jsp?pageNum=1&pageSize=${changePageSize}`)
-	.then(res => {
-		return res.text();
-	})
-	.then(html =>{
-		let parser = new DOMParser();
-		let doc = parser.parseFromString(html,"text/html");
+let getOtherBoards = html =>{
+	let parser = new DOMParser();
+	let doc = parser.parseFromString(html,"text/html");
+	
+	let docBoard = doc.querySelector(".board-container");
+	return docBoard.innerHTML;
+}
 
-		let docBoard = doc.querySelector(".board-container").innerHTML;
-		curBoard.innerHTML = docBoard;
-	})
+let changeCountBoard = async() => {
+	
+	let changePageSize = pageBlockSelect.value;
+	let url = `shareBoard.jsp?pageNum=1&pageSize=${changePageSize}`;
+	
+    let html = await (await fetch(url).catch(alertErr)).text()
+    let parseBoards = await getOtherBoards(html);
+    
+    curBoard.innerHTML = parseBoards;
+}
+
+function alertErr(error){
+	console.warn(error);
+	let res = new Response();
+	alert("url 에러!");
+	return res;
 }
 
 pageBlockSelect.addEventListener('change',changeCountBoard);
