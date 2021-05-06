@@ -39,7 +39,7 @@ String title ="회원가입";
             <input class="addr" type="text" placeholder="주소란" name="addr" readonly required>
             <input type="button" value="주소조회" onclick="callAddress()">
             </div>
-            <input type="text" placeholder="상세주소를 적어주세요!" name="addrDetail" required>
+            <input type="text" placeholder="상세주소를 적어주세요!" name="addr_detail" required>
             </div>
     <p>
 		    <input type="radio" id="r1" name="gender" value="man" checked>

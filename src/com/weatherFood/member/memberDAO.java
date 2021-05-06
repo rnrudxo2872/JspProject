@@ -110,8 +110,8 @@ public class memberDAO {
 				idx = 1;
 			
 			//삽입구문
-			sql = "insert into member (idx,id,pw,name,gender,reg_date) "
-					+ "values(?,?,?,?,?,?)";
+			sql = "insert into member (idx,id,pw,name,gender,reg_date,addr,addr_detail) "
+					+ "values(?,?,?,?,?,?,?,?)";
 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
@@ -120,6 +120,8 @@ public class memberDAO {
 			pstmt.setString(4, mb.getName());
 			pstmt.setString(5, mb.getGender());
 			pstmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+			pstmt.setString(7, mb.getAddr());
+			pstmt.setString(8, mb.getAddr_detail());
 			pstmt.executeUpdate();
 			
 			System.out.println("회원 삽입 성공!");

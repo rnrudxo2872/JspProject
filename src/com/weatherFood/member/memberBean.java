@@ -5,10 +5,14 @@ import java.sql.Timestamp;
 public class memberBean {
 	private int idx;
 	private String id;
+	
+
 	private String pw;
 	private String name;
 	private String gender;
 	private Timestamp reg_date;
+	private String addr;
+	private String addr_detail;
 	
 	public Timestamp getReg_date() {
 		return reg_date;
@@ -46,9 +50,21 @@ public class memberBean {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getAddr_detail() {
+		return addr_detail;
+	}
+	public void setAddr_detail(String addr_detail) {
+		this.addr_detail = addr_detail;
+	}
 	
 	public String toString() {
 		return "memberBean [idx=" + idx + ", id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender
-				+ ", reg_date=" + reg_date + "]";
+				+ ", reg_date=" + reg_date + ", addr=" + addr + ", addr_detail=" + addr_detail + "]";
 	}
 }
