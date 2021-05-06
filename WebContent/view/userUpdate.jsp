@@ -15,7 +15,7 @@ String id = (String)session.getAttribute("id");
 if(id == null){
 	%>
 	<script>
-	alert("세션값이 만료되었습니다!");
+	alert("세션값이 유효하지 않습니다!");
 	location.href = "main.jsp";
 	</script>
 	<%
@@ -24,10 +24,10 @@ memberBean mb = new memberBean();
 memberDAO mdao = new memberDAO();
 try{
 	mb = mdao.getInfo(id);
-}catch(Exception e){
-	System.out.println("회원 정보 가져오기 실패!");
-}
-%>
+	if(mb == null)
+		throw new Exception();
+	
+	%>
 <title>FProject | <%=title %></title>
 <%@include file="partials/style.jsp" %>
 </head>
@@ -46,8 +46,14 @@ try{
             </div>
 			
             <input type="password" placeholder="비밀번호를 입력해주세요!" name="pw" required>
-            <input type="password" placeholder="비밀번호를 한번더 입력해주세요!" name="pw2" required>
             <input type="text" value="<%=mb.getName() %>" name="name" required>
+            <div style="display:flex; flex-direction: column;">
+            <div style="display:flex; flex-direction: row;">
+            <input class="addr" type="text" value="<%=mb.getAddr() %>" name="addr" readonly required>
+            <input type="button" value="주소조회" onclick="callAddress()">
+            </div>
+            <input type="text" value="<%=mb.getAddr_detail() %>" name="addr_detail" required>
+            </div>
     <p>
 		    <input type="radio" id="r1" name="gender" value="man" <%if(mb.getGender().equals("man")){%>checked<%} %> readonly>
 		    <label for="r1"><span></span>남</label>
@@ -63,5 +69,26 @@ try{
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+let callAddress = () =>{
+	let inputTarget = document.querySelector(".addr");
+    new daum.Postcode({
+        oncomplete: function(data) {
+            console.log(data.address);
+            inputTarget.value = data.address;
+            inputTarget.style.color='gray';
+        }
+    }).open();
+	
+}
+</script>
 </body>
 </html>
+	
+	<%
+}catch(Exception e){
+	System.out.println("회원 정보 가져오기 실패!");
+	//response.sendRedirect("error/sessionErr.jsp");
+}
+%>

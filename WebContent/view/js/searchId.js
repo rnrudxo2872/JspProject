@@ -39,4 +39,4 @@ let checkId = () => {
 		return true;
 }
 
-curId.addEventListener('change',searchId);
+curId.addEventListener('keyup',searchId);

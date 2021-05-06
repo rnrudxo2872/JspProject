@@ -76,6 +76,8 @@ public class memberDAO {
 				exist = false;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
 		
 		return exist;
@@ -168,6 +170,8 @@ public class memberDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
 		return flag;
 	}
@@ -207,6 +211,8 @@ public class memberDAO {
 				mb.setName(rs.getString(4));
 				mb.setGender(rs.getString(5));
 				mb.setReg_date(rs.getTimestamp(6));
+				mb.setAddr(rs.getString(7));
+				mb.setAddr_detail(rs.getString(8));
 			}
 		} catch (SQLException e) {
 			System.out.println("회원정보 조회 실패!");
@@ -221,4 +227,52 @@ public class memberDAO {
 		return mb;
 	}
 	//getInfo
+	
+	
+	//updateInfo
+	public int updateInfo(memberBean mb){
+		//0 아이디 X, 1 비밀번호 틀림, 2 정상, -5 비정상
+		int flag = -5;
+		
+		try {
+			int idx = 0;
+			
+			conn = getConnection();
+			sql = "select pw, idx from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mb.getId());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String ans = rs.getString(1);
+				idx = rs.getInt(2);
+				if(!ans.equals(mb.getPw())){
+				flag = 1;
+				return flag;
+				}
+			}else{
+				//아이디 존재 X
+				flag = 0;
+				return flag;
+			}
+			
+			sql = "update member set name=?,gender=?,addr=?,addr_detail=? where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mb.getName());
+			pstmt.setString(2, mb.getGender());
+			pstmt.setString(3, mb.getAddr());
+			pstmt.setString(4, mb.getAddr_detail());
+			pstmt.setInt(5, idx);
+			
+			pstmt.executeUpdate();
+			flag = 2;
+			System.out.println("회원정보 업데이트!");
+		} catch (SQLException e) {
+			System.out.println("업데이트 혹은 조회 sql 에러!");
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+	//updateInfo
 }
