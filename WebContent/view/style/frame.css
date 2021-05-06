@@ -29,6 +29,9 @@
 .logForm{
 	text-align: right;
 }
+.logForm span:not(:last-Child){
+	margin-right: 5px;
+}
 .weatherDisplay{
     position: fixed;
 	z-index: 3;

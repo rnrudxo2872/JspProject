@@ -170,4 +170,53 @@ public class memberDAO {
 		return flag;
 	}
 	//loginFun
+	
+	//getInfo
+	public memberBean getInfo(String id){
+		memberBean mb = null;
+		
+		try {
+			conn = getConnection();
+			
+			//같은 아이디가 있는가?
+			sql = "select count(*) from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				if(rs.getInt(1) > 1){
+					throw new Exception();
+				}
+			}
+			
+			sql = "select * from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				mb = new memberBean();
+				
+				mb.setIdx(rs.getInt(1));
+				mb.setId(rs.getString(2));
+				mb.setPw(rs.getString(3));
+				mb.setName(rs.getString(4));
+				mb.setGender(rs.getString(5));
+				mb.setReg_date(rs.getTimestamp(6));
+			}
+		} catch (SQLException e) {
+			System.out.println("회원정보 조회 실패!");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("종합적 오류!");
+		} finally{
+			clearDB();
+		}
+		
+		
+		return mb;
+	}
+	//getInfo
 }

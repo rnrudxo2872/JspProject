@@ -34,6 +34,13 @@ String title ="회원가입";
             <input type="password" placeholder="비밀번호를 입력해주세요!" name="pw" required>
             <input type="password" placeholder="비밀번호를 한번더 입력해주세요!" name="pw2" required>
             <input type="text" placeholder="이름을 입력해주세요!" name="name" required>
+            <div style="display:flex; flex-direction: column;">
+            <div style="display:flex; flex-direction: row;">
+            <input class="addr" type="text" placeholder="주소란" name="addr" readonly required>
+            <input type="button" value="주소조회" onclick="callAddress()">
+            </div>
+            <input type="text" placeholder="상세주소를 적어주세요!" name="addrDetail" required>
+            </div>
     <p>
 		    <input type="radio" id="r1" name="gender" value="man" checked>
 		    <label for="r1"><span></span>남</label>
@@ -48,5 +55,21 @@ String title ="회원가입";
 </div> 
 </div>
 <script src="js/searchId.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+let callAddress = () =>{
+	let inputTarget = document.querySelector(".addr");
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            console.log(data.address);
+            inputTarget.value = data.address;
+            inputTarget.style.color='gray';
+        }
+    }).open();
+	
+}
+</script>
 </body>
 </html>
