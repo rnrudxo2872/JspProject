@@ -2,7 +2,6 @@ let curId = document.querySelector('.email-container__inputEmail');
 let idInfo = document.querySelector('.idSearchInfo');
 
 let searchId = () =>{
-	
 	if(curId.value.indexOf('@') === -1){
 		idInfo.innerHTML = '<span style="color:red">적절한 아이디가 아닙니다!</span>';
 	}else{
