@@ -51,5 +51,22 @@
 }
 
 .insertBoard-container{
-	display: flex; flex-direction: column;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.insertBoard-container-form{
+	display: flex; 
+	flex-direction: column;
+}
+.insertBoard-container-form #title{
+	height: 50px;
+	font-size: 25px;
+}
+.insertBoard-container-form textarea{
+	resize:none;
+	font-size: 20px;
+}
+.insertBoard-container-form textarea:focus{
+	outline:none;
 }

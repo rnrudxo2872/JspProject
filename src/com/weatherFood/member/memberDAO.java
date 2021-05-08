@@ -270,9 +270,48 @@ public class memberDAO {
 		} catch (SQLException e) {
 			System.out.println("업데이트 혹은 조회 sql 에러!");
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
 		
 		return flag;
 	}
 	//updateInfo
+	
+	//userDel
+	public int userDel(memberBean mb,String pw){
+		
+		//-1 비밀번호 틀림, 1정상, 0 다른 에러
+		int flag = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "select pw from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mb.getId());
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String rsPw = rs.getString(1);
+				if(!rsPw.equals(pw)){
+					flag = -1;
+					return flag;
+				}
+			}
+			
+			sql = "delete from member where id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mb.getId());
+			
+			pstmt.executeUpdate();
+			flag = 1;
+			System.out.println("회원탈퇴 성공!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		return flag;
+	}
+	//userDel(mb,pw)
 }

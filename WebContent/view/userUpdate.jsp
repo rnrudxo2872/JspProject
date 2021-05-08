@@ -60,7 +60,8 @@ try{
 		    <input type="radio" id="r2" name="gender" value="wom" <%if(mb.getGender().equals("wom")){%>checked<%} %> readonly>
 		    <label for="r2"><span></span>여</label>
 			
-        	<input type="submit" value="회원가입">
+        	<input type="submit" value="정보수정">
+        	<input type="button" value="회원탈퇴" onclick="delFun(this.form)">
         </form>
 <div>
 
@@ -83,6 +84,7 @@ let callAddress = () =>{
 	
 }
 </script>
+<script src="js/delAction.js"></script>
 </body>
 </html>
 	

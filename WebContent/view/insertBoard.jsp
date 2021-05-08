@@ -1,7 +1,6 @@
 <%@page import="com.weatherFood.board.boardDAO"%>
 <%@page import="com.weatherFood.board.boardBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.key.ApiKey"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -10,38 +9,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-String title ="공유 게시판";
+String title ="공유 글쓰기";
 %>
 <title>FProject | <%=title %></title>
-<!--  
-<link rel="shortcut icon" type="image/x-icon" href="./images/logo.png"></link>
--->
 <%
-//DB 글 개수
-boardDAO bdao = new boardDAO();
-int cnt = bdao.getBoardCount();
 
-//보여줄 게시판 개수
-int pageSize;
-if(request.getParameter("pageSize") == null)
-	pageSize = 5;
-else
-	pageSize = Integer.parseInt(request.getParameter("pageSize"));
-
-//현재페이지
-String pageNum = request.getParameter("pageNum");
-if(pageNum == null)
-	pageNum = "1";
-
-int currentPage = Integer.parseInt(pageNum);
-
-int startRow = (currentPage - 1) * pageSize + 1;
-int endRow = currentPage * pageSize;
-
-ArrayList<boardBean> bbs = new ArrayList<boardBean>();
-
-//목록 로딩
-bbs = bdao.getBoards(startRow, pageSize);
 %>
 <%@include file="partials/style.jsp" %>
 </head>
@@ -55,9 +27,12 @@ bbs = bdao.getBoards(startRow, pageSize);
 </div>
 
 <div class="insertBoard-container">
-    <input id=title type="text" name="title">
+	<form action="../controller/insertBoardPro.jsp" class="insertBoard-container-form" enctype="multipart/form-data">
+    <input id=title type="text" name="title" placeholder="제목을 입력해 주세요.">
     <input type="file" name="filename">
-    <textarea name="content" cols="30" rows="10">내용을 입력해 주세요.</textarea>
+    <textarea name="content" cols="30" rows="10" placeholder="내용을 입력해 주세요."></textarea>
+    <input type="submit" value="글쓰기">
+    </form>
 </div>
 
 <div>
