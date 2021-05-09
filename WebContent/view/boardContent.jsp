@@ -26,6 +26,7 @@ try{
 	boardDAO bdao = new boardDAO();
 	bb = bdao.getBoard(boardNum);
 	
+	bdao.updateReadCount(bb.getNum());
 }catch(Exception e){
 	%>
 	<script>
@@ -51,16 +52,18 @@ try{
         <tr id="table_title">
         	<td style="font-weight:900; width:100px;">제목 :</td>
             <th><%=bb.getTitle()%></th>
+            <td style="width:100px;">조회수</td>
+            <td style="width:100px;"><%=bb.getReadcount() %></td>
         </tr>
         <tr>
             <th id="table_writer"><%=bb.getUser_name()%></th>
-            <td id="table_date"><%=bb.getDate()%></td>
+            <td id="table_date" colspan="3"><%=bb.getDate()%></td>
         </tr>
         <tr>
-            <td id="table_file" colspan="2">첨부파일 : <%=bb.getFile()%></td>
+            <td id="table_file" colspan="4">첨부파일 : <%=bb.getFile()%></td>
         </tr>
         <tr>
-            <td id="table_content" colspan="2"><%=bb.getContent()%></td>
+            <td id="table_content" colspan="4"><%=bb.getContent()%></td>
         </tr>
     </table>
 </main>

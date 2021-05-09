@@ -1,3 +1,4 @@
+<%@page import="com.weatherFood.board.boardDAO"%>
 <%@page import="com.weatherFood.board.boardBean"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -39,6 +40,22 @@ boardBean bb = new boardBean();
 bb.setTitle(mul.getParameter("title"));
 bb.setContent(mul.getParameter("content"));
 bb.setFile(mul.getFilesystemName("filename"));
+bb.setUser_name((String)session.getAttribute("id"));
+
+//게시글 ip주소
+bb.setIp(request.getRemoteAddr());
+boardDAO bdao = new boardDAO();
+int num = bdao.insertBoard(bb);
+if(num != 0)
+	response.sendRedirect("../view/boardContent.jsp?num="+num);
+else{
+	%>
+	<script>
+	alert("게시글 오류!");
+	location.href = "../view/min.jsp";
+	</script>
+	<%
+}
 %>
 </body>
 </html>

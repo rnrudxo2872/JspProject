@@ -13,7 +13,16 @@ String title ="공유 글쓰기";
 %>
 <title>FProject | <%=title %></title>
 <%
-
+request.setCharacterEncoding("utf-8");
+String id = (String)session.getAttribute("id");
+if(id == null){
+	%>
+	<script>
+		alert("세션값이 유효하지 않습니다! 로그인을 해주세요.");
+		location.href = "../view/main.jsp";
+	</script>
+	<%
+}
 %>
 <%@include file="partials/style.jsp" %>
 </head>
@@ -27,7 +36,7 @@ String title ="공유 글쓰기";
 </div>
 
 <div class="insertBoard-container">
-	<form action="../controller/insertBoardPro.jsp" class="insertBoard-container-form" enctype="multipart/form-data">
+	<form action="../controller/insertBoardPro.jsp" class="insertBoard-container-form" enctype="multipart/form-data" method="post">
     <input id=title type="text" name="title" placeholder="제목을 입력해 주세요.">
     <input type="file" name="filename">
     <textarea name="content" cols="30" rows="10" placeholder="내용을 입력해 주세요."></textarea>

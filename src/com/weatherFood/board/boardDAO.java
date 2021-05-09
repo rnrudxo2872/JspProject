@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -79,7 +80,7 @@ public class boardDAO {
 			conn = getConnection();
 			
 			sql = "select * from board "
-					+ "order by re_ref desc, re_seq asc "
+					+ "order by num desc "
 					+ "limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow - 1);
@@ -96,9 +97,6 @@ public class boardDAO {
 				tmpBb.setUser_name(rs.getString(3));
 				tmpBb.setContent(rs.getString(4));
 				tmpBb.setDate(rs.getDate(5));
-				tmpBb.setRe_ref(rs.getInt(6));
-				tmpBb.setRe_lev(rs.getInt(7));
-				tmpBb.setRe_seq(rs.getInt(8));
 			
 				ret.add(tmpBb);
 			}
@@ -130,10 +128,8 @@ public class boardDAO {
 				bb.setUser_name(rs.getString(3));
 				bb.setContent(rs.getString(4));
 				bb.setDate(rs.getDate(5));
-				bb.setRe_ref(rs.getInt(6));
-				bb.setRe_lev(rs.getInt(7));
-				bb.setRe_seq(rs.getInt(8));
-				bb.setFile(rs.getString(9));
+				bb.setFile(rs.getString(6));
+				bb.setReadcount(rs.getInt(8));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,4 +140,63 @@ public class boardDAO {
 		return bb;
 	}
 	//getBoard
+	
+	//insertBoard
+	public int insertBoard(boardBean bb){
+		
+		// 게시판 번호
+		int num = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "select max(num) from board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				num = rs.getInt(1) + 1;
+			}else
+				num = 1;
+			sql = "insert into board"
+					+ "(num,title,user_name,content,date,file,ip,readcount,comments) "
+					+ "values (?,?,?,?,now(),?,?,?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			pstmt.setString(2, bb.getTitle());
+			pstmt.setString(3, bb.getUser_name());
+			pstmt.setString(4, bb.getContent());
+			pstmt.setString(5, bb.getFile());
+			pstmt.setString(6, bb.getIp());
+			pstmt.setInt(7, 0);
+			pstmt.setInt(8, 0);
+			pstmt.executeUpdate();
+			System.out.println("게시글 작성!" + bb.getUser_name());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		return num;
+	}
+	//insertBoard
+	
+	//updateReadCount
+	public void updateReadCount(int boardNum){
+		
+		try {
+			conn = getConnection();
+			sql = "update board set readcount=readcount+1 where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNum);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+	}
+	//updateReadCount
 }

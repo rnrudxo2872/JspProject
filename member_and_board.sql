@@ -28,10 +28,10 @@ CREATE TABLE `board` (
   `user_name` varchar(80) NOT NULL,
   `content` varchar(2000) NOT NULL,
   `date` date DEFAULT NULL,
-  `re_ref` int(11) DEFAULT NULL,
-  `re_lev` int(11) DEFAULT NULL,
-  `re_seq` int(11) DEFAULT NULL,
   `file` varchar(2000) DEFAULT NULL,
+  `ip` varchar(100) DEFAULT NULL,
+  `readcount` int(11) DEFAULT NULL,
+  `comments` int(11) DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +42,7 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
-INSERT INTO `board` VALUES (1,'ad','ad','ad','2021-05-03',1,1,1,NULL),(2,'a','b','e','2021-05-03',2,1,1,NULL),(3,'a','b','w','2021-05-03',3,1,1,NULL),(4,'a','b','q','2021-05-03',4,1,1,NULL),(5,'a','b','w','2021-05-03',5,1,1,NULL),(6,'a','b','q','2021-05-03',6,1,1,NULL),(7,'a','b','e','2021-05-03',7,1,1,NULL),(8,'a','b','w','2021-05-03',8,1,1,NULL),(9,'a','b','e','2021-05-03',9,1,1,NULL),(10,'a','b','q','2021-05-03',10,1,1,NULL),(11,'a','b','w','2021-05-03',11,1,1,NULL);
+INSERT INTO `board` VALUES (1,'wqd','1qwe','dqwd','2021-05-09',NULL,NULL,28,NULL);
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,9 +73,13 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'admin@master','1234','관리자','man','2021-05-02 18:38:38',NULL,NULL),(2,'test@naver.com','1234','테스트','wom','2021-05-07 00:02:05','부산 강서구 가달1로 7','123');
+INSERT INTO `member` VALUES (1,'admin@master','1234','관리자','man','2021-05-02 18:38:38',NULL,NULL),(2,'test@naver.com','123','테스트','man','2021-05-09 00:36:39','경기 성남시 분당구 판교로25번길 6','카카오');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'jspproject'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -86,4 +90,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-07  1:02:26
+-- Dump completed on 2021-05-10  1:02:43
