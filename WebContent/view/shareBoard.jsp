@@ -30,7 +30,7 @@ else
 
 //현재페이지
 String pageNum = request.getParameter("pageNum");
-if(pageNum == null)
+if(pageNum == null || pageNum.equals("null"))
 	pageNum = "1";
 
 int currentPage = Integer.parseInt(pageNum);

@@ -11,9 +11,11 @@
 <title>게시판 업로드 중...</title>
 </head>
 <body>
+
 <%
 String realPath = request.getRealPath("/upload");
-System.out.println(realPath);
+
+
 
 //파일 업로드 최대크기(500MB)
 int maxFileSize = 500 * 1024 * 1024;
@@ -43,6 +45,18 @@ bb.setFile(mul.getFilesystemName("filename"));
 bb.setUser_name((String)session.getAttribute("id"));
 
 System.out.println(mul.getFilesystemName("filename"));
+
+//넘어온 게시물 번호
+int num = Integer.parseInt(mul.getParameter("num"));
+
+//원래 게시물을 조회.
+boardBean originBB = new boardBean();
+boardDAO bdao = new boardDAO();
+
+originBB = bdao.getBoard(num);
+
+System.out.println(originBB.getFile_sys());
+
 
 //게시글 ip주소
 bb.setIp(request.getRemoteAddr());

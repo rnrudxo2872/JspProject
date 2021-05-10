@@ -131,6 +131,8 @@ public class boardDAO {
 				bb.setDate(rs.getDate(5));
 				bb.setFile(rs.getString(6));
 				bb.setReadcount(rs.getInt(8));
+				bb.setComments(rs.getInt(9));
+				bb.setFile_sys(rs.getString(10));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

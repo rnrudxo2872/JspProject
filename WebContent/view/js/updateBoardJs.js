@@ -24,7 +24,7 @@ function updateSubmit(event){
 	alert("dd");
 	let fileChange = document.querySelector("#fileChange");
 	
-	//파일을 삭제하여 수정하였다면 삭제된 것.
+	/*//파일을 삭제하여 수정하였다면 삭제된 것.
 	if(fileInput.value == "" && fileChange.value == "1" && existFile.style.display == "none"){
 		fileChange.value = "delete";
 		
@@ -33,16 +33,12 @@ function updateSubmit(event){
 		fileChange.value = "stable";
 		
 	//기존에 파일이 있지만 교체할 것인가?
-	}else if(fileInput.value != "" && fileChange.value == "1"){
-		if(confirm("파일을 교체하시겠습니까?")){
-			fileChange.value = "change";
-		}else{
+	}else*/
+	if(fileInput.value != "" && fileChange.value == "1"){
+		if(!confirm("파일을 교체하시겠습니까?")){
 			event.preventDefault();
+			
 		}
-		
-		//파일을 업로드하지만 원래 파일이 없다? => 바로 업로드
-	}else if(fileInput.value != "" && fileChange.value == "0"){
-		fileChange.value = "upload";
 	}
 }
 

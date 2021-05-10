@@ -51,6 +51,7 @@ System.out.println(request.getParameter("filename"));
     </div>
     <textarea name="content" cols="30" rows="10"><%=bb.getContent()%></textarea>
     <input type="submit" value="글쓰기">
+    <input type="hidden" value="<%=boardNum %>" name="num">
     <input id="fileChange" type="hidden" value=<%if(bb.getFile() == null){%>"0"<%}else{ %>"1"<%} %>>
     </form>
 </div>
