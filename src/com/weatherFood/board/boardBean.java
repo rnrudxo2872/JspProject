@@ -12,11 +12,20 @@ public class boardBean {
 	private String ip;
 	private int readcount;
 	private int comments;
+	private String file_sys;
 	
 	public String toString() {
 		return "boardBean [num=" + num + ", title=" + title + ", user_name=" + user_name + ", content=" + content
 				+ ", date=" + date + ", file=" + file + ", ip=" + ip + ", readcount=" + readcount + ", comments="
-				+ comments + "]";
+				+ comments + ", file_sys=" + file_sys + "]";
+	}
+
+	public String getFile_sys() {
+		return file_sys;
+	}
+
+	public void setFile_sys(String file_sys) {
+		this.file_sys = file_sys;
 	}
 
 	public String getIp() {

@@ -39,13 +39,14 @@ System.out.println("근본이름 : " + mul.getOriginalFileName("filename"));
 boardBean bb = new boardBean();
 bb.setTitle(mul.getParameter("title"));
 bb.setContent(mul.getParameter("content"));
-bb.setFile(mul.getOriginalFileName("filename"));
-bb.setFile_sys(mul.getFilesystemName("filename"));
+bb.setFile(mul.getFilesystemName("filename"));
 bb.setUser_name((String)session.getAttribute("id"));
+
+System.out.println(mul.getFilesystemName("filename"));
 
 //게시글 ip주소
 bb.setIp(request.getRemoteAddr());
-boardDAO bdao = new boardDAO();
+/* boardDAO bdao = new boardDAO();
 int num = bdao.insertBoard(bb);
 if(num != 0)
 	response.sendRedirect("../view/boardContent.jsp?num="+num);
@@ -56,7 +57,7 @@ else{
 	location.href = "../view/min.jsp";
 	</script>
 	<%
-}
+} */
 %>
 </body>
 </html>

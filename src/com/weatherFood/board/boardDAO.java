@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.sql.DataSource;
 
 public class boardDAO {
@@ -158,8 +159,8 @@ public class boardDAO {
 			}else
 				num = 1;
 			sql = "insert into board"
-					+ "(num,title,user_name,content,date,file,ip,readcount,comments) "
-					+ "values (?,?,?,?,now(),?,?,?,?)";
+					+ "(num,title,user_name,content,date,file,ip,readcount,comments,file_sys) "
+					+ "values (?,?,?,?,now(),?,?,?,?,?)";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -171,6 +172,7 @@ public class boardDAO {
 			pstmt.setString(6, bb.getIp());
 			pstmt.setInt(7, 0);
 			pstmt.setInt(8, 0);
+			pstmt.setString(9, bb.getFile_sys());
 			pstmt.executeUpdate();
 			System.out.println("게시글 작성!" + bb.getUser_name());
 		} catch (SQLException e) {
@@ -199,4 +201,81 @@ public class boardDAO {
 		}
 	}
 	//updateReadCount
+	
+	//boardDel(bb,id);
+	public int boardDel(String id, int num){
+		//-1 error, 1 정상
+		int flag = -1;
+		
+		try {
+			conn = getConnection();
+			sql = "select user_name from board where num=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			//글쓴이가 같은지 확인
+			if(rs.next()){
+				
+				String getId = rs.getString(1);
+				if(!getId.equals(id)){
+					return flag;
+				}
+			}else{
+				return flag;
+			}
+			
+			//db삭제
+			sql = "delete from board where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			pstmt.executeUpdate();
+			System.out.println("글삭제!");
+			flag = 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		
+		return flag;
+	}
+	//boardDel(bb,id);
+	
+	//getFileSysName
+	public String getFileSysName(int num){
+		
+		String fileSysName = null;
+		
+		//파일 삭제
+		try {
+			System.out.println(num);
+			conn = getConnection();
+			sql = "select file_sys from board where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				String fileName = rs.getString(1);
+				System.out.println("글 파일 조회! => " + fileName);
+				
+				System.out.println(fileName);
+				if(fileName != null){
+					fileSysName = fileName;
+				}
+			}else{
+				System.out.println("글 없음");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		
+		return fileSysName;
+	}
+	//getFileSysName
 }

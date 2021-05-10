@@ -59,17 +59,27 @@ try{
             <th id="table_writer"><%=bb.getUser_name()%></th>
             <td id="table_date" colspan="3"><%=bb.getDate()%></td>
         </tr>
-        <tr>
+        <tr>	
             <td id="table_file" colspan="4">첨부파일 : <%=bb.getFile()%></td>
         </tr>
         <tr>
             <td id="table_content" colspan="4"><%=bb.getContent()%></td>
         </tr>
     </table>
+    <%
+    String curId = (String)session.getAttribute("id");
+    String curBoardId = bb.getUser_name();
+    
+    if(curId != null && curId.equals(curBoardId)){ %>
+    <span><a class="board-container-footer__insertBoard" href="shareBoard.jsp?pageNum=<%=pageNum%>">글 목록</a></span>
+    <span><a class="board-container-footer__insertBoard" href="updateBoard.jsp?num=<%=bb.getNum()%>">글 수정</a></span>
+    <span><a class="board-container-footer__insertBoard" onclick="confirmDel(<%=boardNum%>)">글 삭제</a></span>
+    <%} %>
 </main>
 <div>
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
+<script src="js/deleteBoard.js"></script>
 </body>
 </html>

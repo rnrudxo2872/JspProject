@@ -70,3 +70,12 @@
 .insertBoard-container-form textarea:focus{
 	outline:none;
 }
+#filename{
+	  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none; 
+}
+.insertBoard-container__dleButton{
+	border: none;
+	background-color: white;
+}

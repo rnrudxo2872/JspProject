@@ -35,7 +35,7 @@
 .weatherDisplay{
     position: fixed;
 	z-index: 3;
-    top: 50px;
+    top: 30px;
     right: 10px;
     display: flex;
     flex-direction: column;
