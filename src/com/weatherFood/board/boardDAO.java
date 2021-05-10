@@ -280,4 +280,31 @@ public class boardDAO {
 		return fileSysName;
 	}
 	//getFileSysName
+	
+	//updateBoard
+	public int updateBoard(boardBean bb){
+		int flag = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "update board set title=?,content=?,file=?,file_sys=? where num=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, bb.getTitle());
+			pstmt.setString(2, bb.getContent());
+			pstmt.setString(3, bb.getFile());
+			pstmt.setString(4, bb.getFile_sys());
+			pstmt.setInt(5, bb.getNum());
+			
+			pstmt.executeUpdate();
+			flag = 1;
+			System.out.println("수정 끝");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return flag;
+	}
+	//updateBoard
 }

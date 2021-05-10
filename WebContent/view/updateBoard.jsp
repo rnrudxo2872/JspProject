@@ -12,9 +12,20 @@ String title ="글 수정";
 %>
 <title>FProject | <%=title %></title>
 <%
-request.setCharacterEncoding("utf-8");
-String id = (String)session.getAttribute("id");
-int boardNum = Integer.parseInt(request.getParameter("num"));
+String id = null;
+int boardNum = -1;
+try{
+	request.setCharacterEncoding("utf-8");
+	id = (String)session.getAttribute("id");
+	boardNum = Integer.parseInt(request.getParameter("num"));
+}catch(NumberFormatException err){
+	System.out.println(err);
+	response.sendRedirect("shareBoard.jsp");
+	return;
+}catch(Exception err){
+	System.out.println(err);
+	return;
+}
 
 if(id == null){
 	%>
@@ -52,7 +63,7 @@ System.out.println(request.getParameter("filename"));
     <textarea name="content" cols="30" rows="10"><%=bb.getContent()%></textarea>
     <input type="submit" value="글쓰기">
     <input type="hidden" value="<%=boardNum %>" name="num">
-    <input id="fileChange" type="hidden" value=<%if(bb.getFile() == null){%>"0"<%}else{ %>"1"<%} %>>
+    <input id="fileChange" type="hidden" value=<%if(bb.getFile() == null){%>"0"<%}else{ %>"1"<%} %> name="fileChange">
     </form>
 </div>
 
@@ -61,5 +72,37 @@ System.out.println(request.getParameter("filename"));
 </div> 
 </div>
 <script src="js/updateBoardJs.js"></script>
+<script>
+function updateSubmit(event){
+	
+	let preFileName = "<%=bb.getFile()%>";
+	let CurFilePath = fileInput.value;
+	let curFileName = CurFilePath.substring(CurFilePath.indexOf(preFileName),CurFilePath.length);
+	
+	//alert(curFileName);
+	
+	if(curFileName === preFileName && existFile.style.display!="none"){
+		alert("같은 파일을 중복 첨부는 안됩니다!");
+		fileInput.value = "";
+		event.preventDefault();
+		return;
+	}
+	
+	if(fileInput.value != "" && fileChange.value == "1"){
+		if(!confirm("파일을 교체하시겠습니까?")){
+			event.preventDefault();
+			console.log(existFile.style.display);
+			console.log(fileChange.value);
+			fileChange.value = "Overwrite";
+		}
+	}
+	//원래있던 파일 삭제시,
+	if(existFile.style.display=="none"){
+		fileChange.value = "Del";
+	}
+}
+
+updateForm.addEventListener("submit",updateSubmit);
+</script>
 </body>
 </html>
