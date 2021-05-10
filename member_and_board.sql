@@ -32,6 +32,7 @@ CREATE TABLE `board` (
   `ip` varchar(100) DEFAULT NULL,
   `readcount` int(11) DEFAULT NULL,
   `comments` int(11) DEFAULT NULL,
+  `file_sys` varchar(2000) DEFAULT NULL,
   PRIMARY KEY (`num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +43,7 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
-INSERT INTO `board` VALUES (1,'wqd','1qwe','dqwd','2021-05-09',NULL,NULL,28,NULL);
+INSERT INTO `board` VALUES (1,'123','test@naver.com','123','2021-05-10',NULL,'0:0:0:0:0:0:0:1',2,0,NULL),(2,'124124','test@naver.com','12412424','2021-05-10','2.25.txt','0:0:0:0:0:0:0:1',2,0,'2.25.txt'),(4,'412412','test@naver.com','124124','2021-05-10','2.25.txt','0:0:0:0:0:0:0:1',1,0,'2.252.txt');
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,10 +77,6 @@ LOCK TABLES `member` WRITE;
 INSERT INTO `member` VALUES (1,'admin@master','1234','관리자','man','2021-05-02 18:38:38',NULL,NULL),(2,'test@naver.com','123','테스트','man','2021-05-09 00:36:39','경기 성남시 분당구 판교로25번길 6','카카오');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'jspproject'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -90,4 +87,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-10  1:02:43
+-- Dump completed on 2021-05-10 17:51:39
