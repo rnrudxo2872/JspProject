@@ -43,8 +43,35 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
-INSERT INTO `board` VALUES (1,'123','test@naver.com','123','2021-05-10',NULL,'0:0:0:0:0:0:0:1',2,0,NULL),(2,'124124','test@naver.com','12412424','2021-05-10','2.25.txt','0:0:0:0:0:0:0:1',2,0,'2.25.txt'),(4,'412412','test@naver.com','124124','2021-05-10','2.25.txt','0:0:0:0:0:0:0:1',1,0,'2.252.txt');
+INSERT INTO `board` VALUES (1,'123','test@naver.com','123123213','2021-05-10','babel.txt','0:0:0:0:0:0:0:1',10,0,'babel2.txt'),(2,'123123','test@naver.com','213123','2021-05-10','babel.txt','0:0:0:0:0:0:0:1',1,0,'babel1.txt');
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `board_comment`
+--
+
+DROP TABLE IF EXISTS `board_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `board_comment` (
+  `idx` int(11) NOT NULL,
+  `comment` varchar(3000) COLLATE utf8_bin NOT NULL,
+  `date` date NOT NULL,
+  `board_num` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idx`),
+  KEY `comment_to_board_fk_idx` (`board_num`),
+  CONSTRAINT `comment_to_board_fk` FOREIGN KEY (`board_num`) REFERENCES `board` (`num`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `board_comment`
+--
+
+LOCK TABLES `board_comment` WRITE;
+/*!40000 ALTER TABLE `board_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `board_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -77,6 +104,10 @@ LOCK TABLES `member` WRITE;
 INSERT INTO `member` VALUES (1,'admin@master','1234','관리자','man','2021-05-02 18:38:38',NULL,NULL),(2,'test@naver.com','123','테스트','man','2021-05-09 00:36:39','경기 성남시 분당구 판교로25번길 6','카카오');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'jspproject'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -87,4 +118,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-10 17:51:39
+-- Dump completed on 2021-05-11  0:14:31
