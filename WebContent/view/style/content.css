@@ -1,6 +1,11 @@
-.boardDetail table{
+.boardDetail .detail-container{
+	min-width: 500px;
+	min-height: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.detail-container table{
 	width: 100%;
-	height: 100%;
 }
 .boardDetail tr td,.boardDetail tr th{
 	border-bottom: 3px solid black;
@@ -10,4 +15,12 @@
 }
 #table_title{
 	font-size:21px;
+}
+
+.detail-container__userInter{
+	padding: 5px 0;
+}
+#userComment{
+	width: 100%;
+	min-height: 20px;
 }

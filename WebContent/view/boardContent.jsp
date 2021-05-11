@@ -1,3 +1,4 @@
+<%@page import="com.weatherFood.comment.commentBean"%>
 <%@page import="com.weatherFood.board.boardDAO"%>
 <%@page import="com.weatherFood.board.boardBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -48,6 +49,7 @@ try{
 </jsp:include>
 </div>
 <main class="boardDetail">
+<div class="detail-container">
     <table>
         <tr id="table_title">
         	<td style="font-weight:900; width:100px;">제목 :</td>
@@ -71,10 +73,23 @@ try{
     String curBoardId = bb.getUser_name();
     
     if(curId != null && curId.equals(curBoardId)){ %>
+    <div>
+    <div class="detail-container__userInter">
     <span><a class="board-container-footer__insertBoard" href="shareBoard.jsp?pageNum=<%=pageNum%>">글 목록</a></span>
     <span><a class="board-container-footer__insertBoard" href="updateBoard.jsp?num=<%=bb.getNum()%>">글 수정</a></span>
     <span><a class="board-container-footer__insertBoard" onclick="confirmDel(<%=boardNum%>)">글 삭제</a></span>
+    </div>
     <%} %>
+    <div class="comment-container" style="box-sizing: border-box; overflow: hidden;">
+    	<% if(curId != null){%>
+    	<form class="comment-container__form">
+    	<input id="userComment" type="text" placeholder="코멘트를 남겨보세요!" name="userComment">
+    	</form>
+    	<%} %>
+	<%//댓글들 표시 %>
+    </div>
+    </div>
+    </div>
 </main>
 <div>
 <%@include file="partials/footer.jsp" %>
