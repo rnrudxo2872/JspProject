@@ -84,9 +84,14 @@ try{
     	<% if(curId != null){%>
     	<form class="comment-container__form">
     	<input id="userComment" type="text" placeholder="코멘트를 남겨보세요!" name="userComment">
+    	<input id="user_id" type="hidden" value="<%=curId%>">
+    	<input id="board_num" type="hidden" value="<%=boardNum %>">
     	</form>
     	<%} %>
-	<%//댓글들 표시 %>
+	<div class="comment-container__commentList">
+	<div class="commentList-head"></div>
+	
+	</div>
     </div>
     </div>
     </div>
@@ -96,5 +101,6 @@ try{
 </div> 
 </div>
 <script src="js/deleteBoard.js"></script>
+<script src="js/commentFun.js"></script>
 </body>
 </html>

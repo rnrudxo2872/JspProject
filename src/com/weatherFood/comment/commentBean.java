@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class commentBean {
 	private int idx;
+	private String user_id;
 	private String comment;
 	private Date date;
 	private int board_num;
@@ -13,6 +14,12 @@ public class commentBean {
 	}
 	public void setIdx(int idx) {
 		this.idx = idx;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 	public String getComment() {
 		return comment;
@@ -34,6 +41,7 @@ public class commentBean {
 	}
 
 	public String toString() {
-		return "commentBean [idx=" + idx + ", comment=" + comment + ", date=" + date + ", board_num=" + board_num + "]";
+		return "commentBean [idx=" + idx + ", user_id=" + user_id + ", comment=" + comment + ", date=" + date
+				+ ", board_num=" + board_num + "]";
 	}
 }

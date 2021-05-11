@@ -43,7 +43,7 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
-INSERT INTO `board` VALUES (1,'123','test@naver.com','123123213','2021-05-10','babel.txt','0:0:0:0:0:0:0:1',10,0,'babel2.txt'),(2,'123123','test@naver.com','213123','2021-05-10','babel.txt','0:0:0:0:0:0:0:1',1,0,'babel1.txt');
+INSERT INTO `board` VALUES (1,'123','test@naver.com','123123213','2021-05-10','babel.txt','0:0:0:0:0:0:0:1',10,0,'babel2.txt'),(2,'123123','test@naver.com','213123','2021-05-10','babel.txt','0:0:0:0:0:0:0:1',186,0,'babel1.txt');
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,6 +56,7 @@ DROP TABLE IF EXISTS `board_comment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `board_comment` (
   `idx` int(11) NOT NULL,
+  `user_id` varchar(200) COLLATE utf8_bin NOT NULL,
   `comment` varchar(3000) COLLATE utf8_bin NOT NULL,
   `date` date NOT NULL,
   `board_num` int(11) DEFAULT NULL,
@@ -71,6 +72,7 @@ CREATE TABLE `board_comment` (
 
 LOCK TABLES `board_comment` WRITE;
 /*!40000 ALTER TABLE `board_comment` DISABLE KEYS */;
+INSERT INTO `board_comment` VALUES (1,'test@naver.com','안녕하세요!','2021-05-11',2),(2,'test@naver.com','안녕하세요!','2021-05-11',2),(3,'test@naver.com','왜 바로 안나오죠?','2021-05-11',2),(4,'test@naver.com','흠 이상하네요...','2021-05-11',2),(5,'test@naver.com','왜 제대로 안나와??','2021-05-11',2),(6,'test@naver.com','123123','2021-05-11',2),(7,'test@naver.com','룰루랄라~','2021-05-11',2),(8,'test@naver.com','12321','2021-05-12',2);
 /*!40000 ALTER TABLE `board_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-11  0:14:31
+-- Dump completed on 2021-05-12  0:46:37

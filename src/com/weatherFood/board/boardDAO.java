@@ -160,6 +160,7 @@ public class boardDAO {
 				num = rs.getInt(1) + 1;
 			}else
 				num = 1;
+			
 			sql = "insert into board"
 					+ "(num,title,user_name,content,date,file,ip,readcount,comments,file_sys) "
 					+ "values (?,?,?,?,now(),?,?,?,?,?)";
