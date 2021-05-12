@@ -13,6 +13,49 @@ let insertCommentLen = (commentsJson) =>{
 	    commentListHead.innerText = `${commentsJson.length} comments`;
 }
 
+let CommentFunc = {
+	Update : (event) =>{
+		event.preventDefault();
+		console.log(event.target);
+	},
+	Delete : async(event) =>{
+		console.log(event.target);
+		event.preventDefault();
+		
+		let This = event.target;
+		let Parent = This.parentNode.parentNode.parentNode;
+
+		if(confirm("정말 삭제하겠습니까?")){
+			Parent.style.display = "none";
+			await fetch(This.href);
+		}
+	}
+} 
+
+let insertCommentButton = (idx) => {
+	let btnContainer = document.createElement("span");
+
+	let update = document.createElement("a");
+	let del = document.createElement("a");
+
+	update.setAttribute("href", `../controller/updateComment.jsp?idx=${idx}`);
+	del.setAttribute("href", `../controller/delComment.jsp?idx=${idx}`);
+	
+	update.innerText = "수정";
+	del.innerText = "삭제";
+	
+	update.style.marginLeft = "10px";
+	update.style.marginRight = "10px";
+	
+	update.addEventListener("click", CommentFunc.Update)
+	del.addEventListener("click", CommentFunc.Delete);
+
+	btnContainer.appendChild(update);
+	btnContainer.appendChild(del);
+
+	return btnContainer;
+}
+
 let insertHtml = (commentsJson) =>{
 	commentsJson.forEach(element =>{
 		
@@ -30,6 +73,12 @@ let insertHtml = (commentsJson) =>{
 	    let commentContent = document.createElement("div");
 	    commentContent.setAttribute("class","commentContent");
 	    commentContent.innerText = element.comment;
+	    
+	    //console.log(element.idx);
+	    if(commentUser === element.user_id){
+	    	let tempElement = insertCommentButton(element.idx);
+	    	commentContent.appendChild(tempElement);
+	    }
 
 	    commenttail.appendChild(userName);
 	    commenttail.appendChild(date);
@@ -52,18 +101,16 @@ let insertComment = async() =>{
 		    body: JSON.stringify(data),
 		    headers: {
 		        'Content-Type': 'application/json'
-		    }
-			}
+		   }
+	}
 	
 	commentInput.value = "";
 	
 	
 	let commentsJson = await (await fetch("../controller/insertComment.jsp",fetchData)).json();
-	
-	
-	
+
 	insertCommentLen(commentsJson);
-	commentList.innerHTML = commentListHead.innerHTML;
+	commentList.innerHTML = commentListHead.outerHTML;
 	
 	insertHtml(commentsJson);
 }
@@ -93,4 +140,5 @@ let err = (errorArgs) => {
 }
 
 initFetch();
-commentForm.addEventListener("submit",FetchInsert);
+if(commentForm !== null)
+	commentForm.addEventListener("submit",FetchInsert);
