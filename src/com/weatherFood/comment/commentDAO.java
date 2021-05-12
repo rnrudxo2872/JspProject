@@ -104,6 +104,17 @@ public class commentDAO {
 			
 			if(rs.next()){
 				comments = new JSONArray();
+				
+				JSONObject obj = new JSONObject();
+				obj.put("idx", rs.getInt(1));
+				obj.put("user_id", rs.getString(2));
+				obj.put("comment", rs.getString(3));
+				
+				//date는 문자열로 해줘야함.
+				obj.put("date", rs.getString(4));
+				obj.put("board_num",rs.getInt(5));
+				
+				comments.add(obj);
 			}
 			while(rs.next()){
 				JSONObject obj = new JSONObject();

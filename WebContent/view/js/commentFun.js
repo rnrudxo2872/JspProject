@@ -4,33 +4,18 @@ const commentUser = document.querySelector("#user_id").value;
 const commentBoardNum = document.querySelector("#board_num").value;
 const commentList = document.querySelector(".comment-container__commentList");
 
-let insertComment = async() =>{
-	
-	let data = {
-			user_id:commentUser,
-			comment:commentInput.value,
-			board_num:commentBoardNum
-	}
-	
-	let fetchData = {
-		    method: 'POST',
-		    body: JSON.stringify(data),
-		    headers: {
-		        'Content-Type': 'application/json'
-		    }
-			}
+let commentListHead = document.querySelector(".commentList-head");
 
-	let commentsJson = await (await fetch("../controller/insertComment.jsp",fetchData)).json();
-	
-	let commentListHead = document.querySelector(".commentList-head");
-	
+let insertCommentLen = (commentsJson) =>{
 	if(commentsJson.length === 1)
 	    commentListHead.innerText = `1 comment`;
 	else
 	    commentListHead.innerText = `${commentsJson.length} comments`;
-	    	
-	    
+}
+
+let insertHtml = (commentsJson) =>{
 	commentsJson.forEach(element =>{
+		
 	    let commenttail = document.createElement("div");
 	    commenttail.setAttribute("class","commentList-tail");
 
@@ -54,7 +39,36 @@ let insertComment = async() =>{
 	})
 }
 
-let FetchNow = (event) =>{
+let insertComment = async() =>{
+	
+	let data = {
+			user_id:commentUser,
+			comment:commentInput.value,
+			board_num:commentBoardNum
+	}
+	
+	let fetchData = {
+		    method: 'POST',
+		    body: JSON.stringify(data),
+		    headers: {
+		        'Content-Type': 'application/json'
+		    }
+			}
+	
+	commentInput.value = "";
+	
+	
+	let commentsJson = await (await fetch("../controller/insertComment.jsp",fetchData)).json();
+	
+	
+	
+	insertCommentLen(commentsJson);
+	commentList.innerHTML = commentListHead.innerHTML;
+	
+	insertHtml(commentsJson);
+}
+
+let FetchInsert = (event) =>{
 	event.preventDefault();
 	if(confirm("덧글을 작성하시겠습니까?")){
 		
@@ -62,4 +76,21 @@ let FetchNow = (event) =>{
 	}
 }
 
-commentForm.addEventListener("submit",FetchNow);
+
+let initFetch = async() =>{
+	let commentsJson = await (await fetch(`../controller/contentComments.jsp?num=${commentBoardNum}`).catch(err)).json();
+	
+	console.log(commentsJson);
+	insertCommentLen(commentsJson);
+	insertHtml(commentsJson);
+}
+
+let err = (errorArgs) => {
+	console.log(errorArgs);
+	let res = new Response();
+	alert("댓글 파싱 에러!");
+	return res;
+}
+
+initFetch();
+commentForm.addEventListener("submit",FetchInsert);
