@@ -138,4 +138,21 @@ public class commentDAO {
 		return comments;
 	}
 	//getComments
+	
+	//delComment
+	public void delComment(int idx){
+		
+		try {
+			conn = getConnection();
+			sql = "delete from board_comment where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//delComment
 }

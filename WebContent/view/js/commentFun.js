@@ -28,6 +28,16 @@ let CommentFunc = {
 		if(confirm("정말 삭제하겠습니까?")){
 			Parent.style.display = "none";
 			await fetch(This.href);
+			console.log(commentListHead.innerText.indexOf("comm"));
+			let innerTEXT = commentListHead.innerText
+			let lastPosition = innerTEXT.indexOf("comm");
+			let commentNum = innerTEXT.substring(0,lastPosition-1);
+			console.log(commentNum);
+			
+			if(commentNum === 1)
+			    commentListHead.innerText = `1 comment`;
+			else
+				commentListHead.innerText = `${commentNum-1} comments`;
 		}
 	}
 } 

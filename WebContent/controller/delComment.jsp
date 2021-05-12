@@ -1,15 +1,11 @@
+<%@page import="com.weatherFood.comment.commentDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 <%
 System.out.println("안녕??");
-%>
+int commentNum = Integer.parseInt(request.getParameter("idx"));
+System.out.println(commentNum);
 
-</body>
-</html>
+commentDAO cdao = new commentDAO();
+cdao.delComment(commentNum);
+%>
