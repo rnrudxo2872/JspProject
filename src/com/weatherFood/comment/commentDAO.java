@@ -141,6 +141,27 @@ public class commentDAO {
 	}
 	//getComments
 	
+	//getBoardCommentSize
+	public int getBoardCommentSize(int num){
+		int ret = 0;
+		
+		try {
+			conn = getConnection();
+			sql = "select count(*) from board_comment where board_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				ret = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return ret;
+	}
+	//getBoardCommentSize
+	
 	//delComment
 	public void delComment(int idx){
 		

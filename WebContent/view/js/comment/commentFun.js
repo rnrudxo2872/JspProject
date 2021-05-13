@@ -9,17 +9,35 @@ let commentListHead = document.querySelector(".commentList-head");
 
 let count = 0;
 
-let insertCommentLen = (commentsJson) =>{
-	if(commentsJson.length === 1)
+let insertCommentHead = async() =>{
+	let numberOfComment = await (await fetch(`../controller/comment/getNumberOfComment.jsp?num=${commentBoardNum}`)).text()
+	console.log(numberOfComment);
+	if(numberOfComment == 1)
 	    commentListHead.innerText = `1 comment`;
 	else
-	    commentListHead.innerText = `${commentsJson.length} comments`;
+		commentListHead.innerText = `${numberOfComment} comments`;
 }
+
 
 let CommentFunc = {
 	Update : (event) =>{
 		event.preventDefault();
 		console.log(event.target);
+		
+		let This = event.target;
+		let contentContainer = This.parentNode.parentNode;
+		let Parent = This.parentNode.parentNode.parentNode;
+		
+		let inputUpdateContent = document.createElement("input");
+		inputUpdateContent.className = "updateComment";
+		inputUpdateContent.setAttribute("type","text");
+		inputUpdateContent.addEventListener("keydown",e =>{
+		    console.log(e.target) 
+		})
+		contentContainer.innerHTML = inputUpdateContent.outerHTML;
+		/*let index = contentContainer.innerText.indexOf("수정");
+		let content = contentContainer.innerText.substring(0,index)
+		console.log(contentContainer.innerText.substring(0,index));*/
 	},
 	Delete : async(event) =>{
 		console.log(event.target);
@@ -50,8 +68,8 @@ let insertCommentButton = (idx) => {
 	let update = document.createElement("a");
 	let del = document.createElement("a");
 
-	update.setAttribute("href", `../controller/updateComment.jsp?idx=${idx}`);
-	del.setAttribute("href", `../controller/delComment.jsp?idx=${idx}`);
+	update.setAttribute("href", `../controller/comment/updateComment.jsp?idx=${idx}`);
+	del.setAttribute("href", `../controller/comment/delComment.jsp?idx=${idx}`);
 	
 	update.innerText = "수정";
 	del.innerText = "삭제";
@@ -69,35 +87,38 @@ let insertCommentButton = (idx) => {
 }
 
 let insertHtml = (commentsJson) =>{
-	commentsJson.forEach(element =>{
-		
-	    let commenttail = document.createElement("div");
-	    commenttail.setAttribute("class","commentList-tail");
+	if(commentsJson !== null){
+		commentsJson.forEach(element =>{
+			
+		    let commenttail = document.createElement("div");
+		    commenttail.setAttribute("class","commentList-tail");
 
-	    let userName = document.createElement("div");
-	    userName.setAttribute("class","commentUserName");
-	    userName.innerText = element.user_id;
+		    let userName = document.createElement("div");
+		    userName.setAttribute("class","commentUserName");
+		    userName.innerText = element.user_id;
 
-	    let date = document.createElement("div");
-	    date.setAttribute("class","commentDate");
-	    date.innerText = element.date;
+		    let date = document.createElement("div");
+		    date.setAttribute("class","commentDate");
+		    date.innerText = element.date;
 
-	    let commentContent = document.createElement("div");
-	    commentContent.setAttribute("class","commentContent");
-	    commentContent.innerText = element.comment;
-	    
-	    //console.log(element.idx);
-	    if(commentUser === element.user_id){
-	    	let tempElement = insertCommentButton(element.idx);
-	    	commentContent.appendChild(tempElement);
-	    }
+		    let commentContent = document.createElement("div");
+		    commentContent.setAttribute("class","commentContent");
+		    commentContent.innerText = element.comment;
+		    
+		    //console.log(element.idx);
+		    if(commentUser === element.user_id){
+		    	let tempElement = insertCommentButton(element.idx);
+		    	commentContent.appendChild(tempElement);
+		    }
 
-	    commenttail.appendChild(userName);
-	    commenttail.appendChild(date);
-	    commenttail.appendChild(commentContent);
+		    commenttail.appendChild(userName);
+		    commenttail.appendChild(date);
+		    commenttail.appendChild(commentContent);
 
-	    commentList.appendChild(commenttail);
-	})
+		    commentList.appendChild(commenttail);
+		})
+	}
+	
 }
 
 let insertComment = async() =>{
@@ -119,12 +140,13 @@ let insertComment = async() =>{
 	commentInput.value = "";
 	
 	
-	let commentsJson = await (await fetch("../controller/insertComment.jsp",fetchData)).json();
+	let commentsJson = await (await fetch("../controller/comment/insertComment.jsp",fetchData)).json();
 
-	insertCommentLen(commentsJson);
-	commentList.innerHTML = commentListHead.outerHTML;
+	//insertCommentLen(commentsJson);
+	//commentList.innerHTML = commentListHead.outerHTML;
 	
 	insertHtml(commentsJson);
+	insertCommentHead();
 }
 
 let FetchInsert = (event) =>{
@@ -142,15 +164,16 @@ bottomObserver.observe(footer);
 
 
 let initFetch = async() =>{
-	let commentsJson = await (await fetch(`../controller/contentComments.jsp?num=${commentBoardNum}&start=${count}`).catch(err)).json();
+	
+	let commentsJson = await (await fetch(`../controller/comment/contentComments.jsp?num=${commentBoardNum}&start=${count}`).catch(err)).json();
 	
 	count += 5;
-	console.log(commentsJson);
-	insertCommentLen(commentsJson);
+	//insertCommentLen(commentsJson);
 	insertHtml(commentsJson);
 	
-	if(commentsJson==null)
+	if(commentsJson == null)
 		bottomObserver.unobserve(footer);
+	
 }
 
 function targetSearch(entries){
@@ -169,6 +192,7 @@ let err = (errorArgs) => {
 	return res;
 }
 
+insertCommentHead();
 
 if(commentForm !== null)
 	commentForm.addEventListener("submit",FetchInsert);

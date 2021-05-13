@@ -88,8 +88,8 @@ try{
     	<%} %>
     	<input id="user_id" type="hidden" value="<%if(curId != null) {%><%=curId%><%}%><%else{%>None<%}%>">
 		<input id="board_num" type="hidden" value="<%=boardNum %>">
-	<div class="comment-container__commentList">
 	<div class="commentList-head"></div>
+	<div class="comment-container__commentList">
 	
 	</div>
     </div>
@@ -101,6 +101,7 @@ try{
 </div> 
 </div>
 <script src="js/deleteBoard.js"></script>
-<script src="js/commentFun.js"></script>
+<script src="js/comment/commentFun.js"></script>
+<script src="js/comment/updateComment.js"></script>
 </body>
 </html>
