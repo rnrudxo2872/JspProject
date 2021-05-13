@@ -27,8 +27,8 @@ cb.setBoard_num(curBoardNum);
 commentDAO cdao = new commentDAO();
 cdao.insertComment(cb);
 
-//해당 게시판 모든 코멘트 불러옴.(후에 구간별로 불러오게 수정예정)
-JSONArray comments = cdao.getComments(curBoardNum);
+//해당 게시판 코멘트 불러옴.
+JSONArray comments = cdao.getComments(0,curBoardNum);
 
 //예외(글을 썻기 때문에 있을 수 없는 일임)
 if(comments == null){

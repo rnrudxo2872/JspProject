@@ -90,15 +90,17 @@ public class commentDAO {
 	//insertComment
 	
 	//getComments
-	public JSONArray getComments(int boardNum){
+	public JSONArray getComments(int start, int boardNum){
 		JSONArray comments = null;
 		
 		try {
 			conn = getConnection();
 			sql = "select * from board_comment where board_num=? "
-					+ "order by idx desc";
+					+ "order by idx desc "
+					+ "limit ?,5";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNum);
+			pstmt.setInt(2, start);
 			
 			rs = pstmt.executeQuery();
 			

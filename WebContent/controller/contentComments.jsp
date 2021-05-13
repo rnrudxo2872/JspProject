@@ -4,9 +4,10 @@
     pageEncoding="UTF-8"%>
 <%
 int boardNum = Integer.parseInt(request.getParameter("num"));
+int start = Integer.parseInt(request.getParameter("start"));
 
 commentDAO cdao = new commentDAO();
-JSONArray comments = cdao.getComments(boardNum);
+JSONArray comments = cdao.getComments(start, boardNum);
 System.out.println("댓글 => " + comments);
 %>
 <%=comments%>

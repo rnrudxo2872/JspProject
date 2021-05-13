@@ -4,7 +4,10 @@ const commentUser = document.querySelector("#user_id").value;
 const commentBoardNum = document.querySelector("#board_num").value;
 const commentList = document.querySelector(".comment-container__commentList");
 
+let footer =  document.querySelector('.footer-container');
 let commentListHead = document.querySelector(".commentList-head");
+
+let count = 0;
 
 let insertCommentLen = (commentsJson) =>{
 	if(commentsJson.length === 1)
@@ -133,12 +136,30 @@ let FetchInsert = (event) =>{
 }
 
 
+const bottomObserver = new IntersectionObserver(targetSearch);
+
+bottomObserver.observe(footer);
+
+
 let initFetch = async() =>{
-	let commentsJson = await (await fetch(`../controller/contentComments.jsp?num=${commentBoardNum}`).catch(err)).json();
+	let commentsJson = await (await fetch(`../controller/contentComments.jsp?num=${commentBoardNum}&start=${count}`).catch(err)).json();
 	
+	count += 5;
 	console.log(commentsJson);
 	insertCommentLen(commentsJson);
 	insertHtml(commentsJson);
+	
+	if(commentsJson==null)
+		bottomObserver.unobserve(footer);
+}
+
+function targetSearch(entries){
+    entries.forEach(element => {
+        if (!element.isIntersecting)
+            return;
+        
+        initFetch();
+    });
 }
 
 let err = (errorArgs) => {
@@ -148,6 +169,6 @@ let err = (errorArgs) => {
 	return res;
 }
 
-initFetch();
+
 if(commentForm !== null)
 	commentForm.addEventListener("submit",FetchInsert);
