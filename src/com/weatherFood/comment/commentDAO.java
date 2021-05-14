@@ -156,6 +156,8 @@ public class commentDAO {
 				ret = rs.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
 		
 		return ret;
@@ -175,6 +177,8 @@ public class commentDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
 	}
 	//delComment

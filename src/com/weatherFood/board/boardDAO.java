@@ -302,6 +302,8 @@ public class boardDAO {
 			System.out.println("수정 끝");
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
 		
 		
