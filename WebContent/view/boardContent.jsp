@@ -101,7 +101,6 @@ try{
 </div> 
 </div>
 <script src="js/deleteBoard.js"></script>
-<script src="js/comment/commentFun.js"></script>
-<script src="js/comment/updateComment.js"></script>
+<script type="module" src="js/comment/commentFun.js"></script>
 </body>
 </html>

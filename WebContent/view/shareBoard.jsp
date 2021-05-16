@@ -13,9 +13,6 @@
 String title ="공유 게시판";
 %>
 <title>FProject | <%=title %></title>
-<!--  
-<link rel="shortcut icon" type="image/x-icon" href="./images/logo.png"></link>
--->
 <%
 //DB 글 개수
 boardDAO bdao = new boardDAO();

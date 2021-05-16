@@ -28,7 +28,8 @@ commentDAO cdao = new commentDAO();
 cdao.insertComment(cb);
 
 //해당 게시판 코멘트 불러옴.
-JSONArray comments = cdao.getComments(0,curBoardNum);
+JSONArray comments = new JSONArray();
+comments.add(jsonObject);
 
 //예외(글을 썻기 때문에 있을 수 없는 일임)
 if(comments == null){

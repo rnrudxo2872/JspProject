@@ -182,4 +182,49 @@ public class commentDAO {
 		}
 	}
 	//delComment
+	
+	//updateComment
+	public int updateComment(JSONObject data){
+		int flag = -1;
+		String curId = (String)data.get("user_id");
+		String curComment = (String)data.get("comment");
+		int idx = Integer.parseInt((String)data.get("idx"));
+
+	 	try {
+	 		
+	 		conn = getConnection();
+	 		sql = "select user_id from board_comment where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, idx);
+			
+			rs = pstmt.executeQuery();
+			
+			//회원정보 일치
+			if(rs.next()){
+				flag = 0;
+			}else{
+				return flag;
+			}
+			
+			sql = "update board_comment set comment=? where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, curComment);
+			pstmt.setInt(2, idx);
+			
+			pstmt.executeUpdate();
+			
+			//정상 업데이트
+			flag = 1;
+			System.out.println("댓글 업데이트! => " + curComment);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+	 	
+		return flag;
+	}
+	//updateComment
 }

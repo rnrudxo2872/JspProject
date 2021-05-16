@@ -20,21 +20,53 @@ let insertCommentHead = async() =>{
 
 
 let CommentFunc = {
-	Update : (event) =>{
+	Update : async(event) =>{
 		event.preventDefault();
 		console.log(event.target);
 		
 		let This = event.target;
+		
+		let userInter = This.parentNode.outerHTML;
+		console.log(userInter);
+		
 		let contentContainer = This.parentNode.parentNode;
 		let Parent = This.parentNode.parentNode.parentNode;
-		
+
 		let inputUpdateContent = document.createElement("input");
 		inputUpdateContent.className = "updateComment";
 		inputUpdateContent.setAttribute("type","text");
-		inputUpdateContent.addEventListener("keydown",e =>{
-		    console.log(e.target) 
+		
+		let UserID = Parent.querySelector('.commentUserName').innerText;
+		console.log(Parent);
+		
+		inputUpdateContent.addEventListener("keyup",async e =>{
+		    if(e.key === 'Enter'){
+		    	if(confirm("정말 수정하시겠습니까?")){
+		    		
+		    		let data = {
+		    				user_id:commentUser,
+		    				comment:inputUpdateContent.value,
+		    				idx:Parent.dataset.id
+		    		}
+		    		
+		    		let fetchData = {
+		    			    method: 'POST',
+		    			    body: JSON.stringify(data),
+		    			    headers: {
+		    			        'Content-Type': 'application/json'
+		    			   }
+		    		}
+		    		
+		    		let updateCom = await fetch('../controller/comment/updateComment.jsp',fetchData);
+		    		console.log(updateCom);
+		    		
+		    		let updateContent = inputUpdateContent.value;
+		    		contentContainer.innerHTML = `${updateContent}${userInter}`;
+		    	}
+		    }
 		})
-		contentContainer.innerHTML = inputUpdateContent.outerHTML;
+		contentContainer.innerHTML = '';
+		contentContainer.appendChild(inputUpdateContent);
 		/*let index = contentContainer.innerText.indexOf("수정");
 		let content = contentContainer.innerText.substring(0,index)
 		console.log(contentContainer.innerText.substring(0,index));*/
@@ -86,13 +118,15 @@ let insertCommentButton = (idx) => {
 	return btnContainer;
 }
 
-let insertHtml = (commentsJson) =>{
+let insertHtml = (commentsJson, insert) =>{
 	if(commentsJson !== null){
 		commentsJson.forEach(element =>{
-			
+	
 		    let commenttail = document.createElement("div");
 		    commenttail.setAttribute("class","commentList-tail");
-
+		    console.log(element);
+		    commenttail.setAttribute("data-id",element.idx);
+		    
 		    let userName = document.createElement("div");
 		    userName.setAttribute("class","commentUserName");
 		    userName.innerText = element.user_id;
@@ -114,8 +148,12 @@ let insertHtml = (commentsJson) =>{
 		    commenttail.appendChild(userName);
 		    commenttail.appendChild(date);
 		    commenttail.appendChild(commentContent);
-
-		    commentList.appendChild(commenttail);
+		    
+		    if(insert){
+		    	commentList.prepend(commenttail);
+		    }else{
+		    	commentList.appendChild(commenttail);
+		    }
 		})
 	}
 	
@@ -145,7 +183,7 @@ let insertComment = async() =>{
 	//insertCommentLen(commentsJson);
 	//commentList.innerHTML = commentListHead.outerHTML;
 	
-	insertHtml(commentsJson);
+	insertHtml(commentsJson, true);
 	insertCommentHead();
 }
 
