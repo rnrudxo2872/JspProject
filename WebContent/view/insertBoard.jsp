@@ -48,6 +48,5 @@ if(id == null){
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
-<script src="js/changePageBlock.js"></script>
 </body>
 </html>

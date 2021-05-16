@@ -1,7 +1,6 @@
 <%@page import="com.weatherFood.board.boardDAO"%>
 <%@page import="com.weatherFood.board.boardBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.key.ApiKey"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

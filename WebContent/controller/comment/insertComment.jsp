@@ -35,8 +35,5 @@ comments.add(jsonObject);
 if(comments == null){
 	return;
 }
-/* System.out.println(comments);
-JSONObject dd = (JSONObject)comments.get(0);
-System.out.println(dd.get("date")); */
 %>
 <%=comments%>

@@ -61,11 +61,13 @@ try{
             <th id="table_writer"><%=bb.getUser_name()%></th>
             <td id="table_date" colspan="3"><%=bb.getDate()%></td>
         </tr>
+        <%if(bb.getFile() != null){%>
         <tr>	
-            <td id="table_file" colspan="4">첨부파일 : <%=bb.getFile()%></td>
+            <td id="table_file" colspan="4"><a href="../controller/file/fileDown.jsp?num=<%=bb.getNum() %>&fileName=<%=bb.getFile()%>">💾<%=bb.getFile()%></a></td>
         </tr>
+        <%} %>
         <tr>
-            <td id="table_content" colspan="4"><%=bb.getContent()%></td>
+            <td class="table_content" id="table_content" colspan="4"><%=bb.getContent()%></td>
         </tr>
     </table>
     <%

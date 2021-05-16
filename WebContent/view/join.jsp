@@ -25,7 +25,7 @@ String title ="회원가입";
 </div>
 
 <div class="form-container">
-        <form action="../controller/joinPro.jsp" method="post" style="display:flex; flex-direction: column;" onsubmit="return checkId()">
+        <form class="joinForm" action="../controller/joinPro.jsp" method="post" style="display:flex; flex-direction: column;">
             <div class="form-container__email-container">
             <input class="email-container__inputEmail" type="email" placeholder="이메일을 입력해주세요!" name="id" required>
             <span class="idSearchInfo"></span>
@@ -54,7 +54,7 @@ String title ="회원가입";
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
-<script src="js/searchId.js"></script>
+<script type="module" src="js/searchId.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 let callAddress = () =>{
