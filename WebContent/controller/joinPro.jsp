@@ -18,7 +18,15 @@ if(!pw1.equals(pw2)){%>
 alert("입력된 비밀번호가 서로 다릅니다! 다시 확인해주세요");
 history.back();
 </script>
-<%}else{%>
+<%}else if(pw1.indexOf(' ') != -1){
+	%>
+	<script>
+	alert("비밀번호가 옳지않은 방식입니다!");
+	history.back();
+	</script>
+	<%
+}
+else{%>
 <jsp:useBean id="mb" class="com.weatherFood.member.memberBean" />
 <jsp:setProperty property="*" name="mb"/>
 <%

@@ -6,19 +6,10 @@
 <html>
 <head>
 <%
-String curUser = (String)session.getAttribute("id");
-/*
-if(curUser == null){
-	%>
-	<script>
-	alert("유효한 세션값이 없습니다!");
-	location.href="login.jsp"; 
-	</script>
-	<%
-}
-*/
+String searchWord = (String)session.getAttribute("search");
+String title = "검색결과";
 
-String title = "main";
+
 
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,14 +25,9 @@ String title = "main";
 </div>
 
 <article>
-<div class="roulette" style="display: none;">
-	<div>1</div>
-	<div>2</div>
-	<div>3</div>
-	<div>4</div>
-	<div>5</div>
-</div>
+
 </article>
+
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 

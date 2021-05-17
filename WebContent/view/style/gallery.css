@@ -1,0 +1,19 @@
+.food-contanier{
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
+  grid-gap: 30px;
+  grid-row-gap: 50px;
+}
+.foodBlock{
+	margin-bottom: 10px;
+	max-width: 100%;
+}
+.foodBlock:nth-child(1),
+.foodBlock:nth-child(2){
+	grid-column: span 3;
+}
+.foodBlock:nth-child(3),
+.foodBlock:nth-child(4),
+.foodBlock:nth-child(5){
+	grid-column: span 2;
+}

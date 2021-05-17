@@ -116,8 +116,8 @@ bbs = bdao.getBoards(startRow, pageSize);
         </div>
     </main>
 
-            <form class="board-container-footer__search" action="">
-                <input type="text" placeholder="여기" name="searching">
+            <form class="board-container-footer__search" action="boardSearch.jsp" method="get">
+                <input type="text" placeholder="여기" name="search">
                 <input type="submit" value="검색">
             </form>
            	<%if(session.getAttribute("id") != null) {%>

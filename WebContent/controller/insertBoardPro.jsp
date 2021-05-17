@@ -45,8 +45,11 @@ bb.setUser_name((String)session.getAttribute("id"));
 
 //게시글 ip주소
 bb.setIp(request.getRemoteAddr());
+int num = 0;
+
 boardDAO bdao = new boardDAO();
-int num = bdao.insertBoard(bb);
+num = bdao.insertBoard(bb);
+
 if(num != 0)
 	response.sendRedirect("../view/boardContent.jsp?num="+num);
 else{
@@ -57,6 +60,7 @@ else{
 	</script>
 	<%
 }
+
 %>
 </body>
 </html>

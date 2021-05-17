@@ -161,6 +161,7 @@ public class boardDAO {
 			}else
 				num = 1;
 			
+			for(int i = 0; i < 20000; i++){
 			sql = "insert into board"
 					+ "(num,title,user_name,content,date,file,ip,readcount,comments,file_sys) "
 					+ "values (?,?,?,?,now(),?,?,?,?,?)";
@@ -178,6 +179,7 @@ public class boardDAO {
 			pstmt.setString(9, bb.getFile_sys());
 			pstmt.executeUpdate();
 			System.out.println("게시글 작성!" + bb.getUser_name());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -310,4 +312,15 @@ public class boardDAO {
 		return flag;
 	}
 	//updateBoard
+	
+	//searchBoard
+	public ArrayList<boardBean> searchBoard(String searchWord, int start, int end){
+		ArrayList<boardBean> result = null;
+		
+		conn = getConnection();
+		sql = "select * from board where like ";
+		
+		return result;
+	}
+	//searchBoard
 }
