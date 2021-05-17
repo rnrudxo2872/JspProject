@@ -161,7 +161,7 @@ public class boardDAO {
 			}else
 				num = 1;
 			
-			for(int i = 0; i < 20000; i++){
+			
 			sql = "insert into board"
 					+ "(num,title,user_name,content,date,file,ip,readcount,comments,file_sys) "
 					+ "values (?,?,?,?,now(),?,?,?,?,?)";
@@ -177,9 +177,10 @@ public class boardDAO {
 			pstmt.setInt(7, 0);
 			pstmt.setInt(8, 0);
 			pstmt.setString(9, bb.getFile_sys());
+			
 			pstmt.executeUpdate();
 			System.out.println("게시글 작성!" + bb.getUser_name());
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
@@ -314,12 +315,42 @@ public class boardDAO {
 	//updateBoard
 	
 	//searchBoard
-	public ArrayList<boardBean> searchBoard(String searchWord, int start, int end){
+	public ArrayList<boardBean> searchBoard(searchBean searchObj, int start, int end){
 		ArrayList<boardBean> result = null;
 		
-		conn = getConnection();
-		sql = "select * from board where like ";
-		
+		try {
+			conn = getConnection();
+			
+			String searchWord = searchObj.getSearchWord();
+			
+			//1은 제목, 2는 내용, 3은 제목 및 내용, 4는 작성자
+			int type = searchObj.getSearchType();
+			
+			String searchSection = 
+				type == 1 ? "title" : 
+				(type == 2 ? "content" : 
+				(type == 3 ? "concat(title,content)" : "user_name"));
+			
+			sql = "select * from board where " + searchSection + " like ? "
+					+ "limit ?,?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+searchWord+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			System.out.println("11");
+			rs = pstmt.executeQuery();
+			System.out.println("22");
+			
+			while(rs.next()){
+				System.out.println(rs.getInt(1));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 	//searchBoard

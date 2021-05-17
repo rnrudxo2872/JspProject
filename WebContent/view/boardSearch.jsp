@@ -1,3 +1,6 @@
+<%@page import="com.weatherFood.board.searchBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.weatherFood.board.boardDAO"%>
 <%@page import="com.key.ApiKey"%>
 <%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,10 +9,17 @@
 <html>
 <head>
 <%
-String searchWord = (String)session.getAttribute("search");
+request.setCharacterEncoding("utf-8");
+String searchWord = request.getParameter("search");
+//int searchType = Integer.parseInt(request.getParameter("type"));
 String title = "검색결과";
 
+searchBean searchObj = new searchBean();
+searchObj.setSearchWord("안녕");
+searchObj.setSearchType(3);
 
+boardDAO bdao = new boardDAO();
+ArrayList arr = bdao.searchBoard(searchObj, 0, 5);
 
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

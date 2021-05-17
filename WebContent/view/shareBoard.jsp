@@ -95,19 +95,19 @@ bbs = bdao.getBoards(startRow, pageSize);
             	//이전
             	if(startPage > pageBlock){
 					%>
-					<a href="shareBoard.jsp?pageNum=<%=startPage - pageBlock%>">[이전]</a>
+					<a href="shareBoard.jsp?pageNum=<%=startPage - 1%>&pageSize=<%=pageSize%>">이전</a>
 					<%
             	}
             	
             	for(int i = startPage; i<= endPage; i++){
             		%>
-            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="shareBoard.jsp?pageNum=<%=i%>"<%}%>><%=i %></a>
+            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="shareBoard.jsp?pageNum=<%=i%>&pageSize=<%=pageSize%>"<%}%>><%=i %></a>
             		<%
             	}
             	
             	if(endPage < pageCount){
             		%>
-            		<a href="shareBoard.jsp?pageNum=<%=endPage + 1%>">다음</a>
+            		<a href="shareBoard.jsp?pageNum=<%=endPage + 1%>&pageSize=<%=pageSize%>">다음</a>
             		<%
             	}
             }
