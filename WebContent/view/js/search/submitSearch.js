@@ -1,40 +1,56 @@
 export default class SearchForm {
     constructor($form) {
-        const $SearchType = document.createElement('select');
-        $SearchType.className = 'searchType';
-        $SearchType.name = 'type';
+    	
+    	this.$target = $form;
+    	
+        this.$SearchType = document.createElement('select');
+        this.$SearchType.className = 'searchType';
+        this.$SearchType.name = 'type';
         
-        const Types = ['제목', '내용', '제목+내용', '작성자'];
+        this.Types = ['제목', '내용', '제목+내용', '작성자'];
         
-        $SearchType.innerHTML =
-        `${Types.map((Type,idx) => {
-        return `<option value="${idx+1}">${Type}</option>`
-        }).join('')}`;
+        this.$searchBox = document.createElement('input');
+        this.$searchBox.type = 'text';
+        this.$searchBox.name = 'search';
+        this.$searchBox.placeholder = '게시물 검색'
 
-        $SearchType.firstChild.setAttribute('selected', 'selected');
-
-        const $searchBox = document.createElement('input');
-        $searchBox.type = 'text';
-        $searchBox.name = 'search';
-        $searchBox.placeholder = '게시물 검색'
-
-        const $btn = document.createElement('input');
-        $btn.type = 'submit';
-        $btn.value = '검색'
-
-        $form.appendChild($SearchType);
-        $form.appendChild($searchBox);
-        $form.appendChild($btn);
+        this.$btn = document.createElement('input');
+        this.$btn.type = 'submit';
+        this.$btn.value = '검색'
         
         $form.addEventListener('submit', e => {
-        	 if (100 < $searchBox.value.length || $searchBox.value.length < 2) {
+        	 if (100 < this.$searchBox.value.length || this.$searchBox.value.length < 2) {
                  alert('검색어는 최소 2글자 이상, 100글자 이하입니다.')
                  e.preventDefault();
-             } else {
-                const searchTerm = $searchBox.value;
-                const searchType = $SearchType.selectedOptions[0].dataset.id;
-                
-            }
+             }
         })
+        
+        this.render();
+    }
+    
+    setProp(nextData){
+    	console.log(this.$SearchType[Number(nextData.type)-1]);
+    	this.nowType = Number(nextData.type)-1;
+    	this.nowWord = decodeURI(nextData.search);
+    	
+    	this.render();
+    }
+    
+    render(){
+    	this.$SearchType.innerHTML =
+            `${this.Types.map((Type,idx) => {
+            return `<option value="${idx+1}">${Type}</option>`
+            }).join('')}`;
+    	
+    	if(this.nowType){
+    		this.$SearchType[this.nowType].setAttribute('selected','selected');
+    	}
+    	if(this.nowWord){
+    		this.$searchBox.value = this.nowWord;
+    	}
+    	
+    	this.$target.appendChild(this.$SearchType);
+    	this.$target.appendChild(this.$searchBox);
+    	this.$target.appendChild(this.$btn);
     }
 }

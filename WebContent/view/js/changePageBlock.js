@@ -4,7 +4,22 @@ const $searchForm = document.querySelector(".board-container-footer__search");
 const pageBlockSelect = document.querySelector(".pageBlockSelector");
 const curBoard = document.querySelector(".board-container");
 
-new SearchForm($searchForm);
+const searchForm = new SearchForm($searchForm);
+const curPATH = window.location.pathname;
+
+let searchObj = {};
+
+if(curPATH.indexOf('boardSearch') !== -1){
+	let searchParam = location.search.substr(location.search.indexOf('type'));
+	searchParam = searchParam.split('&');
+	searchParam.map(item => {
+		let tmp = item.split('=');
+		console.log(tmp)
+		searchObj[tmp[0]] = tmp[1];
+	})
+	console.log(searchObj);
+	searchForm.setProp(searchObj);
+}
 
 let getOtherBoards = html =>{
 	let parser = new DOMParser();
@@ -18,10 +33,11 @@ let getBoard = async(search) =>{
 	let changePageSize = pageBlockSelect.value;
 	let url = null;
 	
-	if(!search)
+	if(search.type === undefined || search.search === undefined)
 		url = `shareBoard.jsp?pageNum=1&pageSize=${changePageSize}`;
-	else
+	else{
 		url = `boardSearch.jsp?pageNum=1&pageSize=${changePageSize}&type=${search.type}&search=${search.search}`;
+	}
 	
     let html = await (await fetch(url).catch(alertErr)).text()
     let parseBoards = await getOtherBoards(html);
@@ -30,23 +46,7 @@ let getBoard = async(search) =>{
 }
 
 let changeCountBoard = () => {
-	
-	const curPATH = window.location.pathname;
-	if(curPATH.indexOf('boardSearch') === -1)
-		getBoard();
-	else{
-		let searchParam = location.search.substr(location.search.indexOf('type'));
-		searchParam = searchParam.split('&');
-		
-		let searchObj = {}
-		
-		searchParam.map(item => {
-			let tmp = item.split('=');
-			searchObj[tmp[0]] = tmp[1];
-		})
-		console.log(searchObj);
 		getBoard(searchObj);
-	}
 }
 
 function alertErr(error){
