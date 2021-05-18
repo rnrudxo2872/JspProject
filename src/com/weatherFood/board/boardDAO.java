@@ -313,10 +313,47 @@ public class boardDAO {
 		return flag;
 	}
 	//updateBoard
+
+	//searchBoardCnt
+	public int searchBoardCnt(searchBean searchObj){
+		int result = 0;
+		
+		String searchWord = searchObj.getSearchWord();
+		
+		//1은 제목, 2는 내용, 3은 제목 및 내용, 4는 작성자
+		int type = searchObj.getSearchType();
+		
+		String searchSection = 
+			type == 1 ? "title" : 
+			(type == 2 ? "content" : 
+			(type == 3 ? "concat(title,content)" : "user_name"));
+		
+		conn = getConnection();
+		sql = "select count(*) from board where " + searchSection + " like ? ";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+searchWord+"%");
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+
+		return result;
+	}
+	//searchBoardCnt
 	
 	//searchBoard
 	public ArrayList<boardBean> searchBoard(searchBean searchObj, int start, int end){
-		ArrayList<boardBean> result = null;
+		ArrayList<boardBean> result = new ArrayList<boardBean>();
 		
 		try {
 			conn = getConnection();
@@ -334,23 +371,34 @@ public class boardDAO {
 			sql = "select * from board where " + searchSection + " like ? "
 					+ "limit ?,?";
 			
+			System.out.println(type);
+			System.out.println(sql);
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%"+searchWord+"%");
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
 			
-			System.out.println("11");
 			rs = pstmt.executeQuery();
-			System.out.println("22");
 			
 			while(rs.next()){
-				System.out.println(rs.getInt(1));
+				boardBean tmpBb = new boardBean();
+				
+				tmpBb.setNum(rs.getInt(1));
+				tmpBb.setTitle(rs.getString(2));
+				tmpBb.setUser_name(rs.getString(3));
+				tmpBb.setContent(rs.getString(4));
+				tmpBb.setDate(rs.getDate(5));
+				
+				result.add(tmpBb);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			clearDB();
 		}
-
+		
 		return result;
 	}
 	//searchBoard

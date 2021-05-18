@@ -1,5 +1,10 @@
+import SearchForm  from "./search/submitSearch.js";
+
+const $searchForm = document.querySelector(".board-container-footer__search");
 const pageBlockSelect = document.querySelector(".pageBlockSelector");
 const curBoard = document.querySelector(".board-container");
+
+new SearchForm($searchForm);
 
 let getOtherBoards = html =>{
 	let parser = new DOMParser();
@@ -9,15 +14,39 @@ let getOtherBoards = html =>{
 	return docBoard.innerHTML;
 }
 
-let changeCountBoard = async() => {
-	
+let getBoard = async(search) =>{
 	let changePageSize = pageBlockSelect.value;
-	let url = `shareBoard.jsp?pageNum=1&pageSize=${changePageSize}`;
+	let url = null;
+	
+	if(!search)
+		url = `shareBoard.jsp?pageNum=1&pageSize=${changePageSize}`;
+	else
+		url = `boardSearch.jsp?pageNum=1&pageSize=${changePageSize}&type=${search.type}&search=${search.search}`;
 	
     let html = await (await fetch(url).catch(alertErr)).text()
     let parseBoards = await getOtherBoards(html);
     
     curBoard.innerHTML = parseBoards;
+}
+
+let changeCountBoard = () => {
+	
+	const curPATH = window.location.pathname;
+	if(curPATH.indexOf('boardSearch') === -1)
+		getBoard();
+	else{
+		let searchParam = location.search.substr(location.search.indexOf('type'));
+		searchParam = searchParam.split('&');
+		
+		let searchObj = {}
+		
+		searchParam.map(item => {
+			let tmp = item.split('=');
+			searchObj[tmp[0]] = tmp[1];
+		})
+		console.log(searchObj);
+		getBoard(searchObj);
+	}
 }
 
 function alertErr(error){

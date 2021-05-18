@@ -116,10 +116,8 @@ bbs = bdao.getBoards(startRow, pageSize);
         </div>
     </main>
 
-            <form class="board-container-footer__search" action="boardSearch.jsp" method="get">
-                <input type="text" placeholder="여기" name="search">
-                <input type="submit" value="검색">
-            </form>
+            <form class="board-container-footer__search" action="boardSearch.jsp" method="get"></form>
+            
            	<%if(session.getAttribute("id") != null) {%>
            	<a class="board-container-footer__insertBoard" href="insertBoard.jsp">글쓰기</a>
            	<%} %>
@@ -137,6 +135,6 @@ bbs = bdao.getBoards(startRow, pageSize);
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
-<script src="js/changePageBlock.js"></script>
+<script type="module" src="js/changePageBlock.js"></script>
 </body>
 </html>
