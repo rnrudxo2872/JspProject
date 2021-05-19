@@ -21,6 +21,7 @@
                 	let iconURL = `http://openweathermap.org/img/wn/${weatherList[4]}.png`;
                 	$(".place").html(`${weatherList[0]}`);
                 	$(".temp").html(`${weatherList[1]}도`);
+                	$(".display__main").html(`${weatherList[2]}`);
                 	$(".weatherDesc").html(weatherList[3]);
                 	$(".Icon").html(`<img style="max-height: 20px; max-width: 20px;" src=${iconURL}></img>`);
                 },

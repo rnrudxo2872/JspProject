@@ -1,9 +1,13 @@
 export default class viewSlot{
+    state = {
+        visible:false,
+        data:null
+    }
+
     constructor({$app}){
 
         this.$target = document.createElement('div');
         this.$target.id = 'slotWrapper';
-        this.$target.style.display = 'none';
         
         this.$title = document.createElement('h1');
         this.$title.id = 'title';
@@ -22,10 +26,17 @@ export default class viewSlot{
         
         $app.appendChild(this.$target);
 
+        this.setData(this.state);
+    }
+
+    setData(nextData){
+        this.state = nextData;
         this.render();
     }
 
     render(){
+        this.$target.style.display = this.state.visible ? 'block' : 'none';
+        
         this.$target.appendChild(this.$title);
         this.$target.appendChild(this.$slot);
         this.$target.appendChild(this.$btn);

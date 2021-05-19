@@ -6,7 +6,9 @@
 	<div>
 		<span class="weatherDesc"></span> <span class="Icon"></span>
 	</div>
-	<div class="place"></div> <div class="temp"></div>
+	<div class="place"></div>
+	<div class="temp"></div>
+	<div class="display__main" style="display: none;"></div>
 </div>
 <script src="js/getCoord.js"></script>
 <script src="js/weatherParse.js"></script>
