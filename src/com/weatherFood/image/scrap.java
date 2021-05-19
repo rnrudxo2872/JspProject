@@ -9,6 +9,16 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class scrap {
+	private ArrayList<String> getSourceArr(Elements elements){
+		ArrayList<String> retArr = new ArrayList<String>();
+		
+		for(Element item : elements){
+			retArr.add(item.attr("src"));
+		}
+		
+		return retArr;
+	}
+	
 	public List<String> parseHTML(){
 		List<String> arr = new ArrayList<String>();
 		
@@ -17,9 +27,7 @@ public class scrap {
 
 			Elements elements = doc.select("#search-results img");
 			
-			for(Element element : elements){
-				arr.add(element.attr("src"));
-			}
+			arr = getSourceArr(elements);
 			
 		} catch (Exception e) {
 			System.out.println("스크랩에러!");

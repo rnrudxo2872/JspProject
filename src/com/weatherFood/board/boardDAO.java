@@ -39,14 +39,14 @@ public class boardDAO {
 	//getConnection
 	
 	private void clearDB(){
-			try {
-				if(conn != null) conn.close();
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			if(conn != null) conn.close();
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//getBoardCount

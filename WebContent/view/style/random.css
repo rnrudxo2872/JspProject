@@ -1,0 +1,128 @@
+@keyframes done {
+    70% {
+        transform: scale(2)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+
+#title {
+    font-size: 3rem;
+    margin: 2rem 0
+}
+
+#slotWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px
+}
+
+#foods {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 30px;
+    border: 3px solid pink;
+    border-radius: 20px
+}
+
+#foods .ball {
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    line-height: 200px;
+    font-size: 48px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+#foods .ball.blue {
+    background: #69c8f2
+}
+
+#foods .ball.red {
+    background:#ff7272
+}
+
+#foods .ball.grey {
+    background:#aaa
+}
+
+#foods .ball.bonus {
+    background: #b0d840
+}
+
+#foods .ball.done {
+    animation: done .3s linear
+}
+
+#foods .ball:last-child {
+    margin-right: 0
+}
+
+#foods .plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 48px;
+    font-weight: bold
+}
+
+#slotBtn {
+    position: relative;
+    display: block;
+    padding: 1rem 2.5rem 1.6rem;
+    background: #fff;
+    color: #666;
+    border: 2px solid #666;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: .5s;
+    user-select: none
+}
+
+#slotBtn:hover {
+    padding: 1rem 2.5rem 1rem;
+    margin-top: .6rem;
+    background: #999;
+    color: #fff
+}
+
+#slotBtn::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    height: .6rem;
+    width: 100%;
+    background-image: repeating-linear-gradient(45deg, #666, #666 1px, transparent 2px, transparent 5px);
+    border-top: 1px solid #666;
+    transition: .5s
+}
+
+#slotBtn:hover::after {
+    transform: translateY(.6rem)
+}
+
+#slotBtn.hide {
+    transform: scale(0)
+}
+
+@media screen and (max-width: 800px) {
+    #foods {
+        flex-direction: column;
+        align-items: center
+    }
+
+    #foods .ball {
+        margin-right: 0;
+        margin-bottom: 10px
+    }
+
+    #foods .ball:last-child {
+        margin-bottom: 0
+    }
+}
