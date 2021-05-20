@@ -27,6 +27,9 @@ export default class viewSlot{
         this.$findBtn.className = 'btn';
         this.$findBtn.innerText = '찾기!';
         this.$findBtn.classList.add("hide");
+        this.$findBtn.addEventListener('click', e =>{
+            location.href = `serviceFoodPlace.jsp?food=${this.$ball.innerText}`;
+        })
 
         this.$btn = document.createElement('button');
         this.$btn.id = 'slotBtn';

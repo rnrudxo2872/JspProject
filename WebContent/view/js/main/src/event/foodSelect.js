@@ -13,7 +13,7 @@ const decryptEffect = (element) => {
         clearInterval(effect);
         element.classList.add("done");
         element.innerText = foods[random].name;
-        foods.splice(random, 1);
+        //foods.splice(random, 1);
         console.log(foods);
     }, 1500);
 }

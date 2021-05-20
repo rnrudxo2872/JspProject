@@ -49,22 +49,23 @@ public class foodDAO {
 	}
 	//clearDB
 	
-	/*//putObject
-	public JSONObject putObject(){
+	//putObject
+	public JSONObject putObject(ResultSet row) throws SQLException{
+		JSONObject data = new JSONObject();
 		
+		data.put("idx", row.getInt(1));
+		data.put("name", row.getString(2));
+		
+		return data;
 	}
 	//putObject
-*/	
+	
 	//getDatas
 	public JSONArray getDatas(ResultSet results) throws SQLException{
 		JSONArray retDatas = new JSONArray();
 	
 		while(results.next()){
-			JSONObject data = new JSONObject();
-			
-			data.put("idx", results.getInt(1));
-			data.put("name", results.getString(2));
-			
+			JSONObject data = putObject(results);
 			retDatas.add(data);
 		}
 		
@@ -99,4 +100,5 @@ public class foodDAO {
 		return retArr;
 	}
 	//getRandomFood
+	
 }

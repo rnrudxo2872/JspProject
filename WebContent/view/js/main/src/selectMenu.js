@@ -35,9 +35,11 @@ export default class selectMenu{
         this.$randomBtn = document.createElement('button');
         this.$randomBtn.className = 'select-container__btn';
         this.$randomBtn.innerText = '음식 랜덤 추천!';
-
-        this.randClick = randClick;
-        this.weathClick = weathClick;
+        
+        this.$randomBtn.addEventListener('click', e =>{
+            randClick();
+        })
+        
 
         $app.appendChild(this.$target);
         this.render();
@@ -56,10 +58,8 @@ export default class selectMenu{
         this.$target.appendChild(this.$title);
         if(this.state.condition !== 'init') this.$target.appendChild(this.$randomBtn);
         this.$title.innerText = this.mapping[this.state.condition];
-        this.$target.style.display = this.state.visible ? 'block' : 'none';
+        this.$target.style.display = this.state.visible ? 'flex' : 'none';
         console.log(this.$target.style.display);
-        this.$randomBtn.addEventListener('click', e =>{
-            this.randClick();
-        })
+        
     }
 }

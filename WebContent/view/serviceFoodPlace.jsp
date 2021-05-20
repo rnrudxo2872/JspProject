@@ -8,9 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 ApiKey Apikey = new ApiKey();
-String title ="OO할 때 먹을 것들!";
+String title ="맛집 찾기!";
 
-String recFood = "파전";
+String recFood = request.getParameter("food");
+String viewWord = recFood == null ? "맛집" : recFood+"맛집";
+recFood = recFood == null ? "맛집" : recFood;
 %>
 <title>FProject | <%=title %></title>
 <%@include file="partials/style.jsp" %>
@@ -28,8 +30,8 @@ String recFood = "파전";
     <div id="map" style="width:1200px;height:400px;position:relative;overflow:hidden;"></div>
 
     <div class="hAddr">
-        <span id="centerAddr"></span>
-        <button class="reload">여기서 다시 찾아볼까요?</button>
+        <span id="centerAddr"></span><br>
+        <button class="reload"><%=viewWord %>을 여기서 다시 찾아볼까요?</button>
     </div>
     <div id="menu_wrap" class="bg_white">
         <ul id="placesList"></ul>

@@ -19,6 +19,17 @@
     padding: 10px
 }
 
+.select-container{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.select-container__title{
+	margin:auto 0;
+}
+
 #foods {
     display: flex;
     margin-bottom: 20px;
