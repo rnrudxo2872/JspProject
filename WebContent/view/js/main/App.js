@@ -12,8 +12,11 @@ export default class App{
 				console.log(tmpData);
 				this.switching(tmpData);
 			},
-			weathClick: e =>{
+			weathClick: async e =>{
 				console.log("날씨별!");
+				const tmpData = await (await fetch(`../controller/food/weatherList.jsp?weather=${this.selectMenu.getState().condition}`)).json();
+				console.log(tmpData);
+				this.switching(tmpData);
 			}
 		})
         this.setInit();

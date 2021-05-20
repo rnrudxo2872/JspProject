@@ -101,4 +101,32 @@ public class foodDAO {
 	}
 	//getRandomFood
 	
+	//getWeatherRecomList
+	public JSONArray getWeatherRecomList(String weatherCondition){
+		JSONArray retArr = null;
+		
+		try {
+			conn = getConnection();
+			sql = "select * from weather_food t1, "
+					+ "("
+					+ "select idx from weather_food "
+					+ "where weather in (?,'every') "
+					+ "order by rand() limit 10"
+					+ ") t2 "
+					+ "where t1.idx = t2.idx;";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, weatherCondition);
+			rs = pstmt.executeQuery();
+			
+			retArr = getDatas(rs);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			clearDB();
+		}
+		return retArr;
+	}
+	//getWeatherRecomList
 }

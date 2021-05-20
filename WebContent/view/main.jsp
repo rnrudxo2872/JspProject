@@ -12,7 +12,7 @@ String title = "main";
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>FProject | <%=title %></title>
 <%@include file="partials/style.jsp" %>
-<link rel="stylesheet" href="style/random.css">
+<link rel="stylesheet" href="style/mainPage.css">
 </head>
 <body>
 <div class="basicFrame">
