@@ -10,10 +10,15 @@ export default class App{
 				console.log("랜덤!");
 				const tmpData = await (await fetch('../controller/food/randomList.jsp')).json();
 				console.log(tmpData);
-				this.viewSlot.setData({
-					visible:true,
-					data:null
-				})
+				
+                this.viewSlot.setData({
+					visible: true,
+                    data: tmpData
+                })
+                
+                this.selectMenu.setState({
+                    visible: false
+                })
 			},
 			weathClick: e =>{
 				console.log("날씨별!");
@@ -41,6 +46,10 @@ export default class App{
 		
 		this.ConditionData = this.setWeatherData(data);
 
-		this.selectMenu.setState(data[2].innerHTML);
+        this.selectMenu.setState({
+            visible:true,
+            data:null,
+            condition: data[2].innerHTML
+        });
 	}
 }

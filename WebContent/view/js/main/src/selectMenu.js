@@ -1,5 +1,6 @@
 export default class selectMenu{
     mapping = {
+        init:'환영합니다.',
         Thunderstorm: "천둥 비가 내리는 날입니다. 야외활동에 주의하세요! 어떤 음식을 드실지 정하셨나요?",
         Drizzle: "이슬비가 내리는 날이네요! 어떤 음식을 드실지 정하셨나요?",
         Rain: "오늘은 비가 오네요! 어떤 음식을 드실지 정하셨나요?",
@@ -17,6 +18,11 @@ export default class selectMenu{
         Clear: "오늘 날씨가 맑네요! 어떤 음식을 드실지 정하셨나요?",
         Clouds: "오늘은 흐리네요! 어떤 음식을 드실지 정하셨나요?"
     }
+    state = {
+        visible:true,
+        data: null,
+        condition:'init'
+    }
 
     constructor({$app,randClick,weathClick}){
         this.$target = document.createElement('div');
@@ -33,22 +39,22 @@ export default class selectMenu{
         this.randClick = randClick;
         this.weathClick = weathClick;
 
-        //this.$target.appendChild()
-
         $app.appendChild(this.$target);
         this.render();
     }
 
     setState(nextData){
-    	console.log(nextData);
-    	this.$title.innerText = this.mapping[nextData];
+        console.log(nextData);
+        this.state = nextData;
 
         this.render();
     }
 
     render(){
         this.$target.appendChild(this.$title);
-        this.$target.appendChild(this.$randomBtn);
+        if(this.state.condition !== 'init') this.$target.appendChild(this.$randomBtn);
+        this.$title.innerText = this.mapping[this.state.condition];
+        this.$target.style.display = this.state.visible ? 'block' : 'none';
 
         this.$randomBtn.addEventListener('click', e =>{
             this.randClick();

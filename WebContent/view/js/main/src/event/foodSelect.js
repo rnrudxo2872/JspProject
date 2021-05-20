@@ -1,9 +1,9 @@
 let tmp = 1;
 let foods;
 
-function decryptEffect(element) {
+const decryptEffect = (element) => {
     const effect = setInterval(() => {
-        element.innerText = foods[Math.floor(Math.random() * foods.length)];
+        element.innerText = foods[Math.floor(Math.random() * foods.length)].name;
     }, 10);
 
     setTimeout(() => {
@@ -12,27 +12,30 @@ function decryptEffect(element) {
         //1초후 멈춘다.
         clearInterval(effect);
         element.classList.add("done");
-        element.innerText = foods[random];
+        element.innerText = foods[random].name;
         foods.splice(random, 1);
         console.log(foods);
     }, 1500);
 }
 
-function lottery() {
+const lottery = () => {
     document.querySelectorAll(".ball").forEach(element => {
         element.classList.remove("done");
         decryptEffect(element);
     });
 }
 
-document.getElementById("slotBtn").addEventListener("click", e => {
+export const soltFunc = (e, data, $findBtn) => {
+    console.log("룰렛!");
     if (tmp === 1) {
-        foods =['네이버','카카오','배민','라인','쿠팡'];
+        console.log(data);
+        foods = data;
         tmp = 0;
         e.target.classList.add("hide");
         lottery();
         setTimeout(function () {
             (tmp = 1), e.target.classList.remove("hide");
+            $findBtn.classList.remove("hide");
         }, 2000);
     }
-});
+};

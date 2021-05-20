@@ -23,22 +23,13 @@ String title = "main";
 </div>
 
 <article class="App">
-	<!-- Thunderstorm, Drizzle, Rain,Snow,Mist,Smoke, Haze,
-	Dust, Fog, Sand, Dust, Ash,Tornado,Squall ,Clear, Clouds -->
-	
-<!--     <div id="slotWrapper">
-        <h1 id="title">음식추천</h1>
-        <div id="foods">
-            <div class="ball blue">?</div>
-        </div>
-        <button id="slotBtn">시작!</button>
-    </div> -->
 </article>
+
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
 <script type="module" src="js/main/main.js"></script>
-<script type="module" src="js/randomFood/foodSelect.js"></script>
+<!-- <script type="module" src="js/randomFood/foodSelect.js"></script> -->
 </body>
 </html>
