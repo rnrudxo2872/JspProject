@@ -9,8 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 String title ="인증 갤러리";
-scrap scrapper = new scrap();
-List images = scrapper.parseHTML();
 %>
 <title>FProject | <%=title %></title>
 <%@include file="partials/style.jsp" %>
@@ -25,14 +23,12 @@ List images = scrapper.parseHTML();
 </div>
 
 <article class="food-contanier">
-<%for(int i = 0; i < images.size(); i++){ %>
-<img class="foodBlock" alt="음식<%=i %>" src="<%=images.get(i)%>">
-<%} %>
+
 </article>
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
-<script src="js/createMap.js"></script>
+<script src="js/gallery/imageSource.js" type="module"></script>\
 </body>
 </html>
