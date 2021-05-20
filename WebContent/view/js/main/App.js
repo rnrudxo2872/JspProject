@@ -10,25 +10,41 @@ export default class App{
 				console.log("랜덤!");
 				const tmpData = await (await fetch('../controller/food/randomList.jsp')).json();
 				console.log(tmpData);
-				
-                this.viewSlot.setData({
-					visible: true,
-                    data: tmpData
-                })
+				this.switching(tmpData);
+                // this.viewSlot.setData({
+				// 	visible: true,
+                //     data: tmpData
+                // })
                 
-                this.selectMenu.setState({
-                    visible: false
-                })
+                // this.selectMenu.setState({
+                //     visible: false
+                // })
 			},
 			weathClick: e =>{
 				console.log("날씨별!");
 			}
 		})
+        this.setInit();
 
-		this.viewSlot = new viewSlot({$app});
-
-		this.setInit();
-	}
+        this.viewSlot = new viewSlot({
+            $app,
+            PrevClick: () => this.switching()
+        });
+    }
+    
+    switching(data) {
+        const disState = this.selectMenu.getState();
+        console.log(disState.visible);
+        disState.visible = !disState.visible;
+        console.log(!data);
+        console.log(disState.visible); 
+        this.selectMenu.setState(disState)
+        // console.log(this.selectMenu.getState()); 
+        // this.viewSlot.setData({
+        //     visible: !disState.visible,
+        //     data:!data ? null : data
+        // })
+    }
 
 	setWeatherData(data){
 		return {

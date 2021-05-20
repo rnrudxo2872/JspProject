@@ -43,10 +43,12 @@ export default class selectMenu{
         this.render();
     }
 
-    setState(nextData){
-        console.log(nextData);
-        this.state = nextData;
+    getState() {
+        return this.state;
+    }
 
+    setState(nextData){
+        this.state = nextData;
         this.render();
     }
 
@@ -55,7 +57,7 @@ export default class selectMenu{
         if(this.state.condition !== 'init') this.$target.appendChild(this.$randomBtn);
         this.$title.innerText = this.mapping[this.state.condition];
         this.$target.style.display = this.state.visible ? 'block' : 'none';
-
+        console.log(this.$target.style.display);
         this.$randomBtn.addEventListener('click', e =>{
             this.randClick();
         })

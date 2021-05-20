@@ -6,7 +6,7 @@ export default class viewSlot{
         data: null
     }
 
-    constructor({$app}){
+    constructor({$app,PrevClick}){
 
         this.$target = document.createElement('div');
         this.$target.id = 'slotWrapper';
@@ -37,6 +37,7 @@ export default class viewSlot{
         this.$prevBtn.id = 'prevBtn';
         this.$prevBtn.className = 'btn';
         this.$prevBtn.innerText = '뒤로!';
+        this.$prevBtn.addEventListener('click', e => PrevClick());
 
         $app.appendChild(this.$target);
 
