@@ -63,7 +63,7 @@ try{
         </tr>
         <%if(bb.getFile() != null){%>
         <tr>	
-            <td id="table_file" colspan="4"><a href="../controller/file/fileDown.jsp?num=<%=bb.getNum() %>&fileName=<%=bb.getFile()%>">💾<%=bb.getFile()%></a></td>
+            <td id="table_file" colspan="4"><a href="./controller/file/fileDown.jsp?num=<%=bb.getNum() %>&fileName=<%=bb.getFile()%>">💾<%=bb.getFile()%></a></td>
         </tr>
         <%} %>
         <tr>

@@ -14,7 +14,7 @@ export const getPosition = async() =>{
 }
 
 export const fetchXml = async(PosObject) =>{
-    const url = `../controller/weatherPage.jsp?lat=${PosObject.lat}&lon=${PosObject.lon}`;
+    const url = `./weatherData.xml?lat=${PosObject.lat}&lon=${PosObject.lon}`;
     const textXml = await (await fetch(url).catch(ErrorFunc)).text();
     
     const parser = new DOMParser();

@@ -22,14 +22,14 @@ String title ="로그인";
 </div>
 
 <div class="form-container">
-        <form action="../controller/loginPro.jsp" method="post">
+        <form action="./loginAction.in" method="post">
             <input type="email" placeholder="아이디(이메일)을 입력해주세요!" name="id" required>
             <input type="password" placeholder="비밀번호를 입력해주세요!" name="pw" required>
     <p>
 
             <input type="submit" value="로그인">
         </form>
-        <button onclick="location.href='join.jsp'">회원이 아니신가요?</button>
+        <button onclick="location.href='join.in'">회원이 아니신가요?</button>
 </div>
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>

@@ -8,13 +8,13 @@ export default class App{
 			$app,
 			randClick: async e =>{
 				console.log("랜덤!");
-				const tmpData = await (await fetch('../controller/food/randomList.jsp')).json();
+				const tmpData = await (await fetch('./randomFoodList.json')).json();
 				console.log(tmpData);
 				this.switching(tmpData);
 			},
 			weathClick: async e =>{
 				console.log("날씨별!");
-				const tmpData = await (await fetch(`../controller/food/weatherList.jsp?weather=${this.selectMenu.getState().condition}`)).json();
+				const tmpData = await (await fetch(`./weatherFoodList.json?weather=${this.selectMenu.getState().condition}`)).json();
 				console.log(tmpData);
 				this.switching(tmpData);
 			}

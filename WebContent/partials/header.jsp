@@ -13,11 +13,11 @@ String name = (String)session.getAttribute("id");
 <div class="logForm">
 <%if(name == null){
 %>
-<a href="login.jsp">로그인</a>
+<a href="./login.use">로그인</a>
 <%}else{%>
 <span><%=name %>님</span>
-<span><a href="../controller/logout.jsp">로그아웃</a></span>
-<span><a href="userUpdate.jsp">회원 정보수정</a></span>
+<span><a href="./logout.use">로그아웃</a></span>
+<span><a href="./update.use">회원 정보수정</a></span>
 <%}%>
 </div>
 </div>

@@ -24,8 +24,13 @@
   </error-page> -->
   
   <servlet>
-  <servlet-name>MainHandler</servlet-name>
-  <servlet-class>com.weatherFood.MainHandler</servlet-class>
+  <servlet-name>MainController</servlet-name>
+  <servlet-class>com.weatherFood.controller.MainController</servlet-class>
+  </servlet>
+  
+  <servlet>
+  <servlet-name>DataController</servlet-name>
+  <servlet-class>com.weatherFood.controller.dataset.DataController</servlet-class>
   </servlet>
   
   <!-- <servlet-mapping>
@@ -34,9 +39,15 @@
   </servlet-mapping> -->
   
   <servlet-mapping>
-  <servlet-name>MainHandler</servlet-name>
+  <servlet-name>MainController</servlet-name>
+  <url-pattern></url-pattern>
   <url-pattern>/main</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  <servlet-name>DataController</servlet-name>
+  <url-pattern>*.json</url-pattern>
+  <url-pattern>*.xml</url-pattern>
+  </servlet-mapping>
   
 </web-app>

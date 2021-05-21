@@ -1,9 +1,9 @@
     let init = () => {
             var params = `lat=${lat}&lon=${long}`; //쿼리, 데이터 넘긴다
- 
+            console.log("날씨여기")
             $.ajax({
                 type:"POST",                //전송방식
-                url:"../controller/weatherPage.jsp",    //주소
+                url:"./weatherData.xml",    //주소
                 data:params,            //전송데이터
                 dataType:"xml", // 받을 때 데이터 타입
                 
