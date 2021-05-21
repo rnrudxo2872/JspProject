@@ -10,10 +10,9 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <!-- web.xml : 배포서술자(p61) 프로젝트의 시작점
+  <!-- web.xml : 배포서술자 프로젝트의 시작점
   프로젝트 전역에 적용될 설정을 작성
    -->
-  <!-- html 주석을 사용가능하나 주석을 가능하면 없을수록 좋다 -->
 <!--   <error-page>
   <error-code>404</error-code>
   <location>/error/code404.jsp</location>
@@ -23,4 +22,21 @@
   <error-code>500</error-code>
   <location>/error/code500.jsp</location>
   </error-page> -->
+  
+  <servlet>
+  <servlet-name>MainHandler</servlet-name>
+  <servlet-class>com.weatherFood.MainHandler</servlet-class>
+  </servlet>
+  
+  <!-- <servlet-mapping>
+  <servlet-name>MainHandler</servlet-name>
+  <url-pattern>/board/*</url-pattern>
+  </servlet-mapping> -->
+  
+  <servlet-mapping>
+  <servlet-name>MainHandler</servlet-name>
+  <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

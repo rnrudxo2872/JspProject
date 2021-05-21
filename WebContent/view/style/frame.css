@@ -99,13 +99,13 @@ input:focus, input:active {
 	outline: none; 
 }
 .loading-container{
-	display: table; 
+	display: table;
 	margin-left: auto; 
 	margin-right: auto;
 }
 .loading{
-    width: 250px;
-    height: 250px;
+    width: 500px;
+    height: 500px;
     animation: rotation 8s infinite linear;
 }
 
