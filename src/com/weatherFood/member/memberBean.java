@@ -2,17 +2,26 @@ package com.weatherFood.member;
 
 import java.sql.Timestamp;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class memberBean {
 	private int idx;
 	private String id;
-	
-
 	private String pw;
 	private String name;
 	private String gender;
 	private Timestamp reg_date;
 	private String addr;
 	private String addr_detail;
+	
+	public void setParams(HttpServletRequest req){
+		setId(req.getParameter("id"));
+		setAddr_detail(req.getParameter("addr_detail"));
+		setAddr(req.getParameter("addr"));
+		setGender(req.getParameter("gender"));
+		setName(req.getParameter("name"));
+		setPw(req.getParameter("pw"));
+	}
 	
 	public Timestamp getReg_date() {
 		return reg_date;

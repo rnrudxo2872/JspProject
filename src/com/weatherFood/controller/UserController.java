@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.servletFunc.servletDAO;
 import com.weatherFood.action.Action;
+import com.weatherFood.action.joinAction;
 import com.weatherFood.action.loginAction;
 import com.weatherFood.action.logoutAction;
+import com.weatherFood.action.userDeleteAction;
+import com.weatherFood.action.userUpdateAction;
 import com.weatherFood.session.sessionDAO;
 
 @WebServlet("*.use")
@@ -52,6 +55,9 @@ public class UserController extends HttpServlet{
 		}else if(curCmd.equals("/logout.use")){
 			action = new logoutAction(req, res);
 			fdto = action.execute();
+		
+		}else if(curCmd.equals("/update.use")){
+			fdto.setURL("./userUpdate.jsp");
 		}
 		
 		render(res);
@@ -64,6 +70,18 @@ public class UserController extends HttpServlet{
 		
 		if(curCmd.equals("/loginAction.use")){
 			action = new loginAction(req, res);
+			fdto = action.execute();
+		
+		}else if(curCmd.equals("/joinAction.use")){
+			action = new joinAction(req, res);
+			fdto = action.execute();
+		
+		}else if(curCmd.equals("/updateAction.use")){
+			action = new userUpdateAction(req, res);
+			fdto = action.execute();
+		
+		}else if(curCmd.equals("/delAction.use")){
+			action = new userDeleteAction(req, res);
 			fdto = action.execute();
 		}
 		

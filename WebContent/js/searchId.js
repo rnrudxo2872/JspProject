@@ -39,7 +39,7 @@ let searchId = () =>{
 		
 		$.ajax({
 			type:"POST",
-			url:"../controller/checkId.jsp",
+			url:"./curIdCheck.xml",
 			data:param,
 			dataType:"xml",
 			success:function(args){

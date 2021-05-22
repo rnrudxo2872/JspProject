@@ -26,7 +26,7 @@ String title ="회원가입";
 </div>
 
 <div class="form-container">
-        <form class="joinForm" action="../controller/joinPro.jsp" method="post" style="display:flex; flex-direction: column;">
+        <form class="joinForm" action="./joinAction.use" method="post" style="display:flex; flex-direction: column;">
             <div class="form-container__email-container">
             <input class="email-container__inputEmail" type="email" placeholder="이메일을 입력해주세요!" name="id" required>
             <span class="idSearchInfo"></span>
@@ -67,7 +67,6 @@ let callAddress = () =>{
             inputTarget.style.color='gray';
         }
     }).open();
-	
 }
 </script>
 </body>

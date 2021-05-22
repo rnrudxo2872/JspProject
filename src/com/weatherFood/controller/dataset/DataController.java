@@ -51,6 +51,9 @@ public class DataController extends HttpServlet {
 		
 		if(curCmd.equals("/weatherData.xml")){
 			sendURL = "./controller/weatherPage.jsp";
+		
+		}else if(curCmd.equals("/curIdCheck.xml")){
+			sendURL = "./controller/checkId.jsp";
 		}
 		
 		if(sendURL != null){

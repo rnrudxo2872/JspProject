@@ -2,7 +2,6 @@ package com.weatherFood.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,6 @@ public class MainController extends HttpServlet {
 		ForwardDTO fdto = new ForwardDTO(null,false);
 		
 		System.out.println(curCmd);
-		System.out.println(Ssdao.getPrevURL());
 		if(curCmd.equals("/") || curCmd.equals("/main")){
 			fdto.setURL("./main.jsp");
 		

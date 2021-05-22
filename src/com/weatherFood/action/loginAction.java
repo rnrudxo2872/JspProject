@@ -2,11 +2,9 @@ package com.weatherFood.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.weatherFood.controller.ForwardDTO;
 import com.weatherFood.member.memberBean;
@@ -23,6 +21,7 @@ public class loginAction implements Action{
 	}
 	
 	public void ValueException(String msg) throws IOException{
+		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.println("<script>");
 		out.println("alert('" + msg + "');");
@@ -33,10 +32,11 @@ public class loginAction implements Action{
 	}
 	
 	public void questionJoin() throws IOException{
+		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
 		out.println("<script>");
 		out.println("if(window.confirm('아이디가 없습니다! 회원가입 하시겠습니까?'))");
-		out.println("{location.href='../view/join.jsp';}");
+		out.println("{location.href='./join.use';}");
 		out.println("else {history.back();}");
 		out.println("</script>");
 	}

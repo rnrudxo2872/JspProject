@@ -4,7 +4,7 @@ function delFun(){
 	
 	if(infoText){
 		let form = document.querySelector("div.form-container form");
-		form.action="../controller/userDelPro.jsp";
+		form.action="./delAction.use";
 		form.submit();
 	}
 }

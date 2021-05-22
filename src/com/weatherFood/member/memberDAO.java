@@ -279,7 +279,7 @@ public class memberDAO {
 	//updateInfo
 	
 	//userDel
-	public int userDel(memberBean mb,String pw){
+	public int userDel(memberBean mb){
 		
 		//-1 비밀번호 틀림, 1정상, 0 다른 에러
 		int flag = 0;
@@ -293,7 +293,7 @@ public class memberDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()){
 				String rsPw = rs.getString(1);
-				if(!rsPw.equals(pw)){
+				if(!rsPw.equals(mb.getPw())){
 					flag = -1;
 					return flag;
 				}

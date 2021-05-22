@@ -39,7 +39,7 @@ try{
 </jsp:include>
 </div>
 <div class="form-container">
-        <form action="../controller/userUpdatePro.jsp" method="post" style="display:flex; flex-direction: column;">
+        <form action="./updateAction.use" method="post" style="display:flex; flex-direction: column;">
             <div class="form-container__email-container">
             <input class="email-container__inputEmail" type="email" value="<%=mb.getId() %>" name="id" readonly>
             <span class="idSearchInfo"></span>
