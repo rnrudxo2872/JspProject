@@ -28,6 +28,9 @@ public class DataController extends HttpServlet {
 			
 		}else if(curCmd.equals("/weatherFoodList.json")){
 			sendURL = "./controller/food/weatherList.jsp";
+		
+		}else if(curCmd.equals("/imageSource.json")){
+			sendURL = "./controller/images/scrapImage.jsp";
 		}
 		
 		if(sendURL != null){

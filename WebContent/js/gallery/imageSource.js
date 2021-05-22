@@ -5,7 +5,7 @@ async function init(){
 	$target.classList.add('loading-container');
 	$target.innerHTML = '<img src="./logos/logo.png" class="loading"></img>';
 	
-	const imageSource = await (await fetch('../controller/images/scrapImage.jsp').catch(ImageError)).json();
+	const imageSource = await (await fetch('./imageSource.json').catch(ImageError)).json();
 	
     $target.classList.add('food-contanier');
 	$target.classList.remove('loading-container');
