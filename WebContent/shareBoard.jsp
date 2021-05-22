@@ -65,7 +65,7 @@ bbs = bdao.getBoards(startRow, pageSize);
 			%>
 			<tr>
 	            <td><a href=""><%=curBoard.getNum() %></a></td>
-	            <td><a href="boardContent.jsp?num=<%=curBoard.getNum()%>&pageNum=<%=pageNum%>"><%=curBoard.getTitle() %></a></td>
+	            <td><a href="shareBoard/content?num=<%=curBoard.getNum()%>&pageNum=<%=pageNum%>"><%=curBoard.getTitle() %></a></td>
 	            <td><a href=""><%=curBoard.getUser_name()%></a></td>
 	            <td><a href=""><%=curBoard.getDate() %></a></td>
         	</tr>
@@ -95,19 +95,19 @@ bbs = bdao.getBoards(startRow, pageSize);
             	//이전
             	if(startPage > pageBlock){
 					%>
-					<a href="shareBoard.jsp?pageNum=<%=startPage - 1%>&pageSize=<%=pageSize%>">이전</a>
+					<a href="shareBoard?pageNum=<%=startPage - 1%>&pageSize=<%=pageSize%>">이전</a>
 					<%
             	}
             	
             	for(int i = startPage; i<= endPage; i++){
             		%>
-            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="shareBoard.jsp?pageNum=<%=i%>&pageSize=<%=pageSize%>"<%}%>><%=i %></a>
+            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="shareBoard?pageNum=<%=i%>&pageSize=<%=pageSize%>"<%}%>><%=i %></a>
             		<%
             	}
             	
             	if(endPage < pageCount){
             		%>
-            		<a href="shareBoard.jsp?pageNum=<%=endPage + 1%>&pageSize=<%=pageSize%>">다음</a>
+            		<a href="shareBoard?pageNum=<%=endPage + 1%>&pageSize=<%=pageSize%>">다음</a>
             		<%
             	}
             }
@@ -119,7 +119,7 @@ bbs = bdao.getBoards(startRow, pageSize);
             <form class="board-container-footer__search" action="boardSearch.jsp" method="get"></form>
             
            	<%if(session.getAttribute("id") != null) {%>
-           	<a class="board-container-footer__insertBoard" href="insertBoard.jsp">글쓰기</a>
+           	<a class="board-container-footer__insertBoard" href="shareBoard/insertBoard">글쓰기</a>
            	<%} %>
     <div>
 	<span>게시판 출력개수</span>

@@ -2,6 +2,8 @@ package com.weatherFood.board;
 
 import java.sql.Date;
 
+import com.oreilly.servlet.MultipartRequest;
+
 public class boardBean {
 	private int num;
 	private String title;
@@ -13,6 +15,14 @@ public class boardBean {
 	private int readcount;
 	private int comments;
 	private String file_sys;
+	
+	public void setParam(MultipartRequest mul){
+		setTitle(mul.getParameter("title"));
+		setContent(mul.getParameter("content"));
+		setUser_name(mul.getParameter("user_name"));
+		setFile(mul.getOriginalFileName("filename"));
+		setFile_sys(mul.getFilesystemName("filename"));
+	}
 	
 	public String toString() {
 		return "boardBean [num=" + num + ", title=" + title + ", user_name=" + user_name + ", content=" + content

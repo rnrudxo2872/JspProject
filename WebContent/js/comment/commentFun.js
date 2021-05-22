@@ -133,7 +133,7 @@ let insertHtml = (commentsJson, insert) =>{
 
 		    let date = document.createElement("div");
 		    date.setAttribute("class","commentDate");
-		    date.innerText = element.date;
+		    date.innerText = element.date == undefined ? '방금' : element.date;
 
 		    let commentContent = document.createElement("div");
 		    commentContent.setAttribute("class","commentContent");
@@ -180,7 +180,6 @@ let insertComment = async() =>{
 	
 	let commentsJson = await (await fetch("../controller/comment/insertComment.jsp",fetchData)).json();
 
-	//insertCommentLen(commentsJson);
 	//commentList.innerHTML = commentListHead.outerHTML;
 	
 	insertHtml(commentsJson, true);
@@ -196,29 +195,31 @@ let FetchInsert = (event) =>{
 }
 
 
-const bottomObserver = new IntersectionObserver(targetSearch);
-
+const bottomObserver = new IntersectionObserver(targetSearch,{threshold: 1.0});
+//큰 모니터시 에러 방지
+bottomObserver.observe(document.querySelector('.github__link'));
 bottomObserver.observe(footer);
-
 
 let initFetch = async() =>{
 	
 	let commentsJson = await (await fetch(`../controller/comment/contentComments.jsp?num=${commentBoardNum}&start=${count}`).catch(err)).json();
 	
 	count += 5;
-	//insertCommentLen(commentsJson);
 	insertHtml(commentsJson);
-	
-	if(commentsJson == null)
+	console.log(commentsJson)
+	if(commentsJson == null){
+		console.log("멈춰!")
 		bottomObserver.unobserve(footer);
+	}
 	
 }
 
 function targetSearch(entries){
     entries.forEach(element => {
+    	console.log(element.isIntersecting)
         if (!element.isIntersecting)
             return;
-        
+        console.log("왜 댓글 안띄움?");
         initFetch();
     });
 }

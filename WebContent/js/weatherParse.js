@@ -3,7 +3,7 @@
             console.log("날씨여기")
             $.ajax({
                 type:"POST",                //전송방식
-                url:"./weatherData.xml",    //주소
+                url:"/MyFirstJSP/weatherData.xml",    //주소
                 data:params,            //전송데이터
                 dataType:"xml", // 받을 때 데이터 타입
                 

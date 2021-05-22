@@ -227,4 +227,20 @@ public class commentDAO {
 		return flag;
 	}
 	//updateComment
+	
+	//boardDelete
+	public void boardDelete(int board_num){
+		try {
+			conn = getConnection();
+			sql = "delete from board_comment where board_num=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, board_num);
+			pstmt.executeUpdate();
+			System.out.println("게시판 관련 댓글들 삭제!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	//boardDelete
 }

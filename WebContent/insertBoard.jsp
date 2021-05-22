@@ -36,9 +36,10 @@ if(id == null){
 </div>
 
 <div class="insertBoard-container">
-	<form action="../controller/insertBoardPro.jsp" class="insertBoard-container-form" enctype="multipart/form-data" method="post">
+	<form action="./insertBoardAction" class="insertBoard-container-form" enctype="multipart/form-data" method="post">
     <input id=title type="text" name="title" placeholder="제목을 입력해 주세요.">
     <input type="file" name="filename">
+    <input type="hidden" name="user_name" value="<%=id%>">
     <textarea name="content" cols="30" rows="10" placeholder="내용을 입력해 주세요."></textarea>
     <input type="submit" value="글쓰기">
     </form>

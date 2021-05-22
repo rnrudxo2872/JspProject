@@ -14,9 +14,6 @@
 String title ="공유 게시판";
 %>
 <title>FProject | <%=title %></title>
-<!--  
-<link rel="shortcut icon" type="image/x-icon" href="./images/logo.png"></link>
--->
 <%
 String pageNum = request.getParameter("pageNum");
 int boardNum = 0;
@@ -32,7 +29,7 @@ try{
 	%>
 	<script>
 	alert("없는 게시물입니다!");
-	location.href = "shareBoard.jsp";
+	location.href = "/shareBoard";
 	</script>
 	<%
 }
@@ -63,7 +60,7 @@ try{
         </tr>
         <%if(bb.getFile() != null){%>
         <tr>	
-            <td id="table_file" colspan="4"><a href="./controller/file/fileDown.jsp?num=<%=bb.getNum() %>&fileName=<%=bb.getFile()%>">💾<%=bb.getFile()%></a></td>
+            <td id="table_file" colspan="4"><a href="fileDown?num=<%=bb.getNum() %>&fileName=<%=bb.getFile()%>">💾<%=bb.getFile()%></a></td>
         </tr>
         <%} %>
         <tr>
@@ -77,7 +74,7 @@ try{
     if(curId != null && curId.equals(curBoardId)){ %>
     <div>
     <div class="detail-container__userInter">
-    <span><a class="board-container-footer__insertBoard" href="shareBoard.jsp?pageNum=<%=pageNum%>">글 목록</a></span>
+    <span><a class="board-container-footer__insertBoard" href="/shareBoard?pageNum=<%=pageNum%>">글 목록</a></span>
     <span><a class="board-container-footer__insertBoard" href="updateBoard.jsp?num=<%=bb.getNum()%>">글 수정</a></span>
     <span><a class="board-container-footer__insertBoard" onclick="confirmDel(<%=boardNum%>)">글 삭제</a></span>
     </div>
@@ -102,7 +99,7 @@ try{
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
-<script src="js/deleteBoard.js"></script>
-<script type="module" src="js/comment/commentFun.js"></script>
+<script src="../js/deleteBoard.js"></script>
+<script type="module" src="../js/comment/commentFun.js"></script>
 </body>
 </html>

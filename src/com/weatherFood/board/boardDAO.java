@@ -14,6 +14,8 @@ import javax.naming.NamingException;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.sql.DataSource;
 
+import com.weatherFood.comment.commentDAO;
+
 public class boardDAO {
 	private Connection conn = null;
 	private ResultSet rs = null;
@@ -212,7 +214,7 @@ public class boardDAO {
 	public int boardDel(String id, int num){
 		//-1 error, 1 정상
 		int flag = -1;
-		
+		System.out.println(id);
 		try {
 			conn = getConnection();
 			sql = "select user_name from board where num=?";
@@ -231,6 +233,10 @@ public class boardDAO {
 			}else{
 				return flag;
 			}
+			
+			//댓글 삭제
+			commentDAO cdao = new commentDAO();
+			cdao.boardDelete(num);
 			
 			//db삭제
 			sql = "delete from board where num=?";
