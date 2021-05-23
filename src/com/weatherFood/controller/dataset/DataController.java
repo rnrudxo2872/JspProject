@@ -31,6 +31,14 @@ public class DataController extends HttpServlet {
 		
 		}else if(curCmd.equals("/imageSource.json")){
 			sendURL = "./controller/images/scrapImage.jsp";
+		
+		}else if(curCmd.equals("/getNumberOfComment.json")){
+			sendURL = "./controller/comment/getNumberOfComment.jsp";
+			
+		}else if(curCmd.equals("/curBoardComments.json")){
+			System.out.println("댓글파싱");
+			sendURL = "./controller/comment/contentComments.jsp";
+			
 		}
 		
 		if(sendURL != null){
@@ -54,6 +62,14 @@ public class DataController extends HttpServlet {
 		
 		}else if(curCmd.equals("/curIdCheck.xml")){
 			sendURL = "./controller/checkId.jsp";
+			
+		}else if(curCmd.equals("/updateComment.json")){
+			System.out.println("댓글업데이트");
+			sendURL = "./controller/comment/updateComment.jsp";
+			
+		}else if(curCmd.equals("/insertComment.json")){
+			sendURL = "./controller/comment/insertComment.jsp";
+			
 		}
 		
 		if(sendURL != null){

@@ -13,11 +13,13 @@ import com.weatherFood.action.Action;
 import com.weatherFood.action.boardDeleteAction;
 import com.weatherFood.action.boardInsertAction;
 import com.weatherFood.action.boardUpdateAction;
+import com.weatherFood.action.commentDeleteAction;
+import com.weatherFood.action.commentUpdateAction;
 import com.weatherFood.session.sessionDAO;
 
 @WebServlet({"/shareBoard/content","/shareBoard/insertBoard","/shareBoard/delBoard",
 	"/shareBoard/insertBoardAction","/shareBoard/fileDown","/shareBoard/updateBoard",
-	"/shareBoard/updateBoardAction"})
+	"/shareBoard/updateBoardAction","/shareBoard/delComment","/shareBoard/updateCommentAction"})
 public class boardController extends Controller{
 	
 	@Override
@@ -40,6 +42,11 @@ public class boardController extends Controller{
 		
 		}else if(curCmd.equals("/fileDown")){
 			fdto.setURL("../controller/file/fileDown.jsp");
+		
+		}else if(curCmd.equals("/delComment")){
+			action = new commentDeleteAction(req, res);
+			fdto = action.execute();
+			
 		}
 		render(res);
 	}
@@ -56,7 +63,11 @@ public class boardController extends Controller{
 		}else if(curCmd.equals("/updateBoardAction")){
 			action = new boardUpdateAction(req, res);
 			fdto = action.execute();
-			System.out.println("업데이트 dto : " + fdto);
+		
+		}else if(curCmd.equals("/updateCommentAction")){
+			action = new commentUpdateAction(req, res);
+			fdto = action.execute();
+			
 		}
 		render(res);
 	}

@@ -25,10 +25,11 @@ cb.setComment(curComment);
 cb.setBoard_num(curBoardNum);
 
 commentDAO cdao = new commentDAO();
-cdao.insertComment(cb);
+jsonObject = cdao.insertComment(cb);
 
 //해당 게시판 코멘트 불러옴.
 JSONArray comments = new JSONArray();
+System.out.println(jsonObject);
 comments.add(jsonObject);
 
 //예외(글을 썻기 때문에 있을 수 없는 일임)

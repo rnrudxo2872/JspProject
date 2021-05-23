@@ -10,7 +10,7 @@ let commentListHead = document.querySelector(".commentList-head");
 let count = 0;
 
 let insertCommentHead = async() =>{
-	let numberOfComment = await (await fetch(`../controller/comment/getNumberOfComment.jsp?num=${commentBoardNum}`)).text()
+	let numberOfComment = await (await fetch(`../getNumberOfComment.json?num=${commentBoardNum}`)).text()
 	console.log(numberOfComment);
 	if(numberOfComment == 1)
 	    commentListHead.innerText = `1 comment`;
@@ -57,7 +57,7 @@ let CommentFunc = {
 		    			   }
 		    		}
 		    		
-		    		let updateCom = await fetch('../controller/comment/updateComment.jsp',fetchData);
+		    		let updateCom = await fetch('./updateCommentAction',fetchData);
 		    		console.log(updateCom);
 		    		
 		    		let updateContent = inputUpdateContent.value;
@@ -67,9 +67,6 @@ let CommentFunc = {
 		})
 		contentContainer.innerHTML = '';
 		contentContainer.appendChild(inputUpdateContent);
-		/*let index = contentContainer.innerText.indexOf("수정");
-		let content = contentContainer.innerText.substring(0,index)
-		console.log(contentContainer.innerText.substring(0,index));*/
 	},
 	Delete : async(event) =>{
 		console.log(event.target);
@@ -99,9 +96,8 @@ let insertCommentButton = (idx) => {
 
 	let update = document.createElement("a");
 	let del = document.createElement("a");
-
-	update.setAttribute("href", `../controller/comment/updateComment.jsp?idx=${idx}`);
-	del.setAttribute("href", `../controller/comment/delComment.jsp?idx=${idx}`);
+	update.setAttribute("href", `./updateComment?idx=${idx}`);
+	del.setAttribute("href", `./delComment?idx=${idx}`);
 	
 	update.innerText = "수정";
 	del.innerText = "삭제";
@@ -121,7 +117,7 @@ let insertCommentButton = (idx) => {
 let insertHtml = (commentsJson, insert) =>{
 	if(commentsJson !== null){
 		commentsJson.forEach(element =>{
-	
+			console.log(element)
 		    let commenttail = document.createElement("div");
 		    commenttail.setAttribute("class","commentList-tail");
 		    console.log(element);
@@ -177,8 +173,7 @@ let insertComment = async() =>{
 	
 	commentInput.value = "";
 	
-	
-	let commentsJson = await (await fetch("../controller/comment/insertComment.jsp",fetchData)).json();
+	let commentsJson = await (await fetch("../insertComment.json",fetchData)).json();
 
 	//commentList.innerHTML = commentListHead.outerHTML;
 	
@@ -194,7 +189,6 @@ let FetchInsert = (event) =>{
 	}
 }
 
-
 const bottomObserver = new IntersectionObserver(targetSearch,{threshold: 1.0});
 //큰 모니터시 에러 방지
 bottomObserver.observe(document.querySelector('.github__link'));
@@ -202,7 +196,7 @@ bottomObserver.observe(footer);
 
 let initFetch = async() =>{
 	
-	let commentsJson = await (await fetch(`../controller/comment/contentComments.jsp?num=${commentBoardNum}&start=${count}`).catch(err)).json();
+	let commentsJson = await (await fetch(`../curBoardComments.json?num=${commentBoardNum}&start=${count}`).catch(err)).json();
 	
 	count += 5;
 	insertHtml(commentsJson);
