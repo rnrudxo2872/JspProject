@@ -385,7 +385,6 @@ public class boardDAO {
 			pstmt.setInt(3, end);
 			
 			rs = pstmt.executeQuery();
-			System.out.println("시작 지점 : "+start+"에서 "+ end+"까지 "+searchWord+ "찾았습니다.");
 			while(rs.next()){
 				boardBean tmpBb = new boardBean();
 				

@@ -12,16 +12,11 @@ import com.servletFunc.servletDAO;
 import com.weatherFood.session.sessionDAO;
 
 @WebServlet({"/foodGallery","/serviceFoodPlace","/shareBoard","/boardSearch"})
-public class MainController extends HttpServlet {
+public class MainController extends Controller {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		servletDAO sdao = new servletDAO(req,res);
-		sessionDAO Ssdao = new sessionDAO(req);
-		
-		String curCmd = sdao.getCurSubURI();
-		
-		ForwardDTO fdto = new ForwardDTO(null,false);
+		setInit(req, res);
 		
 		System.out.println(curCmd);
 		if(curCmd.equals("/") || curCmd.equals("/main")){
@@ -38,14 +33,10 @@ public class MainController extends HttpServlet {
 			
 		}else if(curCmd.equals("/boardSearch")){
 			fdto.setURL("./boardSearch.jsp");
+			
 		}
 		
-		if(fdto.getURL() != null){
-			Ssdao.setSession("prevPage", "."+curCmd);
-			sdao.render(fdto);
-			return;
-		}
-		res.setStatus(404);
+		renderAfterSavePrev(res);
 	}
 	
 }

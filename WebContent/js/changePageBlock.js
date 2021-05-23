@@ -34,9 +34,9 @@ let getBoard = async(search) =>{
 	let url = null;
 	
 	if(search.type === undefined || search.search === undefined)
-		url = `shareBoard.jsp?pageNum=1&pageSize=${changePageSize}`;
+		url = `shareBoard?pageNum=1&pageSize=${changePageSize}`;
 	else{
-		url = `boardSearch.jsp?pageNum=1&pageSize=${changePageSize}&type=${search.type}&search=${search.search}`;
+		url = `boardSearch?pageNum=1&pageSize=${changePageSize}&type=${search.type}&search=${search.search}`;
 	}
 	
     let html = await (await fetch(url).catch(alertErr)).text()

@@ -18,6 +18,9 @@ let isValid  = (str) =>{
 	if(start === -1)
 		return false;
 	
+	if(start < 5)
+		return false;
+	
 	if(str - start < 5)
 		return false;
 	
@@ -49,7 +52,7 @@ let searchId = () =>{
 					console.log($(this).text())
 					ret.push($(this).text());
 				});
-				console.log(ret);
+
 				$(".idSearchInfo").html(`<span style="color:${ret[1]}">${ret[0]}</span>`);
 			}
 		})

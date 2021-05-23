@@ -25,7 +25,7 @@ public class loginAction implements Action{
 		PrintWriter out = res.getWriter();
 		out.println("<script>");
 		out.println("alert('" + msg + "');");
-		out.println("history.back()");
+		out.println("location.href='./main';");
 		out.println("</script>");
 		
 		out.close();
@@ -57,22 +57,19 @@ public class loginAction implements Action{
 	@Override
 	public ForwardDTO execute() {
 		ForwardDTO fdto = null;
-		System.out.println("execute!@!@");
 
 		try {
 			req.setCharacterEncoding("utf-8");
-			String id = req.getParameter("id") ;
-			String pw = req.getParameter("pw");
-			
-			//파라미터 유무 확인
-			if(id == null || pw == null){
-				ValueException("정보값이 잘못됐습니다!");
-				return fdto;
-			}
-			
 			memberBean mb = new memberBean();
-			mb.setId(id);
-			mb.setPw(pw);
+			mb.setParams(req);
+			
+			sessionDAO Sedao = new sessionDAO(req);
+			
+			//예외 상황(파라미터, 이미 로그인 상태)
+			if(mb.getId() == null || mb.getPw() == null || Sedao.getSession("id") != null){
+				ValueException("정보값이 잘못됐습니다!");
+				return null;
+			}
 			
 			memberDAO mdao = new memberDAO();
 			int flag = mdao.loginFun(mb);
@@ -80,15 +77,11 @@ public class loginAction implements Action{
 			if(!isValidLogin(flag))
 				return null;
 			
-			sessionDAO Sedao = new sessionDAO(req);
 			Sedao.setSession("id", mb.getId());
-			
 			fdto = new ForwardDTO(Sedao.getPrevURL(), true);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return fdto;
 	}
 }

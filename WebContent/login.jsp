@@ -9,6 +9,14 @@
 <%
 ApiKey Apikey = new ApiKey();
 String title ="로그인";
+if((String)session.getAttribute("id") != null){
+	%>
+	<script>
+		alert("잘못된 경로입니다!");
+		history.back();
+	</script>
+	<%
+}
 %>
 <title>FProject | <%=title %></title>
 <%@include file="partials/style.jsp" %>

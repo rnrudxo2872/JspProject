@@ -104,8 +104,8 @@ input:focus, input:active {
 	margin-right: auto;
 }
 .loading{
-    width: 500px;
-    height: 500px;
+	height: 20vmin;
+	width: 20vmin;
     animation: rotation 8s infinite linear;
 }
 

@@ -37,4 +37,11 @@ public class Controller extends HttpServlet{
 			sdao.render(fdto);
 		}
 	}
+	
+	protected void renderAfterSavePrev(HttpServletResponse res) throws IOException, ServletException{
+		if(fdto != null){
+			Sedao.setSession("prevPage", "."+curCmd);
+			sdao.render(fdto);
+		}
+	}
 }

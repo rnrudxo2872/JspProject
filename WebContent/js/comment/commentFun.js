@@ -10,8 +10,8 @@ let commentListHead = document.querySelector(".commentList-head");
 let count = 0;
 
 let insertCommentHead = async() =>{
-	let numberOfComment = await (await fetch(`../getNumberOfComment.json?num=${commentBoardNum}`)).text()
-	console.log(numberOfComment);
+	let numberOfComment = await (await fetch(`../getNumberOfComment.json?num=${commentBoardNum}`).catch(err)).text()
+
 	if(numberOfComment == 1)
 	    commentListHead.innerText = `1 comment`;
 	else
@@ -22,12 +22,10 @@ let insertCommentHead = async() =>{
 let CommentFunc = {
 	Update : async(event) =>{
 		event.preventDefault();
-		console.log(event.target);
 		
 		let This = event.target;
 		
 		let userInter = This.parentNode.outerHTML;
-		console.log(userInter);
 		
 		let contentContainer = This.parentNode.parentNode;
 		let Parent = This.parentNode.parentNode.parentNode;
@@ -37,7 +35,6 @@ let CommentFunc = {
 		inputUpdateContent.setAttribute("type","text");
 		
 		let UserID = Parent.querySelector('.commentUserName').innerText;
-		console.log(Parent);
 		
 		inputUpdateContent.addEventListener("keyup",async e =>{
 		    if(e.key === 'Enter'){
@@ -175,8 +172,6 @@ let insertComment = async() =>{
 	
 	let commentsJson = await (await fetch("../insertComment.json",fetchData)).json();
 
-	//commentList.innerHTML = commentListHead.outerHTML;
-	
 	insertHtml(commentsJson, true);
 	insertCommentHead();
 }
@@ -213,7 +208,6 @@ function targetSearch(entries){
     	console.log(element.isIntersecting)
         if (!element.isIntersecting)
             return;
-        console.log("왜 댓글 안띄움?");
         initFetch();
     });
 }
