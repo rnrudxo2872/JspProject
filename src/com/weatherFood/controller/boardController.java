@@ -12,10 +12,12 @@ import com.servletFunc.servletDAO;
 import com.weatherFood.action.Action;
 import com.weatherFood.action.boardDeleteAction;
 import com.weatherFood.action.boardInsertAction;
+import com.weatherFood.action.boardUpdateAction;
 import com.weatherFood.session.sessionDAO;
 
 @WebServlet({"/shareBoard/content","/shareBoard/insertBoard","/shareBoard/delBoard",
-	"/shareBoard/insertBoardAction","/shareBoard/fileDown"})
+	"/shareBoard/insertBoardAction","/shareBoard/fileDown","/shareBoard/updateBoard",
+	"/shareBoard/updateBoardAction"})
 public class boardController extends HttpServlet{
 	servletDAO sdao = null;
 	sessionDAO Sedao = null;
@@ -50,6 +52,9 @@ public class boardController extends HttpServlet{
 		}else if(curCmd.equals("/insertBoard")){
 			fdto.setURL("../insertBoard.jsp");
 			
+		}else if(curCmd.equals("/updateBoard")){
+			fdto.setURL("../updateBoard.jsp");
+			
 		}else if(curCmd.equals("/delBoard")){
 			action = new boardDeleteAction(req, res);
 			fdto = action.execute();
@@ -69,6 +74,11 @@ public class boardController extends HttpServlet{
 		if(curCmd.equals("/insertBoardAction")){
 			action = new boardInsertAction(req, res);
 			fdto = action.execute();
+		
+		}else if(curCmd.equals("/updateBoardAction")){
+			action = new boardUpdateAction(req, res);
+			fdto = action.execute();
+			
 		}
 		
 		render(res);

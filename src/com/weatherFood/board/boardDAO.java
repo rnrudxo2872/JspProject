@@ -294,7 +294,6 @@ public class boardDAO {
 	//updateBoard
 	public int updateBoard(boardBean bb){
 		int flag = 0;
-		
 		try {
 			conn = getConnection();
 			sql = "update board set title=?,content=?,file=?,file_sys=? where num=?";

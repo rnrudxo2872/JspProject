@@ -40,7 +40,7 @@ boardBean bb = new boardBean();
 boardDAO bdao = new boardDAO();
 bb = bdao.getBoard(boardNum);
 
-System.out.println(request.getParameter("filename"));
+String pageNum = request.getParameter("pageNum");
 %>
 <%@include file="partials/style.jsp" %>
 </head>
@@ -54,7 +54,7 @@ System.out.println(request.getParameter("filename"));
 </div>
 
 <div class="insertBoard-container">
-	<form action="../controller/updateBoardPro.jsp" class="insertBoard-container-form" enctype="multipart/form-data" method="post">
+	<form action="updateBoardAction" class="insertBoard-container-form" enctype="multipart/form-data" method="post">
     <input id=title type="text" name="title" value="<%=bb.getTitle()%>">
     <div>
     <input id="filename" type="file" name="filename">
@@ -63,6 +63,8 @@ System.out.println(request.getParameter("filename"));
     <textarea name="content" cols="30" rows="10"><%=bb.getContent()%></textarea>
     <input type="submit" value="글쓰기">
     <input type="hidden" value="<%=boardNum %>" name="num">
+    <input type="hidden" value="<%=id %>" name="user_name">
+    <%if(pageNum != null){%><input type="hidden" value="<%=pageNum%>" name="pageNum"><%} %>
     <input id="fileChange" type="hidden" value=<%if(bb.getFile() == null){%>"0"<%}else{ %>"1"<%} %> name="fileChange">
     </form>
 </div>
@@ -71,7 +73,7 @@ System.out.println(request.getParameter("filename"));
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
-<script src="js/updateBoardJs.js"></script>
+<script src="../js/updateBoardJs.js"></script>
 <script>
 function updateSubmit(event){
 	

@@ -16,6 +16,7 @@ String title ="공유 게시판";
 <title>FProject | <%=title %></title>
 <%
 String pageNum = request.getParameter("pageNum");
+
 int boardNum = 0;
 boardBean bb = new boardBean();
 
@@ -74,8 +75,8 @@ try{
     if(curId != null && curId.equals(curBoardId)){ %>
     <div>
     <div class="detail-container__userInter">
-    <span><a class="board-container-footer__insertBoard" href="/shareBoard?pageNum=<%=pageNum%>">글 목록</a></span>
-    <span><a class="board-container-footer__insertBoard" href="updateBoard.jsp?num=<%=bb.getNum()%>">글 수정</a></span>
+    <span><a class="board-container-footer__insertBoard" href="../shareBoard<%if(pageNum != null){%>?pageNum=<%=pageNum%><%} %>">글 목록</a></span>
+    <span><a class="board-container-footer__insertBoard" href="updateBoard?num=<%=bb.getNum()%><%if(pageNum != null){%>&pageNum=<%=pageNum%><%} %>">글 수정</a></span>
     <span><a class="board-container-footer__insertBoard" onclick="confirmDel(<%=boardNum%>)">글 삭제</a></span>
     </div>
     <%} %>
