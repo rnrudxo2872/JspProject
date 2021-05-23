@@ -18,28 +18,7 @@ import com.weatherFood.action.userUpdateAction;
 import com.weatherFood.session.sessionDAO;
 
 @WebServlet("*.use")
-public class UserController extends HttpServlet{
-	servletDAO sdao = null;
-	sessionDAO Sedao = null;
-	String curCmd = null;
-	ForwardDTO fdto = null;
-	Action action = null;
-	
-	private void setInit(HttpServletRequest req, HttpServletResponse res){
-		sdao = new servletDAO(req, res);
-		Sedao = new sessionDAO(req);
-		curCmd = sdao.getCurSubURI();
-		fdto = new ForwardDTO(null,false);
-	}
-	
-	private void render(HttpServletResponse res) throws IOException, ServletException{
-		if(fdto.getURL() != null || fdto != null){
-			//Sedao.setSession("prevPage", "."+curCmd);
-			sdao.render(fdto);
-			return;
-		}
-		res.setStatus(404);
-	}
+public class UserController extends Controller{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
