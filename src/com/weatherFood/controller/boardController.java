@@ -19,7 +19,8 @@ import com.weatherFood.session.sessionDAO;
 
 @WebServlet({"/shareBoard/content","/shareBoard/insertBoard","/shareBoard/delBoard",
 	"/shareBoard/insertBoardAction","/shareBoard/fileDown","/shareBoard/updateBoard",
-	"/shareBoard/updateBoardAction","/shareBoard/delComment","/shareBoard/updateCommentAction"})
+	"/shareBoard/updateBoardAction","/shareBoard/delComment","/shareBoard/updateCommentAction",
+	"/shareBoard/boardSearch"})
 public class boardController extends Controller{
 	
 	@Override

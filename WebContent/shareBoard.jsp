@@ -116,7 +116,7 @@ bbs = bdao.getBoards(startRow, pageSize);
         </div>
     </main>
 
-            <form class="board-container-footer__search" action="boardSearch.jsp" method="get"></form>
+            <form class="board-container-footer__search" action="boardSearch" method="get"></form>
             
            	<%if(session.getAttribute("id") != null) {%>
            	<a class="board-container-footer__insertBoard" href="shareBoard/insertBoard">글쓰기</a>

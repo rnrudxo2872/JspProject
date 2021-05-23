@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.servletFunc.servletDAO;
 import com.weatherFood.session.sessionDAO;
 
-@WebServlet({"/foodGallery","/serviceFoodPlace","/shareBoard"})
+@WebServlet({"/foodGallery","/serviceFoodPlace","/shareBoard","/boardSearch"})
 public class MainController extends HttpServlet {
 
 	@Override
@@ -35,6 +35,9 @@ public class MainController extends HttpServlet {
 		
 		}else if(curCmd.equals("/serviceFoodPlace")){
 			fdto.setURL("./serviceFoodPlace.jsp");
+			
+		}else if(curCmd.equals("/boardSearch")){
+			fdto.setURL("./boardSearch.jsp");
 		}
 		
 		if(fdto.getURL() != null){

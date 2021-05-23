@@ -41,6 +41,8 @@ searchObj.setSearchType(searchType);
 
 boardDAO bdao = new boardDAO();
 
+System.out.println(searchObj);
+
 //DB 글 개수
 int cnt = bdao.searchBoardCnt(searchObj);
 ArrayList<boardBean> bbs = bdao.searchBoard(searchObj, startRow, pageSize);
@@ -71,7 +73,7 @@ ArrayList<boardBean> bbs = bdao.searchBoard(searchObj, startRow, pageSize);
 			%>
 			<tr>
 	            <td><a href=""><%=curBoard.getNum() %></a></td>
-	            <td><a href="boardContent.jsp?num=<%=curBoard.getNum()%>&pageNum=<%=pageNum%>"><%=curBoard.getTitle() %></a></td>
+	            <td><a href="content?num=<%=curBoard.getNum()%>&pageNum=<%=pageNum%>"><%=curBoard.getTitle() %></a></td>
 	            <td><a href=""><%=curBoard.getUser_name()%></a></td>
 	            <td><a href=""><%=curBoard.getDate() %></a></td>
         	</tr>
@@ -101,19 +103,19 @@ ArrayList<boardBean> bbs = bdao.searchBoard(searchObj, startRow, pageSize);
             	//이전
             	if(startPage > pageBlock){
 					%>
-					<a href="boardSearch.jsp?pageNum=<%=startPage - 1%>&pageSize=<%=pageSize%>&type=<%=searchObj.getSearchType() %>&search=<%=searchObj.getSearchWord() %>">이전</a>
+					<a href="boardSearch?pageNum=<%=startPage - 1%>&pageSize=<%=pageSize%>&type=<%=searchObj.getSearchType() %>&search=<%=searchObj.getSearchWord() %>">이전</a>
 					<%
             	}
             	
             	for(int i = startPage; i<= endPage; i++){
             		%>
-            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="boardSearch.jsp?pageNum=<%=i%>&pageSize=<%=pageSize%>&type=<%=searchObj.getSearchType() %>&search=<%=searchObj.getSearchWord() %>"<%}%>><%=i %></a>
+            		<a <%if(i == currentPage){%>class="curPageNum"<%} else{%>href="boardSearch?pageNum=<%=i%>&pageSize=<%=pageSize%>&type=<%=searchObj.getSearchType() %>&search=<%=searchObj.getSearchWord() %>"<%}%>><%=i %></a>
             		<%
             	}
             	
             	if(endPage < pageCount){
             		%>
-            		<a href="boardSearch.jsp?pageNum=<%=endPage + 1%>&pageSize=<%=pageSize%>&type=<%=searchObj.getSearchType() %>&search=<%=searchObj.getSearchWord() %>">다음</a>
+            		<a href="boardSearch?pageNum=<%=endPage + 1%>&pageSize=<%=pageSize%>&type=<%=searchObj.getSearchType() %>&search=<%=searchObj.getSearchWord() %>">다음</a>
             		<%
             	}
             }
@@ -122,10 +124,10 @@ ArrayList<boardBean> bbs = bdao.searchBoard(searchObj, startRow, pageSize);
         </div>
     </main>
 
-            <form class="board-container-footer__search" action="boardSearch.jsp" method="get"></form>
+            <form class="board-container-footer__search" action="boardSearch" method="get"></form>
             
            	<%if(session.getAttribute("id") != null) {%>
-           	<a class="board-container-footer__insertBoard" href="insertBoard.jsp">글쓰기</a>
+           	<a class="board-container-footer__insertBoard" href="insertBoard">글쓰기</a>
            	<%} %>
     <div>
 	<span>게시판 출력개수</span>
