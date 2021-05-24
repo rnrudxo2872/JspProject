@@ -30,8 +30,14 @@ recFood = recFood == null ? "맛집" : recFood;
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div class="hAddr">
-        <span id="centerAddr"></span><br>
-        <button class="reload"><%=viewWord %>을 여기서 다시 찾아볼까요?</button>
+ 		<div class="hAddr__item">
+	        <span id="centerAddr"></span>
+	        <button class="reload"><%=viewWord %>을 여기서 다시 찾아볼까요?</button>
+ 		</div>
+        <div class="hAddr__item">
+        	<input type="text" class="searchKeyword">
+        	<button class="reload">키워드 검색!</button>
+        </div>
     </div>
     <div id="menu_wrap" class="bg_white">
         <ul id="placesList"></ul>

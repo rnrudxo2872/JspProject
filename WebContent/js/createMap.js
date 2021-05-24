@@ -125,11 +125,8 @@ let loadMap = () =>{
 	    map.setBounds(bounds);
 	}
 	
-	
 	//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
 	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-
 
 	//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
 	kakao.maps.event.addListener(map, 'idle', function() {
@@ -161,17 +158,6 @@ let loadMap = () =>{
 	            nowAddr = result[i].address_name;
 	            break;
 	        }
-	        
-	        
-
-	        /*
-	         * // 키워드로 장소를 검색합니다
-searchPlaces();
-
-// 키워드 검색을 요청하는 함수입니다
-
-
-	        */
 	    }
 	}
 	
@@ -185,9 +171,7 @@ searchPlaces();
 		reloadButton.addEventListener("click",searchPlaces)
 		pur = false;
 	}
-	
 	}
-	
 	
 	// 검색결과 항목을 Element로 반환하는 함수입니다
 	function getListItem(index, places) {

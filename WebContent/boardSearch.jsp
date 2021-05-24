@@ -16,6 +16,18 @@ String title ="게시글 검색";
 <%
 request.setCharacterEncoding("utf-8");
 String searchWord = request.getParameter("search");
+
+
+if(searchWord == null || request.getParameter("type") == null){
+	%>
+	<script>
+	alert("잘못된 경로입니다!");
+	location.href = "./main";
+	</script>
+	<%
+	return;
+}
+
 int searchType = Integer.parseInt(request.getParameter("type"));
 
 //보여줄 게시판 개수
