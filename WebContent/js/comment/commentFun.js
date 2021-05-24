@@ -18,7 +18,6 @@ let insertCommentHead = async() =>{
 		commentListHead.innerText = `${numberOfComment} comments`;
 }
 
-
 let CommentFunc = {
 	Update : async(event) =>{
 		event.preventDefault();
@@ -132,7 +131,6 @@ let insertHtml = (commentsJson, insert) =>{
 		    commentContent.setAttribute("class","commentContent");
 		    commentContent.innerText = element.comment;
 		    
-		    //console.log(element.idx);
 		    if(commentUser === element.user_id){
 		    	let tempElement = insertCommentButton(element.idx);
 		    	commentContent.appendChild(tempElement);
@@ -197,7 +195,6 @@ let initFetch = async() =>{
 	insertHtml(commentsJson);
 	console.log(commentsJson)
 	if(commentsJson == null){
-		console.log("멈춰!")
 		bottomObserver.unobserve(footer);
 	}
 	

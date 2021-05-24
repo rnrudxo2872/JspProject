@@ -247,8 +247,8 @@ public class memberDAO {
 				String ans = rs.getString(1);
 				idx = rs.getInt(2);
 				if(!ans.equals(mb.getPw())){
-				flag = 1;
-				return flag;
+					flag = 1;
+					return flag;
 				}
 			}else{
 				//아이디 존재 X
@@ -267,8 +267,8 @@ public class memberDAO {
 			pstmt.executeUpdate();
 			flag = 2;
 			System.out.println("회원정보 업데이트!");
+			
 		} catch (SQLException e) {
-			System.out.println("업데이트 혹은 조회 sql 에러!");
 			e.printStackTrace();
 		}finally{
 			clearDB();
