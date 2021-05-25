@@ -55,7 +55,7 @@ public class commentDAO {
 	//clearDB
 	
 	//insertComment
-	public JSONObject insertComment(commentBean cb){
+	public void insertComment(commentBean cb){
 		int idx = 0;
 		JSONObject comObj = null;
 		
@@ -82,20 +82,13 @@ public class commentDAO {
 			pstmt.executeUpdate();
 			System.out.println(cb.getUser_id() + " : 사용자 덧글 등록!");
 			
-			sql = "select max(idx) from board_comment";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next())
-				comObj = getcomment(rs.getInt(1));
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			clearDB();
 		}
 		
-		return comObj;
+		return;
 	}
 	//insertComment
 	
@@ -151,16 +144,27 @@ public class commentDAO {
 	}
 	//getComments
 	
-	//getcomment
-	public JSONObject getcomment(int idx){
+	//getLatestcomment
+	public JSONObject getLatestcomment(){
+		int idx = 0;
 		JSONObject comObj = null;
 		try {
 			conn = getConnection();
+			sql = "select max(idx) from board_comment";
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				idx = rs.getInt(1);
+			else{
+				System.out.println("댓글이 하나도 없습니다!");
+				return null;
+			}
+			
 			sql = "select * from board_comment where idx=?";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, idx);
-			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
@@ -180,7 +184,7 @@ public class commentDAO {
 		System.out.println("구했다 최신!" + comObj);
 		return comObj;
 	}
-	//getcomment
+	//getLatestcomment
 	
 	//getBoardCommentSize
 	public int getBoardCommentSize(int num){

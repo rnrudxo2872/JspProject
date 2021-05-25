@@ -23,15 +23,16 @@ let CommentFunc = {
 		event.preventDefault();
 		
 		let This = event.target;
-		
+		console.log(This)
 		let userInter = This.parentNode.outerHTML;
-		
+		let prevText = This.parentNode.parentNode.innerText.split("수정삭제")[0];
 		let contentContainer = This.parentNode.parentNode;
 		let Parent = This.parentNode.parentNode.parentNode;
 
 		let inputUpdateContent = document.createElement("input");
 		inputUpdateContent.className = "updateComment";
 		inputUpdateContent.setAttribute("type","text");
+		inputUpdateContent.value = prevText;
 		
 		let UserID = Parent.querySelector('.commentUserName').innerText;
 		
@@ -183,8 +184,7 @@ let FetchInsert = (event) =>{
 }
 
 const bottomObserver = new IntersectionObserver(targetSearch,{threshold: 1.0});
-//큰 모니터시 에러 방지
-bottomObserver.observe(document.querySelector('.github__link'));
+
 bottomObserver.observe(footer);
 
 let initFetch = async() =>{

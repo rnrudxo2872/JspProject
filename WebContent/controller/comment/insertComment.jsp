@@ -8,7 +8,6 @@
     pageEncoding="UTF-8"%>
 
 <%
-//System.out.println(getbody.readBody(request));
 JSONParser jsonParser = new JSONParser();
 String now = getbody.readBody(request);
 
@@ -25,8 +24,9 @@ cb.setComment(curComment);
 cb.setBoard_num(curBoardNum);
 
 commentDAO cdao = new commentDAO();
-jsonObject = cdao.insertComment(cb);
+cdao.insertComment(cb);
 
+jsonObject = cdao.getLatestcomment();
 //해당 게시판 코멘트 불러옴.
 JSONArray comments = new JSONArray();
 System.out.println(jsonObject);

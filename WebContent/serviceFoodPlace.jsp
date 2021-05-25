@@ -35,8 +35,8 @@ recFood = recFood == null ? "맛집" : recFood;
 	        <button class="reload"><%=viewWord %>을 여기서 다시 찾아볼까요?</button>
  		</div>
         <div class="hAddr__item">
-        	<input type="text" class="searchKeyword">
-        	<button class="reload">키워드 검색!</button>
+        	<input type="text" class="searchKeyword" value="<%=recFood%>">
+        	<button class="searchKeywordButton">키워드 검색!</button>
         </div>
     </div>
     <div id="menu_wrap" class="bg_white">
@@ -51,7 +51,6 @@ recFood = recFood == null ? "맛집" : recFood;
 </div> 
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=Apikey.getKakaoMap()%>&libraries=services"></script>
-<script type="text/javascript">let recFood = "<%=recFood%>";</script>
-<script src="js/createMap.js"></script>
+<script type="module" src="js/createMap.js"></script>
 </body>
 </html>

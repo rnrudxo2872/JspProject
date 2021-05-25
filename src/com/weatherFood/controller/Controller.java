@@ -33,13 +33,13 @@ public class Controller extends HttpServlet{
 	}
 	
 	protected void render(HttpServletResponse res) throws IOException, ServletException{
-		if(fdto != null){
+		if(fdto != null && fdto.getURL() != null){
 			sdao.render(fdto);
 		}
 	}
 	
 	protected void renderAfterSavePrev(HttpServletResponse res) throws IOException, ServletException{
-		if(fdto != null){
+		if(fdto != null && fdto.getURL() != null){
 			Sedao.setSession("prevPage", "."+curCmd);
 			sdao.render(fdto);
 		}

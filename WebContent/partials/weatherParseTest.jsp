@@ -10,5 +10,5 @@
 	<div class="temp"></div>
 	<div class="display__main" style="display: none;"></div>
 </div>
-<script src="<%=context %>/js/getCoord.js"></script>
-<script src="<%=context %>/js/weatherParse.js"></script>
+
+<script type="module" src="<%=context %>/js/weatherParse.js"></script>
