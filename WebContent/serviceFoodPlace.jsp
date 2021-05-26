@@ -51,6 +51,6 @@ recFood = recFood == null ? "맛집" : recFood;
 </div> 
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=Apikey.getKakaoMap()%>&libraries=services"></script>
-<script type="module" src="js/createMap.js"></script>
+<script type="module" src="js/kakaoMap/createMap.js"></script>
 </body>
 </html>

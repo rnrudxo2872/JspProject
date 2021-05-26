@@ -22,13 +22,13 @@ String title ="인증 갤러리";
 </jsp:include>
 </div>
 
-<article class="food-contanier">
+<article id="App">
 
 </article>
 <div>
 <jsp:include page="partials/footer.jsp"></jsp:include>
 </div> 
 </div>
-<script src="js/gallery/imageSource.js" type="module"></script>\
+<script src="js/gallery/main.js" type="module"></script>
 </body>
 </html>

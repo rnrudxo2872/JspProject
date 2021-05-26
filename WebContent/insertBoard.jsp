@@ -19,7 +19,7 @@ if(id == null){
 	%>
 	<script>
 		alert("세션값이 유효하지 않습니다! 로그인을 해주세요.");
-		location.href = "../view/main.jsp";
+		location.href = "./main";
 	</script>
 	<%
 }

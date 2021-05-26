@@ -17,6 +17,7 @@ public class scrap {
 		for(Element item : elements){
 			JSONObject tmpObj = new JSONObject();
 			tmpObj.put("src", item.attr("src"));
+			tmpObj.put("alt", item.attr("alt"));
 			
 			retArr.add(tmpObj);
 		}

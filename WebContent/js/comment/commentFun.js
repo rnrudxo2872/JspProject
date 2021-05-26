@@ -1,11 +1,17 @@
+import { UpdateCommentFunc, DeleteCommentFunc } from "./userInter.js"
+
+export const commentUser = document.querySelector("#user_id").value;
+export const commentListHead = document.querySelector(".commentList-head");
 const commentForm = document.querySelector(".comment-container__form");
 const commentInput = document.querySelector("#userComment");
-const commentUser = document.querySelector("#user_id").value;
-const commentBoardNum = document.querySelector("#board_num").value;
 const commentList = document.querySelector(".comment-container__commentList");
+const footer =  document.querySelector('.footer-container');
+const commentBoardNum = document.querySelector("#board_num").value;
 
-let footer =  document.querySelector('.footer-container');
-let commentListHead = document.querySelector(".commentList-head");
+const CommentFunc = {
+		Update : UpdateCommentFunc,
+		Delete : DeleteCommentFunc
+} 
 
 let count = 0;
 
@@ -18,75 +24,6 @@ let insertCommentHead = async() =>{
 		commentListHead.innerText = `${numberOfComment} comments`;
 }
 
-let CommentFunc = {
-	Update : async(event) =>{
-		event.preventDefault();
-		
-		let This = event.target;
-		console.log(This)
-		let userInter = This.parentNode.outerHTML;
-		let prevText = This.parentNode.parentNode.innerText.split("수정삭제")[0];
-		let contentContainer = This.parentNode.parentNode;
-		let Parent = This.parentNode.parentNode.parentNode;
-
-		let inputUpdateContent = document.createElement("input");
-		inputUpdateContent.className = "updateComment";
-		inputUpdateContent.setAttribute("type","text");
-		inputUpdateContent.value = prevText;
-		
-		let UserID = Parent.querySelector('.commentUserName').innerText;
-		
-		inputUpdateContent.addEventListener("keyup",async e =>{
-		    if(e.key === 'Enter'){
-		    	if(confirm("정말 수정하시겠습니까?")){
-		    		
-		    		let data = {
-		    				user_id:commentUser,
-		    				comment:inputUpdateContent.value,
-		    				idx:Parent.dataset.id
-		    		}
-		    		
-		    		let fetchData = {
-		    			    method: 'POST',
-		    			    body: JSON.stringify(data),
-		    			    headers: {
-		    			        'Content-Type': 'application/json'
-		    			   }
-		    		}
-		    		
-		    		let updateCom = await fetch('./updateCommentAction',fetchData);
-		    		console.log(updateCom);
-		    		
-		    		let updateContent = inputUpdateContent.value;
-		    		contentContainer.innerHTML = `${updateContent}${userInter}`;
-		    	}
-		    }
-		})
-		contentContainer.innerHTML = '';
-		contentContainer.appendChild(inputUpdateContent);
-	},
-	Delete : async(event) =>{
-		console.log(event.target);
-		event.preventDefault();
-		
-		let This = event.target;
-		let Parent = This.parentNode.parentNode.parentNode;
-
-		if(confirm("정말 삭제하겠습니까?")){
-			Parent.style.display = "none";
-			await fetch(This.href);
-
-			let innerTEXT = commentListHead.innerText
-			let lastPosition = innerTEXT.indexOf("comm");
-			let commentNum = innerTEXT.substring(0,lastPosition-1);
-			
-			if(commentNum === 1)
-			    commentListHead.innerText = `1 comment`;
-			else
-				commentListHead.innerText = `${commentNum-1} comments`;
-		}
-	}
-} 
 
 let insertCommentButton = (idx) => {
 	let btnContainer = document.createElement("span");
@@ -184,7 +121,6 @@ let FetchInsert = (event) =>{
 }
 
 const bottomObserver = new IntersectionObserver(targetSearch,{threshold: 1.0});
-
 bottomObserver.observe(footer);
 
 let initFetch = async() =>{

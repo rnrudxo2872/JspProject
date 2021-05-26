@@ -31,6 +31,17 @@ public class loginAction implements Action{
 		out.close();
 	}
 	
+	public void wrongPass(String msg) throws IOException{
+		res.setContentType("text/html; charset=utf-8");
+		PrintWriter out = res.getWriter();
+		out.println("<script>");
+		out.println("alert('" + msg + "');");
+		out.println("history.back();");
+		out.println("</script>");
+		
+		out.close();
+	}
+	
 	public void questionJoin() throws IOException{
 		res.setContentType("text/html; charset=utf-8");
 		PrintWriter out = res.getWriter();
@@ -48,7 +59,7 @@ public class loginAction implements Action{
 			return false;
 		}
 		if(flag == 1){
-			ValueException("비밀번호가 틀렸습니다!");
+			wrongPass("비밀번호가 틀렸습니다!");
 			return false;
 		}
 		return true;
