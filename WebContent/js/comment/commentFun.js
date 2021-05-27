@@ -123,7 +123,7 @@ let FetchInsert = (event) =>{
 const bottomObserver = new IntersectionObserver(targetSearch,{threshold: 1.0});
 bottomObserver.observe(footer);
 
-let initFetch = async() =>{
+const initFetch = async() =>{
 	
 	let commentsJson = await (await fetch(`../curBoardComments.json?num=${commentBoardNum}&start=${count}`).catch(err)).json();
 	
@@ -133,7 +133,6 @@ let initFetch = async() =>{
 	if(commentsJson == null){
 		bottomObserver.unobserve(footer);
 	}
-	
 }
 
 function targetSearch(entries){

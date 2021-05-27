@@ -85,7 +85,7 @@ ArrayList<boardBean> bbs = bdao.searchBoard(searchObj, startRow, pageSize);
 			%>
 			<tr>
 	            <td><a href=""><%=curBoard.getNum() %></a></td>
-	            <td><a href="content?num=<%=curBoard.getNum()%>&pageNum=<%=pageNum%>"><%=curBoard.getTitle() %></a></td>
+	            <td><a href="./shareBoard/content?num=<%=curBoard.getNum()%>&pageNum=<%=pageNum%>"><%=curBoard.getTitle() %></a></td>
 	            <td><a href=""><%=curBoard.getUser_name()%></a></td>
 	            <td><a href=""><%=curBoard.getDate() %></a></td>
         	</tr>
@@ -155,6 +155,7 @@ ArrayList<boardBean> bbs = bdao.searchBoard(searchObj, startRow, pageSize);
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
+<script>document.querySelector('.pageBlockSelector').querySelectorAll('option')[<%=pageSize/5%>-1].setAttribute("selected","selected");</script>
 <script type="module" src="js/changePageBlock.js"></script>
 </body>
 </html>

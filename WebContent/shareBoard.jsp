@@ -135,6 +135,7 @@ bbs = bdao.getBoards(startRow, pageSize);
 <%@include file="partials/footer.jsp" %>
 </div> 
 </div>
+<script>document.querySelector('.pageBlockSelector').querySelectorAll('option')[<%=pageSize/5%>-1].setAttribute("selected","selected");</script>
 <script type="module" src="js/changePageBlock.js"></script>
 </body>
 </html>
