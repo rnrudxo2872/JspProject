@@ -1,5 +1,10 @@
 import { commentUser, commentListHead } from "./commentFun.js"
 
+const AddBtnEvent = () =>{
+	document.querySelector('#comment__update').addEventListener("click", UpdateCommentFunc);
+	document.querySelector('#comment__delete').addEventListener("click", DeleteCommentFunc);
+}
+
 export const DeleteCommentFunc = async(event) =>{
 	console.log(event.target);
 	event.preventDefault();
@@ -62,7 +67,13 @@ export const UpdateCommentFunc = async(event) =>{
 	    		
 	    		let updateContent = inputUpdateContent.value;
 	    		contentContainer.innerHTML = `${updateContent}${userInter}`;
+	    		
+	    		AddBtnEvent();
 	    	}
+	    	
+	    }else if(e.key === 'Escape'){
+	    	contentContainer.innerHTML = `${prevText}${userInter}`;
+	    	AddBtnEvent();
 	    }
 	})
 	contentContainer.innerHTML = '';

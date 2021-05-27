@@ -33,6 +33,9 @@ let insertCommentButton = (idx) => {
 	update.setAttribute("href", `./updateComment?idx=${idx}`);
 	del.setAttribute("href", `./delComment?idx=${idx}`);
 	
+	update.id = "comment__update";
+	del.id = "comment__delete";
+	
 	update.innerText = "수정";
 	del.innerText = "삭제";
 	

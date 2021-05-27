@@ -1,12 +1,14 @@
 export default class ImageInfo{
     data = null;
 
-    constructor({ $target, data }) {
+    constructor({ $target, data, transEvent}) {
         this.$imageInfo = document.createElement('div');
         this.$imageInfo.className = 'ImageInfo';
 
         this.data = data;
         $target.appendChild(this.$imageInfo);
+        
+        this.transEvent = transEvent;
 
         document.addEventListener('click', event => {
             if (event.target === this.$imageInfo) {
@@ -27,10 +29,16 @@ export default class ImageInfo{
         this.data = nextData;
         this.render();
     }
+    
+    setTransDesc(convertedDesc){
+    	this.data.image.alt = convertedDesc;
+    	this.render();
+    }
 
     render() {
         if (this.data.visible === true) {
             const { src,alt } = this.data.image;
+       
             this.$imageInfo.innerHTML = `
             <div class="content-wrapper">
                 <div class="title">
@@ -41,12 +49,14 @@ export default class ImageInfo{
                 <div class="description">
                 ${alt}
                 </div>
+            	<div>
+            		<button id="transBtn">한글로 번역</button>
+            	</div>
             </div>`;
             this.$imageInfo.style.display = 'block';
             
-            document.querySelector('.close').addEventListener('click', event =>{
-            	this.$imageInfo.style.display = 'none';
-            })
+            document.querySelector('#transBtn').addEventListener('click', event => this.transEvent(alt))
+            document.querySelector('.close').addEventListener('click', event => {this.$imageInfo.style.display = 'none';})
 
         } else
             this.$imageInfo.style.display = 'none';

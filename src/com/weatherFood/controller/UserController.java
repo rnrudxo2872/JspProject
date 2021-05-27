@@ -4,18 +4,14 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.servletFunc.servletDAO;
-import com.weatherFood.action.Action;
 import com.weatherFood.action.joinAction;
 import com.weatherFood.action.loginAction;
 import com.weatherFood.action.logoutAction;
 import com.weatherFood.action.userDeleteAction;
 import com.weatherFood.action.userUpdateAction;
-import com.weatherFood.session.sessionDAO;
 
 @WebServlet("*.use")
 public class UserController extends Controller{

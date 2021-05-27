@@ -28,6 +28,19 @@ export default class App {
             data: {
                 visible: false,
                 image: null
+            },
+            transEvent: async(desc) =>{
+            	const data = {eng:desc};
+            	const option = {
+            		    method: 'POST',
+            		    body: JSON.stringify(data),
+            		    headers: {
+            		        'Content-Type': 'application/json'
+            		   }
+            	}
+            	const resObj = await api.papagoTranslate(option);
+            	console.log(resObj);
+            	this.ImageInfo.setTransDesc(resObj.message.result.translatedText);
             }
         });
 

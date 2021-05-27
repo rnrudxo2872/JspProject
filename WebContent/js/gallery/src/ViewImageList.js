@@ -15,7 +15,7 @@ export default class ViewImageList{
         this.data = nextData;
         this.render();
     }
-
+    
     render() {
         if (this.data.visible) {
             this.$foodContainer.innerHTML = `${this.data.image.map(item => `<img class="foodBlock" alt="${item.alt}" src="${item.src}"></img>`).join('')}`;

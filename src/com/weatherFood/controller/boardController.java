@@ -4,18 +4,14 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.servletFunc.servletDAO;
-import com.weatherFood.action.Action;
 import com.weatherFood.action.boardDeleteAction;
 import com.weatherFood.action.boardInsertAction;
 import com.weatherFood.action.boardUpdateAction;
 import com.weatherFood.action.commentDeleteAction;
 import com.weatherFood.action.commentUpdateAction;
-import com.weatherFood.session.sessionDAO;
 
 @WebServlet("/shareBoard/*")
 public class boardController extends Controller{

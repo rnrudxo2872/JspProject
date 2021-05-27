@@ -13,6 +13,10 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class PapagoTranslator {
 	//애플리케이션 클라이언트 아이디값";
 	private String clientId = null;
@@ -98,4 +102,25 @@ public class PapagoTranslator {
 	            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
 	        }
 	    }
+	    
+	    private String getTranslatedText(JSONObject jsonObj){
+			JSONObject messageObj = (JSONObject)jsonObj.get("message");
+			JSONObject resultObj = (JSONObject)messageObj.get("result");
+			
+	    	return (String)resultObj.get("translatedText");
+	    }
+	    
+		public String translateDesc(String engStr){
+			String result = engToKor(engStr);
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObj = null;
+			try {
+				jsonObj = (JSONObject)jsonParser.parse(result);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			String ret = getTranslatedText(jsonObj);
+			return ret;
+		}
 }

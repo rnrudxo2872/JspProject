@@ -70,6 +70,10 @@ public class DataController extends HttpServlet {
 		}else if(curCmd.equals("/insertComment.json")){
 			sendURL = "./controller/comment/insertComment.jsp";
 			
+		}else if(curCmd.equals("/translatePapa.json")){
+			System.out.println("파파고 번역");
+			sendURL = "./controller/papago/translate.jsp";
+			
 		}
 		
 		if(sendURL != null){
